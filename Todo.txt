@@ -1,0 +1,9 @@
+TODO: Learn to create quests
+TODO: Learn to *generate* quests and add to the quest generation pool
+TODO: Learn to add a chance for extra dialogue to legendary dialogue choices
+TODO: Refine and tweak quest options to continue adding more well-designed ones rather than the generic ones that exist now
+TODO: Quest ideas go here:
+    - Multi-stage followups -- go to *this* legendary then to *this* legendary then to *this* one
+    - New goals: "become hated by X faction" or "become loved by Y faction" or "gain Z mutation"
+    - Storyline-driven quests; create a quest generator that can generate a 1,2,3 step storyline
+TODO: Add a quest option that is generated when you gain a certain number of fungal infections

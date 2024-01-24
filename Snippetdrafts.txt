@@ -1,0 +1,27 @@
+This is a document for putting together ChitChats. Initially built from a selection of Animal Crossing snippets to then reformat for Qud and expand.
+
+Various tags:
+
+<neighbortown> : every town will have a "neighbor town" that they frequently talk to. This will be the closest town, chosen at random if there are multiple close by.
+<biome> : whichever biome our town is in
+<biomecreature> : a randomly chosen creature from the biome our town is in
+<apothecary> : the name of the local apothecary. If one doesn't exist, the name of the nearest one in neighboring town.
+<merchant> : name of a local merchant, or a nearby neighbortown merchant
+<mayor> : name of town mayor
+<villager> : name of another member of the town. 
+=====Tutorial Stories=====
+
+=====Hint Stories=====
+This is a category of story that provides a hint at the game mechanics. A disclaimer needs to be included that these stories can provide essential 'game experience' spoilers (though not plot spoilers)
+
+(for consistency, these NPCs need to be generated with these mutations particularly)
+
+Frozen by own fugue clone cold quest: <temporal fugue>
+"*sniffles* Oh sorry I've... ah.. ah... ahCHOO! I picked up a cold the other day... *teeth chattering* It's these damn fugue clones, <name>. I don't know why I keep relying on my own alternate timeline-self. That <gender>'s a real moron, I tell you what. So the other day, I'm making my way over to <neighbor town> when I end up lost in the <biome> and am beset upon by a band of <biome creature>! So what do I do? I popped my alter-selves over from the space time continuum of course! But then I forgot I had freeze grenades in my bag. *tilts head back* ah... ah... AHCHOO! *blows nose loudly* I'm lucky I made it out alive. But now I have this cold, and it won't go away. Do you think you could find me something for my cold? <Apothecary> might be able to help.
+
+
+=====Gossip Stories=====
+
+
+
+=====Direct Quests=====
