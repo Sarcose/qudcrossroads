@@ -159,6 +159,22 @@ A delegate is a function that is called from XML. The function is declared as a 
 
 Question - can delegates return more than true/false?
 
+
+
+--==Infamous Items==--
+DOES NOT APPLY TO FACES LOL
+Items that are generated in the world (through the vanilla system of item procgen) can have mentions of villages and factions, give
++rep or -rep for factions, and even have weird esoteric procs like "8% chance to dismember villagers of Ezra on hit" (this was a 
+real item i saw in Discord)
+
+To that end, a very simple check will be placed on Mayors to look in your inventory for legendary -rep items which you can turn in
+in exchange for a small rep boost (10% of the negative) and a like-tier reward (tier -1, 1 minimum)
+
+    >> Mayor Uswhu, I have found an artifact of your enemies, Villagebane
+
+
+--==Overall==--
+
 So what do we want to achieve with this mod?
 
     -   Insert more named creatures into towns, giving multiple non-legendaries names
@@ -168,6 +184,7 @@ So what do we want to achieve with this mod?
     -   Generative conversations based on personality type, conversation type
     -   Generative errands for the player, first to other villagers within the town, then to outside towns
 
+
     Long term
     -   Errand page, separate from quest page, to prevent clutter
     -   Enable villagers to travel between very close towns
@@ -175,7 +192,11 @@ So what do we want to achieve with this mod?
     -   Caravans and escort quests
 
 
-
+Town relationships:
+    -Hometown
+    -Friendly town
+    -Town's friendly neighbor
+    -Town's rival neighbor
 
 The organic component of this mod is that different types of NPCs will have different dialogue and eventually different quest types they can generate with.
 

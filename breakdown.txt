@@ -1,0 +1,136 @@
+/*
+So what delegates do we need, and how do we use them? First we need to figure out the structure of a phrase. 
+Let's create an example phrase. We will pepper it with as much flavor as possible:
+Actors: 
+    -Freya, player
+    -Ushwu, the speaker
+    -Shushwat, a merchant in Vinewaferton
+    -Tufi, someone the speaker encountered
+    -Starappleton, hometown
+    -Vinewaferton, neighbor town
+    -Bearjerkyton, rival town
+
+    Salt and Sun, Freya my sister. I see you are wearing Bearjerkyton's colors - shame on you, my sister! It would be much lovelier
+    to see you in the regalia of Starappleton, your hometown. At any rate, I am of a sour disposition of late. Do you know why?
+    I have a tale to tell. Some days past at Hindsun I was in Vinewaferton browsing Shushwat's wares for a new Biodynamic Cell when 
+    I ran into Tufi, my old classmate from days long past. And what did that lack-salt do? He chose then to bring up a slight of a 
+    bygone era; it seemed to needle him as a knollworm. So he claims, I have long held onto his Teal-Colored Waterskin which he prized 
+    dearly. He will not let it go, and my honor will not be slaked until I find the accursed thing! *grumbles profusely*
+
+    At any rate, what is new with you?
+
+    >> I will help you find Shushwat, dear sib
+    >> I will help you find a Biodynamic Cell, dear sib
+    >> I will help you find the Teal-Colored Waterskin, dear sib
+
+
+    Hear we see a prosaic tale of many elements. Let us break it down with possible tags
+
+    Quite a few of these will probably be irreplaceable with tags so this is rough. Rather than a markov chain system this is going to be a madlibs-style system with many madlibs
+    forms.
+
+
+=================================================================================================================================================================================
+
+
+{greeting} Salt and Sun, 
+{playername} Freya 
+{affinityBasedTitle} my sister. 
+{playerOutfitNotice} I see you are wearing {rivalTown} Bearjerkyton's colors - 
+{playerOutfitReaction} shame on you, my sister! It would be much lovelier to see you in the regalia of {myTown} Starappleton, {townRelationship} your hometown. 
+{transitionFrom} At any rate 
+{errandContextMoodDeclaration} I am of a sour disposition of late. Do you know why?
+{transitionTo}   I have a tale to tell. 
+{timePeriod} Some days past at Hindsun 
+I was in 
+{friendlyTown} Vinewaferton 
+{busyingActivity} browsing {merchant's} Shushwat's wares for a new {randomItem}Biodynamic Cell 
+{oldAcquaintance} when I ran into Tufi, 
+{randomizedAcquaintance} my old classmate from days long past. 
+And what did that {culturalInsult} lack-salt do? He chose then to bring up a 
+{contextualEvent} slight of a bygone era;
+{flavor?} it seemed to needle him as a knollworm. 
+{moreFlavor/Transition} So he claims, 
+{errandHook} I have long held onto his 
+{errandItem} Teal-Colored Waterskin 
+{acquaintanceRelationshipWithErrandItem} which he prized dearly. 
+{conclusion} He will not let it go, and my honor will not be slaked until I find the accursed thing! *grumbles profusely*
+
+{transitionFrom}    At any rate, 
+{affinityBasedGreeting} what is new with you?
+
+    >> I will help you find Shushwat, dear sib
+    >> I will help you find a Biodynamic Cell, dear sib
+    >> I will help you find the Teal-Colored Waterskin, dear sib
+
+
+    >> {errandObjective}{wrongItem},{affinityAdjective}{affinityTitle}
+    >> {errandObjective}{wrongItem},{affinityAdjective}{affinityTitle}
+    >> {errandObjective}{errandItem},{affinityAdjective}{affinityTltle}
+
+Now let's look into types:
+
+{greeting} Cultural dict
+{playername}    -       string variable
+{affinityBasedTitle} contextual dict based on speaker variable
+{playerOutfitNotice} function check player equipment in priority for rep-granting
+{playerOutfitReaction} dict lookup based on previous
+{rivalTown} -           string variable
+{myTown}    -           string variable
+{townRelationship}  -   probably a string variable?
+{transitionFrom}    -   dict of string phrases like "At any rate"
+{errandContextMoodDeclaration}  -   dict of phrases based on errand itself
+{transitionTo}      -   dict of string phrases like "I have a tale to tell."
+{timePeriod}        -   function some math to put together a day and time and then translate it into a phrase
+{friiendlyTown}     -   string variable
+{busyingActivity}   -   dict lookup of miniMad phrases
+miniMad             - a phrase with its own tags to build another layer of procgen
+{merchant}          - a local merchant, whose name is looked up from the town of above context
+{randomItem}        - any item, probably a long long dict for lookup
+{oldAcquaintance}   -   a random name, possibly a nonexistent person. Alternative:
+{targetPerson}      -   an existing person chosen randomly based on <difficultyContext>
+<difficultyContext> -   a variable that determines how difficult the quest is going to be, determines both number of steps (whether turning in leads to a followup or not) and distance of target
+{randomizedAcquaintance} - what this person means to the speaker
+{culturalInsult}    -   cultural dict lookup
+{contextualEvent}   -   based on <errandMood>, a dict lookup
+{flavor?}   -   still not sure. "It seemed to needle him as a knollworm" may be a constant element
+{errandHook}    -   may probably choosing from a collection of dicts based on <errandCategory>
+{errandItem}    -   the actual item of concern
+{targetRelationshipWithErrandItem} - contextual dict
+{speakerRelationshipWithErrandItem} - contextual dict based on mood probably
+{conclusion} - I don't know how to categorize this
+{affinityBasedGreeting} - contextual dict based on speaker variable
+
+<errandMood>    -   how the errand makes the *speaker* feel, flavoring all the adjectives used
+<errandCategory>    -   what type of quest it is, flavoring the errandHook and objectives
+
+
+
+{errandObjective}   -   the action to take place
+{wrongItem}         -   function to choose from various nouns within the story
+{affinityAdjective} -   single adjective based on affinity, dict
+{affinityTitle}    -   dict based on affinity: "sib," or "woman" or "friend" or somesuch
+
+
+
+
+Theoretical structure:
+
+
+qc_simpleDelegates.cs   -   delegates that have simple true/false
+qc_dicts.cs             -   dict master file
+qc_dicts_[category].cs /
+    or
+qc_dicts.xml            /
+qc_errandTypes.cs       -   broader type spec for different types of errands
+
+qc_errands.cs
+    or
+qc_errands.xml
+
+
+
+qc_functions.cs         -   tool functions
+qc_complexDelegates.cs
+    or                  -   specific and more complex delegates
+qc_[name]Delegate.cs    

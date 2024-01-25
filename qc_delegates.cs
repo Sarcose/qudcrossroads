@@ -12,6 +12,14 @@ using XRL.World.Parts;
 //this was in impatientshopper but may not be necessary
 //we may also end up using a member in this way of QudCrossroads.member?
 
+/*
+Delegates to do:
+
+checkInfamousItems: check player inventory for legendary items with -rep for village, only done by Mayors
+            (if the village doesn't have a mayor then maybe whoever the quest giver is?)
+
+*/
+
 namespace QudCrossroads
 {
     public static class DelegateContainer
