@@ -13,7 +13,7 @@ Here we can use IConversationPart to put together more complex logic it seems. T
 <part Name="QCS_Start" Target="QCS_Followup" />
 */
 
-namespace QCS.Dialogue.General
+namespace QudCrossroads
 {
     public class QCSChat : IConversationPart //it appears to use 
     {
