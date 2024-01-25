@@ -39,7 +39,7 @@ namespace QudCrossroads
             //if (!OptionAllInvite && speaker.HasTagOrProperty("ExcludeFromDynamicEncounters")) return false; //kept for reference
             
             //some possible checks in pseudocode
-            if (speaker.hasName) return true;
+            //f (speaker.hasName) return true;
             return base.HandleEvent(E);
         }
         //let's try some pseudocode to generate a conversation
@@ -47,7 +47,7 @@ namespace QudCrossroads
         {
             E.Text.Append("\n\nehehehehe!");    
             //E.Text.Append can be used for directly loading a string out but can we do more?
-            string sup = "what's up buttercup"
+            string sup = "whats up buttercup";
             E.Text.Append(sup); //is this the correct syntax?
 
             //string randomizedString = createRandomString(dictToLookUp); //where do functions go? where do variables go?

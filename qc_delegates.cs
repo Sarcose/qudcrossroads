@@ -19,7 +19,7 @@ checkInfamousItems: check player inventory for legendary items with -rep for vil
             (if the village doesn't have a mayor then maybe whoever the quest giver is?)
 
 */
-
+/*
 namespace QudCrossroads
 {
     public static class DelegateContainer
@@ -34,4 +34,4 @@ namespace QudCrossroads
             return Context.Target.HasObjectInInventory(Context.Value);
         }
     }
-}
+}*/
