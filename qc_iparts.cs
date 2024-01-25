@@ -23,9 +23,9 @@ namespace QudCrossroads
         {
             return base.WantEvent(ID, Propagation) //this appears to use keys to overload HandleEvent
                    || ID == IsElementVisibleEvent.ID //Can we chat?
-                   || ID == GetTargetElementEvent.ID //what is this?
-                   || ID == GetChoiceTagEvent.ID //probably for determining which choice
-                   || ID == PrepareTextEvent.ID //displaying text?
+                 //  || ID == GetTargetElementEvent.ID //what is this?
+                 //  || ID == GetChoiceTagEvent.ID //probably for determining which choice
+                 //  || ID == PrepareTextEvent.ID //displaying text?
                 ;
         }
 
@@ -33,17 +33,18 @@ namespace QudCrossroads
         {
 
             var speaker = The.Speaker;                              //is this valid outside of hearthpyre? test
-            if (speaker.pBrain == null) return false;               //is this valid outside of hearthpyre? test, presumably on an ooze
+            //if (speaker.pBrain == null) return false;               //is this valid outside of hearthpyre? test, presumably on an ooze
             //if (speaker.OwnPart<HearthpyreSettler>()) return false; //kept for reference
             //if (speaker.HasTagOrProperty("IncludeInSettlementInvitation")) return true; //kept for reference
             //if (!OptionAllInvite && speaker.HasTagOrProperty("ExcludeFromDynamicEncounters")) return false; //kept for reference
             
             //some possible checks in pseudocode
             //f (speaker.hasName) return true;
-            return base.HandleEvent(E);
+            return true;
+//            return base.HandleEvent(E);
         }
         //let's try some pseudocode to generate a conversation
-        public override bool HandleEvent(PrepareTextEvent E) //PrepareTextEvent is from the SnapjawLaugh example code
+       /* public override bool HandleEvent(PrepareTextEvent E) //PrepareTextEvent is from the SnapjawLaugh example code
         {
             E.Text.Append("\n\nehehehehe!");    
             //E.Text.Append can be used for directly loading a string out but can we do more?
@@ -54,7 +55,7 @@ namespace QudCrossroads
             //E.Text.Append(randomizedString);
 
             return base.HandleEvent(E);
-        }
+        }*/
         /*
         //these were not commented out originally, they appear to be overloaded functions. Under what circumstances are ICParts overloaded?
         //oh, obviously, HandleEvent is used for multiple purposes based on input. Duh.

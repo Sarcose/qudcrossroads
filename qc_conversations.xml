@@ -3,7 +3,7 @@
   <!-- Inherited by all conversations by default, unless another base or empty string is specified in Inherits="" -->
   <conversation ID="BaseConversation">
     <choice ID="QCS_Start" Target="QCS_Followup" Transient="true">
-      <part Name="QCS_Chat" Target="QCS_Followup">
+      <part Name="QCS_Chat">
         <text Priority="-1">
           <text>Tell me something interesting!</text>
           <text>So what's new?</text>
@@ -20,7 +20,6 @@
     </choice>
 
     <node ID="QCS_Followup">
-        <part Name="QCS_Chat">
           <text Priority="-1">
               <text>{{emote|*Dances*}}</text>
               <text>{{emote|*Strikes a pose*}}</text>
@@ -31,7 +30,6 @@
               <text>Wow, you're kind of rude.</text>
               <text>{{emote|*Gestures rudely at you*}}</text>
           </text>
-        </part>
 
       <choice Target="End">
         <text Priority="-1">Live and drink.</text>
