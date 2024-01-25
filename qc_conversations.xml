@@ -3,7 +3,7 @@
   <!-- Inherited by all conversations by default, unless another base or empty string is specified in Inherits="" -->
   <conversation ID="BaseConversation">
     <choice ID="QCS_Start" Target="QCS_Followup" Transient="true">
-      <part Name="QCS_Start" Target="QCS_Followup" />
+      <!-- <part Name="QCS_Start" Target="QCS_Followup" />  may not be necessary-->
 
       <text Priority="-1">
         <text>Tell me something interesting!</text>
