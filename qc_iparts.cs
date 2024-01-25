@@ -50,8 +50,8 @@ namespace QCS.Dialogue.General
             string sup = "what's up buttercup"
             E.Text.Append(sup); //is this the correct syntax?
 
-            string randomizedString = createRandomString(dictToLookUp); //where do functions go? where do variables go?
-            E.Text.Append(randomizedString);
+            //string randomizedString = createRandomString(dictToLookUp); //where do functions go? where do variables go?
+            //E.Text.Append(randomizedString);
 
             return base.HandleEvent(E);
         }
