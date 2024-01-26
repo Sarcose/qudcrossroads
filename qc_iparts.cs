@@ -51,7 +51,8 @@ namespace XRL.World.Conversations.Parts
             public override bool HandleEvent(PrepareTextEvent E)
             {
                 XRL.Messages.MessageQueue.AddPlayerMessage("PrepareTextEvent fired");
-                E.Text.Append("\n\nehehehehe!");
+                string laugh = "\n\nehehehehe!";
+                E.Text.Append(laugh);
                 return base.HandleEvent(E);
             }
         }
