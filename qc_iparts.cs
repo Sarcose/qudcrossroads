@@ -15,14 +15,13 @@ Here we can use IConversationPart to put together more complex logic it seems. T
 */
 namespace XRL.World.Conversations.Parts
 {
-    public class QCS_Chat : IConversationPart //it appears to use 
+    public class QCS_Chat_Try : IConversationPart //it appears to use 
         {
             public override bool WantEvent(int id, int propagation){
                 XRL.Messages.MessageQueue.AddPlayerMessage("WantEventFired");
                 return 
                 base.WantEvent(id, propagation) 
                 || id == IsElementVisibleEvent.ID
-                || id == PrepareTextEvent.ID
                 ;
             }
             public override bool HandleEvent(IsElementVisibleEvent E)
@@ -37,6 +36,22 @@ namespace XRL.World.Conversations.Parts
                 {
                     return false;
                 }
+                return base.HandleEvent(E);
+            }
+        }
+    public class QCS_Chat_Respond : IConversationPart //it appears to use 
+        {
+            public override bool WantEvent(int id, int propagation){
+                XRL.Messages.MessageQueue.AddPlayerMessage("WantEventFired");
+                return 
+                base.WantEvent(id, propagation) 
+                || id == PrepareTextEvent.ID
+                ;
+            }
+            public override bool HandleEvent(PrepareTextEvent E)
+            {
+                XRL.Messages.MessageQueue.AddPlayerMessage("PrepareTextEvent fired");
+                E.Text.Append("\n\nehehehehe!");
                 return base.HandleEvent(E);
             }
         }

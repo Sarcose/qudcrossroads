@@ -4,10 +4,11 @@
   <conversation ID="BaseConversation">
     <choice ID="QCS_Choice" GotoID="QCS_Followup" IfAllowEscape="true">
           <text>Tell me something interesting!</text>
-          <part Name="QCS_Chat" />
+          <part Name="QCS_Chat_Try" />
     </choice>
 
       <node ID="QCS_Followup">
+            <part Name="QCS_Chat_Respond" />
             <text Priority="-1">
                 <text>Last night I sat down to some watervine when...</text>
             </text>
