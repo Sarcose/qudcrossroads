@@ -2,39 +2,24 @@
 <conversations>
   <!-- Inherited by all conversations by default, unless another base or empty string is specified in Inherits="" -->
   <conversation ID="BaseConversation">
-    <choice ID="QCS_Start" Target="QCS_Followup" Transient="true">
-      <part Name="QCS_Chat" />
-        <text Priority="-1">
+    <choice ID="QCS_Choice" GotoID="QCS_Followup" IfAllowEscape="true">
           <text>Tell me something interesting!</text>
-          <text>So what's new?</text>
-          <text>How have you been, =pronouns.siblingTerm=?</text>
-          <text>What's on your mind?</text>
-        </text>
-        
-        <text IfHavePart="SociallyRepugnant">
-          <text>I'm bored. Entertain me.</text>
-          <text>What are you doing, =pronouns.personTerm=?</text>
-          <text>Why do you look like that?</text>
-        </text>
-      </part>
+          <part Name="QCS_Chat" />
     </choice>
 
-    <node ID="QCS_Followup">
-          <text Priority="-1">
-              <text>{{emote|*Dances*}}</text>
-              <text>{{emote|*Strikes a pose*}}</text>
-              <text>Last night I sat down to some watervine when...</text>
-          </text>
+      <node ID="QCS_Followup">
+            <text Priority="-1">
+                <text>Last night I sat down to some watervine when...</text>
+            </text>
 
-          <text IfHavePart="SociallyRepugnant">
-              <text>Wow, you're kind of rude.</text>
-              <text>{{emote|*Gestures rudely at you*}}</text>
-          </text>
-
-      <choice Target="End">
-        <text Priority="-1">Live and drink.</text>
-        <text IfHavePart="SociallyRepugnant">Lib. Dink.</text>
-      </choice>
-    </node>
+            <text IfHavePart="SociallyRepugnant">
+                <text>Wow, you're kind of rude.</text>
+                <text>{{emote|*Gestures rudely at you*}}</text>
+            </text>
+        <choice Target="End">
+          <text Priority="-1">Live and drink.</text>
+          <text IfHavePart="SociallyRepugnant">Lib. Dink.</text>
+        </choice>
+      </node>
   </conversation>
 </conversations>

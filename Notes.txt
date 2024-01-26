@@ -1,5 +1,61 @@
 Terminology:
 
+<text Priority="-1">
+            <text>Tell me something interesting!</text>
+            <text>So what's new?</text>
+            <text>How have you been, =pronouns.siblingTerm=?</text>
+            <text>What's on your mind?</text>
+          </text>
+          <text IfHavePart="SociallyRepugnant">
+            <text>I'm bored. Entertain me.</text>
+            <text>What are you doing, =pronouns.personTerm=?</text>
+            <text>Why do you look like that?</text>
+          </text>
+       //let's try some pseudocode to generate a conversation
+ //       public override bool HandleEvent(PrepareTextEvent E) //PrepareTextEvent is from the SnapjawLaugh example code
+ //       {
+ //           E.Text.Append("\n\nehehehehe!");    
+            //E.Text.Append can be used for directly loading a string out but can we do more?
+ //           string sup = "whats up buttercup";
+ //           E.Text.Append(sup); //is this the correct syntax?
+
+            //string randomizedString = createRandomString(dictToLookUp); //where do functions go? where do variables go?
+            //E.Text.Append(randomizedString);
+
+ //           return base.HandleEvent(E);
+ //       }
+        /*
+        //these were not commented out originally, they appear to be overloaded functions. Under what circumstances are ICParts overloaded?
+        //oh, obviously, HandleEvent is used for multiple purposes based on input. Duh.
+        public override bool HandleEvent(GetTargetElementEvent E)
+        {
+            var req = 50;
+            var feeling = The.Speaker.pBrain.GetPersonalFeeling(The.Player) ?? 0;
+            foreach (var pair in The.Speaker.pBrain.FactionMembership)
+            {
+                var rep = Factions.GetFeelingFactionToObject(pair.Key, The.Player);
+                feeling += (int) Math.Round(pair.Value / 100f * rep);
+            }
+
+            if (The.Player.OwnPart<Customs_Tactful>()) req -= 25;
+            if (The.Player.OwnPart<SociallyRepugnant>()) req += 25;
+
+            if (feeling < req) E.Target = Target;
+            return base.HandleEvent(E);
+        }
+
+        public override bool HandleEvent(GetChoiceTagEvent E)
+        {
+            E.Tag = "{{g|[invite]}}";
+            return base.HandleEvent(E);
+        }
+        */
+
+
+
+
+
+
 The idea behind this mod is to create a dynamically generated community system that generates quests for a town which will enable:
     - An alternate way of playing the game
     - An alternative advancement system (social, tokens, and secrets)
