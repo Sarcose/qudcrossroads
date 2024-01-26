@@ -45,13 +45,13 @@ namespace XRL.World.Conversations.Parts
                 XRL.Messages.MessageQueue.AddPlayerMessage("WantEventFired");
                 return 
                 base.WantEvent(id, propagation) 
-                || id == PrepareTextEvent.ID
+                || id == DisplayTextEvent.ID
                 ;
             }
-            public override bool HandleEvent(PrepareTextEvent E)
+            public override bool HandleEvent(DisplayTextEvent E)
             {
                 XRL.Messages.MessageQueue.AddPlayerMessage("PrepareTextEvent fired");
-                string laugh = "\n\nehehehehe!";
+                string laugh = "ehehehehe!";
                 E.Text.Append(laugh);
                 return base.HandleEvent(E);
             }

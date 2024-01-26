@@ -239,13 +239,17 @@ So what do we want to achieve with this mod?
     -   Give villagers catchphrases (internal inventory items with a 'catchphrase' property that can propagate)
     -   Generative conversations based on personality type, conversation type
     -   Generative errands for the player, first to other villagers within the town, then to outside towns
-
+    -   After completing enough errands for a person they start to generate full Village Quests with full rewards, and after enough of those the person can become a legendary 
+                --with relationships and snippets based on your achievements with them
 
     Long term
     -   Errand page, separate from quest page, to prevent clutter
     -   Enable villagers to travel between very close towns
     -   Eventually - an option to increase number of towns genned, performing a worldgen check that forces every town to have at least one neighbor within 3 parasangs
     -   Caravans and escort quests
+    -   More "animal crossing" style features. Lost and found, buildings that have meaningful roles like lighthouses, visiting creatures with special features
+    -   More "animal crossing" style reward opportunities
+    -   A museum somewhere in the world run by a Troll, to hold your artifacts
 
 
 Town relationships:

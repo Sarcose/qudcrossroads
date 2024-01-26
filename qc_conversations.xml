@@ -9,14 +9,6 @@
 
       <node ID="QCS_Followup">
             <part Name="QCS_Chat_Respond" />
-            <text Priority="-1">
-                <text>Last night I sat down to some watervine when...</text>
-            </text>
-
-            <text IfHavePart="SociallyRepugnant">
-                <text>Wow, you're kind of rude.</text>
-                <text>{{emote|*Gestures rudely at you*}}</text>
-            </text>
         <choice Target="End">
           <text Priority="-1">Live and drink.</text>
           <text IfHavePart="SociallyRepugnant">Lib. Dink.</text>

@@ -19,9 +19,27 @@ This is a category of story that provides a hint at the game mechanics. A discla
 Frozen by own fugue clone cold quest: <temporal fugue>
 "*sniffles* Oh sorry I've... ah.. ah... ahCHOO! I picked up a cold the other day... *teeth chattering* It's these damn fugue clones, <name>. I don't know why I keep relying on my own alternate timeline-self. That <gender>'s a real moron, I tell you what. So the other day, I'm making my way over to <neighbor town> when I end up lost in the <biome> and am beset upon by a band of <biome creature>! So what do I do? I popped my alter-selves over from the space time continuum of course! But then I forgot I had freeze grenades in my bag. *tilts head back* ah... ah... AHCHOO! *blows nose loudly* I'm lucky I made it out alive. But now I have this cold, and it won't go away. Do you think you could find me something for my cold? <Apothecary> might be able to help.
 
+=====Flavor Stories=====
+These don't have errands attached but they have a possibility of rewarding the player for reading them enough.
+"Do you like doing X? I LOVE doing X."
+"Do you like doing X? I actually prefer doing Y, hahaha."
+"Hey, what do you want for your birthday? Wait, I don't know your birthday! When is it, again?"
+"Hey, <person> gave me this but I don't really want it. Do you want it for <price>?"
 
 =====Gossip Stories=====
 
 
 
 =====Direct Quests=====
+
+
+
+
+
+
+
+=========================
+Random Stuff /  Unsorted
+=========================
+"I need someone to manage my brand new _____ team. Do you know anybody? Wait, what about you!? Will you be the manager, <name>??" <answer> "That's cool."
+"<Player>, you have really interesting eyes, <catchphrase>" >>Are you OK? >>Be quiet! >>You too! "What? Me too? What do you mean by that? Are you trying to psych me out?"
