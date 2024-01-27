@@ -1,0 +1,61 @@
+This is a document for putting together ChitChats. Initially built from a selection of Animal Crossing snippets to then reformat for Qud and expand.
+
+Various tags:
+
+<neighbortown> : every town will have a "neighbor town" that they frequently talk to. This will be the closest town, chosen at random if there are multiple close by.
+<biome> : whichever biome our town is in
+<biomecreature> : a randomly chosen creature from the biome our town is in
+<apothecary> : the name of the local apothecary. If one doesn't exist, the name of the nearest one in neighboring town.
+<merchant> : name of a local merchant, or a nearby neighbortown merchant
+<mayor> : name of town mayor
+<villager> : name of another member of the town. 
+=====Tutorial Stories=====
+
+=====Hint Stories=====
+This is a category of story that provides a hint at the game mechanics. A disclaimer needs to be included that these stories can provide essential 'game experience' spoilers (though not plot spoilers)
+
+(for consistency, these NPCs need to be generated with these mutations particularly)
+
+Frozen by own fugue clone cold quest: <temporal fugue>
+"*sniffles* Oh sorry I've... ah.. ah... ahCHOO! I picked up a cold the other day... *teeth chattering* It's these damn fugue clones, <name>. I don't know why I keep relying on my own alternate timeline-self. That <gender>'s a real moron, I tell you what. So the other day, I'm making my way over to <neighbor town> when I end up lost in the <biome> and am beset upon by a band of <biome creature>! So what do I do? I popped my alter-selves over from the space time continuum of course! But then I forgot I had freeze grenades in my bag. *tilts head back* ah... ah... AHCHOO! *blows nose loudly* I'm lucky I made it out alive. But now I have this cold, and it won't go away. Do you think you could find me something for my cold? <Apothecary> might be able to help.
+
+Picking what you want to eat
+"Hey, do you ever get so hungry that you can't decide what you want to eat? So what do you do? Isn't it so weird... you could just eat anything you want, but you think about it for so long 
+that you simply can't decide what to eat at all. <randomized whip up a meal ingredients> sound just as good as, say, <randomized good Carbide Recipe> to get a <contextual carbide effect>! 
+Arrrgh! I just can't figure out what I'm going to eat!"  
+>>I'll cook <that recipe> and let you know how it tastes (come back while metabolizing that meal) "So how was it?" >>Good/So-so/Awful "Oh really?? Well I guess that's what I'm having/not having" 
+>>I'll cook <wrong recipe>                                                                                                              <random reward>
+>>I'll cook <whip up a meal recipe>
+
+Picking recipes
+"I'm thinking about going on a picnic and I'm thinking of bringing some <recipe item> and <recipe item>. Do you think that would be a good combination?"
+>>>That's delicious -> Gives one of those ingredients
+>>>Ewww, YUCK! -> "You're right, what was I thinking? Why would I want us to gain <metabolizing effect>!? I'll cook <ingredient> instead *gives both ingredients to you*
+>>>Do what you want! -> "You're no help!"
+
+=====Flavor Stories=====
+These don't have errands attached but they have a possibility of rewarding the player for reading them enough.
+"Do you like doing X? I LOVE doing X."
+"Do you like doing X? I actually prefer doing Y, hahaha."
+"Hey, what do you want for your birthday? Wait, I don't know your birthday! When is it, again?"
+"Hey, <person> gave me this but I don't really want it. Do you want it for <price>?"
+
+=====Gossip Stories=====
+
+
+
+=====Direct Quests=====
+
+
+
+=====Get a gift for talking=====
+Random food
+"Hey, <name>, I spent all this time prepping <food> but I don't want it. Do you want it?"
+
+
+
+=========================
+Random Stuff /  Unsorted
+=========================
+"I need someone to manage my brand new _____ team. Do you know anybody? Wait, what about you!? Will you be the manager, <name>??" <answer> "That's cool."
+"<Player>, you have really interesting eyes, <catchphrase>" >>Are you OK? >>Be quiet! >>You too! "What? Me too? What do you mean by that? Are you trying to psych me out?"
