@@ -117,20 +117,10 @@ miniMad             - a phrase with its own tags to build another layer of procg
 Theoretical structure:
 
 
-qc_simpleDelegates.cs   -   delegates that have simple true/false
+qc_delegates.cs   -   delegates that have simple true/false
+qc_iparts.cs
 qc_dicts.cs             -   dict master file
-qc_dicts_[category].cs /
-    or
-qc_dicts.xml            /
+qc_dicts_[category].cs
 qc_errandTypes.cs       -   broader type spec for different types of errands
-
 qc_errands.cs
-    or
-qc_errands.xml
-
-
-
 qc_functions.cs         -   tool functions
-qc_complexDelegates.cs
-    or                  -   specific and more complex delegates
-qc_[name]Delegate.cs    

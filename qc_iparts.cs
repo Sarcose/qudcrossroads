@@ -5,15 +5,11 @@ using XRL;
 using XRL.Language;
 using XRL.World;
 using XRL.World.Conversations;
-using XRL.World.Encounters.EncounterObjectBuilders;
 using XRL.World.Parts;
 using QudCrossroads;
-//using static Hearthpyre.Static; using static QCS.Static? Copy Hearthpyre's namespace structure when we get home
+using QudCrossroads.Dialogue.Phrases;
+using static QudCrossroads.Dialogue.Phrases.Elements;
 
-/*
-Here we can use IConversationPart to put together more complex logic it seems. This is done with 
-<part Name="QCS_Start" Target="QCS_Followup" />
-*/
 namespace QudCrossroads.Dialogue
 {
     public class QCS_Chat_Try : IConversationPart //it appears to use 
@@ -52,7 +48,6 @@ namespace QudCrossroads.Dialogue
             public override bool HandleEvent(DisplayTextEvent E)
             {
                 XRL.Messages.MessageQueue.AddPlayerMessage("PrepareTextEvent fired");
-                string laugh = "ehehehehe!";
                 E.Text.Append(laugh);
                 return base.HandleEvent(E);
             }
