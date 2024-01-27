@@ -11,6 +11,10 @@ namespace QudCrossroads.Dialogue.Phrases
     
     public static partial class Elements
     {
-        public const string laugh = "mahahahahaha!";
+        public static string[] tester = { 
+            "mahaha", 
+            "hehehe", 
+            "hoohoohoo" 
+            };
     }
 }
