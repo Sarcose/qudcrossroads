@@ -5,6 +5,7 @@ using XRL;
 using XRL.Language;
 using XRL.World;
 using QudCrossroads;
+using QRand = QudCrossroads.Utilities.QudCrossroads_Random;
 using static QudCrossroads.Dialogue.Elements;
 
 namespace QudCrossroads.Dialogue
@@ -13,7 +14,12 @@ namespace QudCrossroads.Dialogue
     {
         public static string TestString() //no input for now
         {
-            string retStr = tester[0] + tester[1] + tester[2];
+            string retStr = "";
+            for (int i = 0; i < 3; i++) 
+                {
+                retStr = retStr + " " + tester[QRand.Next(0, 2)];//C# uses "next" for random??
+                }
+            
             return retStr;
         }
 
