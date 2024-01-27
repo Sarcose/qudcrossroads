@@ -19,6 +19,20 @@ This is a category of story that provides a hint at the game mechanics. A discla
 Frozen by own fugue clone cold quest: <temporal fugue>
 "*sniffles* Oh sorry I've... ah.. ah... ahCHOO! I picked up a cold the other day... *teeth chattering* It's these damn fugue clones, <name>. I don't know why I keep relying on my own alternate timeline-self. That <gender>'s a real moron, I tell you what. So the other day, I'm making my way over to <neighbor town> when I end up lost in the <biome> and am beset upon by a band of <biome creature>! So what do I do? I popped my alter-selves over from the space time continuum of course! But then I forgot I had freeze grenades in my bag. *tilts head back* ah... ah... AHCHOO! *blows nose loudly* I'm lucky I made it out alive. But now I have this cold, and it won't go away. Do you think you could find me something for my cold? <Apothecary> might be able to help.
 
+Picking what you want to eat
+"Hey, do you ever get so hungry that you can't decide what you want to eat? So what do you do? Isn't it so weird... you could just eat anything you want, but you think about it for so long 
+that you simply can't decide what to eat at all. <randomized whip up a meal ingredients> sound just as good as, say, <randomized good Carbide Recipe> to get a <contextual carbide effect>! 
+Arrrgh! I just can't figure out what I'm going to eat!"  
+>>I'll cook <that recipe> and let you know how it tastes (come back while metabolizing that meal) "So how was it?" >>Good/So-so/Awful "Oh really?? Well I guess that's what I'm having/not having" 
+>>I'll cook <wrong recipe>                                                                                                              <random reward>
+>>I'll cook <whip up a meal recipe>
+
+Picking recipes
+"I'm thinking about going on a picnic and I'm thinking of bringing some <recipe item> and <recipe item>. Do you think that would be a good combination?"
+>>>That's delicious -> Gives one of those ingredients
+>>>Ewww, YUCK! -> "You're right, what was I thinking? Why would I want us to gain <metabolizing effect>!? I'll cook <ingredient> instead *gives both ingredients to you*
+>>>Do what you want! -> "You're no help!"
+
 =====Flavor Stories=====
 These don't have errands attached but they have a possibility of rewarding the player for reading them enough.
 "Do you like doing X? I LOVE doing X."
@@ -34,7 +48,9 @@ These don't have errands attached but they have a possibility of rewarding the p
 
 
 
-
+=====Get a gift for talking=====
+Random food
+"Hey, <name>, I spent all this time prepping <food> but I don't want it. Do you want it?"
 
 
 

@@ -7,13 +7,14 @@ using XRL.World;
 using XRL.World.Conversations;
 using XRL.World.Encounters.EncounterObjectBuilders;
 using XRL.World.Parts;
+using QudCrossroads;
 //using static Hearthpyre.Static; using static QCS.Static? Copy Hearthpyre's namespace structure when we get home
 
 /*
 Here we can use IConversationPart to put together more complex logic it seems. This is done with 
 <part Name="QCS_Start" Target="QCS_Followup" />
 */
-namespace XRL.World.Conversations.Parts
+namespace QudCrossroads.Dialogue
 {
     public class QCS_Chat_Try : IConversationPart //it appears to use 
         {
