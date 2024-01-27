@@ -1,14 +1,15 @@
 using System;
-using System.Linq;
+using System.IO;
 using System.Text;
+using System.Linq;
+using System.Reflection;
 using XRL;
-using XRL.Language;
+using XRL.Core;
+using XRL.Rules;
 using XRL.World;
-using QudCrossroads;
 
-namespace QudCrossroads.Dialogue.Phrases
+namespace QudCrossroads.Dialogue
 {
-    
     public static partial class Elements
     {
         public static string[] tester = { 

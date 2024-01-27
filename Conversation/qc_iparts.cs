@@ -7,8 +7,7 @@ using XRL.World;
 using XRL.World.Conversations;
 using XRL.World.Parts;
 using QudCrossroads;
-using QudCrossroads.Dialogue.Phrases;
-using static QudCrossroads.Dialogue.Phrases.Elements;
+using static QudCrossroads.Dialogue.Builders;
 
 namespace QudCrossroads.Dialogue
 {
@@ -48,9 +47,7 @@ namespace QudCrossroads.Dialogue
             public override bool HandleEvent(DisplayTextEvent E)
             {
                 XRL.Messages.MessageQueue.AddPlayerMessage("PrepareTextEvent fired");
-                E.Text.Append(tester[0]);
-                E.Text.Append(tester[1]);
-                E.Text.Append(tester[2]);
+                E.Text.Append(TestString());
                 return base.HandleEvent(E);
             }
         }
