@@ -71,20 +71,26 @@ namespace QudCrossroads.Dialogue
 
         public static string TestString_Tres()
         {
+            XRL.Messages.MessageQueue.AddPlayerMessage("running TestString_Tres()");
             string retStr = "";
             string whichCulture = "SaltMarshCulture";
-            //List<string> convElement  = new List<string> {"Greet","Title"};
-            //List<string> whichFamiliarity  = new List<string> {"unfamiliar","familiar","friendly","unfriendly"};
+            List<string> convElement  = new List<string> {"Greet","Title"};
+            //string convElement = "Greet";
+            List<string> whichFamiliarity  = new List<string> {"unfamiliar","familiar","friendly","unfriendly"};     
             List<string> stringList;
             for (int i=0; i < 5; i++)
-            
             {
                 //stringList = AllCultures.Cultures[whichCulture][GetRandString(convElement)].Familiarities[GetRandString(whichFamiliarity)];
                 //stringList = AllCultures.Cultures["SaltMarshCulture"]Greet.Familiarities.Unfamiliar;
-                string specificGreetString = AllCultures.Cultures[whichCulture].Greet["keys"].Familiarities["unfriendly"][1];
+                //retStr+= AllCultures.Cultures[whichCulture][convElement]["keys"].Familiarities["unfriendly"][1];
                 //retStr += GetRandString(stringList);
+                XRL.Messages.MessageQueue.AddPlayerMessage($"looping {i}");
+                stringList = AllCultures.Cultures[whichCulture].Greet[GetRandString(convElement)].Familiarities[GetRandString(whichFamiliarity)];
+                retStr += GetRandString(stringList);
                 retStr += ", ";
             }
+            XRL.Messages.MessageQueue.AddPlayerMessage("ending loop");
+            XRL.Messages.MessageQueue.AddPlayerMessage($"displaying retStr: {retStr}");
             return retStr;
         }
 
