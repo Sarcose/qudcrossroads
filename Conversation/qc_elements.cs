@@ -141,7 +141,7 @@ namespace QudCrossroads.Dialogue
         int myFamiliarity = 3;
         string whichCulture = "SaltMarshCulture";
         var whichGreetFamiliarity = allCultures.Cultures[whichCulture].Greet.Familiarities[familiarityRanking[myFamiliarity]];
-        string randomGreetString = whichGreetFamiliarity[Random.Next(0,whichGreetFamiliarity.Count)];
+        string randomGreetString = whichGreetFamiliarity[QRand.Next(0,whichGreetFamiliarity.Count)];
         */
     }
 }

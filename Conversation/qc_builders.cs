@@ -64,6 +64,23 @@ namespace QudCrossroads.Dialogue
             return generatedParagraph;
         }
 
+
+        public static string OutfitNotice(GameObject player, string curString)
+        {
+            /*
+            if player.isWearing(thingIDoLike){
+                curString += $"Ahh, it is {positiveAdjective} to see you in {myTown}'s colors! \n{transitionFrom}, "
+            }    
+            elseif player.isWearing(thingIDontLike){
+                curString += $"I see you are wearing the {insult} {rivalTown}'s colors. Shame on you, {title}! It would be much {positiveComparativeAdjective} to see you
+                in the regalia of {myTown}! \n{transitionFrom}, "
+            }
+            return curString;
+            //todo: make these more dynamic
+            */
+        }
+
+
     }
 
 
