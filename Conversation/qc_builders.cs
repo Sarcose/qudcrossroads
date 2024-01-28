@@ -15,7 +15,7 @@ namespace QudCrossroads.Dialogue
     {
         public static string GetRandString(List<string> strList)
         {
-            return strList[QRand.Next(0,strList.Count)];
+            return strList[QRand.Next(0,strList.Count-1)];
         }
         public static string TestString() //no input for now
         {
@@ -71,21 +71,14 @@ namespace QudCrossroads.Dialogue
 
         public static string TestString_Tres()
         {
-            XRL.Messages.MessageQueue.AddPlayerMessage("running TestString_Tres()");
             string retStr = "";
             string whichCulture = "SaltMarshCulture";
-            List<string> convElement  = new List<string> {"Greet","Title"};
-            //string convElement = "Greet";
+            string wfam;
             List<string> whichFamiliarity  = new List<string> {"unfamiliar","familiar","friendly","unfriendly"};     
             List<string> stringList;
             for (int i=0; i < 5; i++)
             {
-                //stringList = AllCultures.Cultures[whichCulture][GetRandString(convElement)].Familiarities[GetRandString(whichFamiliarity)];
-                //stringList = AllCultures.Cultures["SaltMarshCulture"]Greet.Familiarities.Unfamiliar;
-                //retStr+= AllCultures.Cultures[whichCulture][convElement]["keys"].Familiarities["unfriendly"][1];
-                //retStr += GetRandString(stringList);
-                XRL.Messages.MessageQueue.AddPlayerMessage($"looping {i}");
-                stringList = AllCultures.Cultures[whichCulture].Greet[GetRandString(convElement)].Familiarities[GetRandString(whichFamiliarity)];
+                stringList = AllCultures.Cultures[whichCulture].Greet["keys"].Familiarities[GetRandString(whichFamiliarity)];
                 retStr += GetRandString(stringList);
                 retStr += ", ";
             }
@@ -93,7 +86,8 @@ namespace QudCrossroads.Dialogue
             XRL.Messages.MessageQueue.AddPlayerMessage($"displaying retStr: {retStr}");
             return retStr;
         }
-
+        //we will need separate functions for each of Greet, Title, and all others
+        //however I find this probably makes sense in the long run as they will grow in complexity per-member.
 
         public static string OutfitNotice(GameObject player, string curString)
         {
