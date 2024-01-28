@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Text;
+using System.Collections.Generic;
 using XRL;
 using XRL.Language;
 using XRL.World;
@@ -12,6 +13,10 @@ namespace QudCrossroads.Dialogue
 {
     public static partial class Builders
     {
+        public static string GetRandString(List<string> strList)
+        {
+            return strList[QRand.Next(0,strList.Count)];
+        }
         public static string TestString() //no input for now
         {
             string retStr = "";
@@ -64,6 +69,25 @@ namespace QudCrossroads.Dialogue
             return generatedParagraph;
         }
 
+        public static string TestString_Tres()
+        {
+            string retStr = "";
+            string whichCulture = "SaltMarshCulture";
+            //List<string> convElement  = new List<string> {"Greet","Title"};
+            //List<string> whichFamiliarity  = new List<string> {"unfamiliar","familiar","friendly","unfriendly"};
+            List<string> stringList;
+            for (int i=0; i < 5; i++)
+            
+            {
+                //stringList = AllCultures.Cultures[whichCulture][GetRandString(convElement)].Familiarities[GetRandString(whichFamiliarity)];
+                //stringList = AllCultures.Cultures["SaltMarshCulture"]Greet.Familiarities.Unfamiliar;
+                string specificGreetString = AllCultures.Cultures[whichCulture].Greet["keys"].Familiarities["unfriendly"][1];
+                //retStr += GetRandString(stringList);
+                retStr += ", ";
+            }
+            return retStr;
+        }
+
 
         public static string OutfitNotice(GameObject player, string curString)
         {
@@ -78,6 +102,7 @@ namespace QudCrossroads.Dialogue
             return curString;
             //todo: make these more dynamic
             */
+            return curString;
         }
 
 
