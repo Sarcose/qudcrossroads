@@ -9,6 +9,7 @@ using XRL.Messages;
 using QudCrossroads;
 using QRand = QudCrossroads.Utilities.QudCrossroads_Random;
 using static QudCrossroads.Dialogue.Elements;
+using static QudCrossroads.Dialogue.Functions;
 
 namespace QudCrossroads.Dialogue
 {
@@ -35,11 +36,7 @@ namespace QudCrossroads.Dialogue
             return strList[QRand.Next(0,strList.Count-1)];
         }
 
-        public static void GreetFn(Phrase phrase)
-        {
-            List<string> stringList = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
-            phrase.ReStr += GetRandString(stringList);
-        }
+
 
         public static string TestString_Quatro()
         {
