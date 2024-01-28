@@ -59,6 +59,12 @@ And what did that {culturalInsult} lack-salt do? He chose then to bring up a
 {transitionFrom}    At any rate, 
 {affinityBasedGreeting} what is new with you?
 
+{greeting},{playername}{affinityBasedTitle}. {playerOutfitNotice} - {playerOutfitReaction}. {transitionFrom}, {errandContextMoodDeclaration}{transitionTo}
+{timePeriod} I was in {friendlyTown}{busyingActivity}when {acquaintance}, {randomizedAcquaintanceRelation}. And what did that {moodBasedEpithet} do? {AcquaintancePronoun}
+chose then to bring up a {contextualEvent}. {Flavor} {Flavor} {errandHook}{errandItem}{acquaintanceRelationshipWithErrandItem}.{Conclusion}
+{transitionFrom}
+{affinityBasedFollowupGreeting}
+
     >> I will help you find Shushwat, dear sib
     >> I will help you find a Biodynamic Cell, dear sib
     >> I will help you find the Teal-Colored Waterskin, dear sib
