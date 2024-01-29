@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <conversations Namespace="QudCrossroads.Dialogue">
-  <!-- Inherited by all conversations by default, unless another base or empty string is specified in Inherits="" -->
   <conversation ID="BaseConversation">
     <choice ID="QCS_Choice" GotoID="QCS_Followup" IfAllowEscape="true">
           <text>Tell me something interesting!</text>

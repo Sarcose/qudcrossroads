@@ -15,6 +15,13 @@ namespace QudCrossroads.Dialogue
 {
     public static partial class Functions
     {
+        public static string Title = "Title"; public static string Greet = "Greet";
+        public static Dictionary<string, Func<Phrase, string>> functionDictionary = new Dictionary<string, Func<Phrase, string>>
+        {
+            { Greet, GreetFn },
+            { Title, TitleFn }
+        };
+        
         public static string GreetFn(Phrase phrase)
         {
             List<string> stringList = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];

@@ -33,31 +33,31 @@ Actors:
 =================================================================================================================================================================================
 
 
-{greeting} Salt and Sun, 
-{playername} Freya 
-{affinityBasedTitle} my sister. 
-{playerOutfitNotice} I see you are wearing {rivalTown} Bearjerkyton's colors - 
-{playerOutfitReaction} shame on you, my sister! It would be much lovelier to see you in the regalia of {myTown} Starappleton, {townRelationship} your hometown. 
-{transitionFrom} At any rate 
-{errandContextMoodDeclaration} I am of a sour disposition of late. Do you know why?
-{transitionTo}   I have a tale to tell. 
-{timePeriod} Some days past at Hindsun 
-I was in 
-{friendlyTown} Vinewaferton 
-{busyingActivity} browsing {merchant's} Shushwat's wares for a new {randomItem}Biodynamic Cell 
-{oldAcquaintance} when I ran into Tufi, 
-{randomizedAcquaintance} my old classmate from days long past. 
-And what did that {culturalInsult} lack-salt do? He chose then to bring up a 
-{contextualEvent} slight of a bygone era;
-{flavor?} it seemed to needle him as a knollworm. 
-{moreFlavor/Transition} So he claims, 
-{errandHook} I have long held onto his 
-{errandItem} Teal-Colored Waterskin 
-{acquaintanceRelationshipWithErrandItem} which he prized dearly. 
-{conclusion} He will not let it go, and my honor will not be slaked until I find the accursed thing! *grumbles profusely*
+[X]{greeting} Salt and Sun, 
+[]{playername} Freya 
+[X]{affinityBasedTitle} my sister. 
+[]{playerOutfitNotice} I see you are wearing {rivalTown} Bearjerkyton's colors - 
+[]{playerOutfitReaction} shame on you, my sister! It would be much lovelier to see you in the regalia of {myTown} Starappleton, {townRelationship} your hometown. 
+[]{transitionFrom} At any rate 
+[]{errandContextMoodDeclaration} I am of a sour disposition of late. Do you know why?
+[]{transitionTo}   I have a tale to tell. 
+[]{timePeriod} Some days past at Hindsun 
+[]I was in 
+[]{friendlyTown} Vinewaferton 
+[]{busyingActivity} browsing {merchant's} Shushwat's wares for a new {randomItem}Biodynamic Cell 
+[]{oldAcquaintance} when I ran into Tufi, 
+[]{randomizedAcquaintance} my old classmate from days long past. 
+[]And what did that {culturalInsult} lack-salt do? He chose then to bring up a 
+[]{contextualEvent} slight of a bygone era;
+[]{flavor?} it seemed to needle him as a knollworm. 
+[]{moreFlavor/Transition} So he claims, 
+[]{errandHook} I have long held onto his 
+[]{errandItem} Teal-Colored Waterskin 
+[]{acquaintanceRelationshipWithErrandItem} which he prized dearly. 
+[]{conclusion} He will not let it go, and my honor will not be slaked until I find the accursed thing! *grumbles profusely*
 
-{transitionFrom}    At any rate, 
-{affinityBasedGreeting} what is new with you?
+[]{transitionFrom}    At any rate, 
+[]{HowAreYou?} what is new with you?
 
 {greeting},{playername}{affinityBasedTitle}. {playerOutfitNotice} - {playerOutfitReaction}. {transitionFrom}, {errandContextMoodDeclaration}{transitionTo}
 {timePeriod} I was in {friendlyTown}{busyingActivity}when {acquaintance}, {randomizedAcquaintanceRelation}. And what did that {moodBasedEpithet} do? {AcquaintancePronoun}

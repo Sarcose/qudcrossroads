@@ -4,6 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 using XRL;
 using XRL.Language;
+using static XRL.Language.Grammar;
 using XRL.World;
 using XRL.Messages;
 using QudCrossroads;
@@ -15,27 +16,19 @@ namespace QudCrossroads.Dialogue
 {
     public static partial class Builders
     {
-
-
-        private static void qprintc(string message)
+        private static void qprintc(string message)     //move to utilities
         {
             XRL.Messages.MessageQueue.AddPlayerMessage(message);
         }
-        public class Phrase
-        {
-            public string Culture { get; set; }
-            public string Familiarity { get; set; }
-            public string ReStr { get; set; }
-        }
-        public static string GetRandString(List<string> strList)
+        public static string GetRandString(List<string> strList)        //move to utilities
         {
             return strList[QRand.Next(0,strList.Count-1)];
         }
-        private static Dictionary<string, Func<Phrase, string>> functionDictionary = new Dictionary<string, Func<Phrase, string>>
+        public class Phrase                 
         {
-            { "Greet", GreetFn },
-            { "Title", TitleFn }
-        };
+            public string Culture { get; set; }
+            public string Familiarity { get; set; }
+        }
         public delegate void ProcessFnDelegate(string name);
         private static Func<string, string> GetProcessFn(Phrase phrase)
         {
@@ -49,32 +42,15 @@ namespace QudCrossroads.Dialogue
                 Culture = "SaltMarshCulture",
                 Familiarity = "unfamiliar"
             };
-            string Title = "Title";
-            string Greet = "Greet";
+
             Func<string, string> _ = GetProcessFn(newPhrase);
             return $"{_(Greet)}, {_(Title)}, how are you on this day? {_(Greet)}, {_(Title)} {_(Greet)}, {_(Title)} {_(Greet)}, {_(Title)} {_(Greet)}, {_(Title)} {_(Greet)}, {_(Title)}";
         }
 
-/*        public static string TestString_Sinco()
+        public static string TestString_Pluralize()
         {
-                Phrase newPhrase = new Phrase
-                {
-                    Culture = "SaltMarshCulture",
-                    Familiarity = "unfamiliar"
-                };
-                string element = "Greet";
-
-                // Get the process function based on the newPhrase
-                Action<string> localProcessFn = GetProcessFn(newPhrase);
-
-                // Invoke the process function with the provided element
-                for (int i = 0; i < 10; i++)
-                {
-                    localProcessFn(element);
-                }
-                return newPhrase.ReStr;
-        }*/
-
+            return Pluralize("human") + Pluralize("person") + Pluralize("dog") + Pluralize("plant") + Pluralize("child");
+        }
         public static string OutfitNotice(GameObject player, string curString)
         {
             //The.Listener.GetEquippedObjects().Any((Obj) => Obj.HasPart<GivesRep>()) // will need to import System.Linq and XRL
