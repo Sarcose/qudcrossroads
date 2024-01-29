@@ -15,15 +15,15 @@ namespace QudCrossroads.Dialogue
 {
     public static partial class Functions
     {
-        public static void GreetFn(Phrase phrase)
+        public static string GreetFn(Phrase phrase)
         {
             List<string> stringList = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
-            phrase.ReStr += GetRandString(stringList);
+            return GetRandString(stringList);
         }
-        public static void TitleFn(Phrase phrase)
+        public static string TitleFn(Phrase phrase)
         {
             List<string> stringList = AllCultures.Cultures[phrase.Culture].Title["keys"].Familiarities[phrase.Familiarity];
-            phrase.ReStr += GetRandString(stringList);
+            return GetRandString(stringList);
         }
     }
 }

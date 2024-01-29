@@ -31,33 +31,31 @@ namespace QudCrossroads.Dialogue
         {
             return strList[QRand.Next(0,strList.Count-1)];
         }
-        private static Dictionary<string, Action<Phrase>> functionDictionary = new Dictionary<string, Action<Phrase>>
+        private static Dictionary<string, Func<Phrase, string>> functionDictionary = new Dictionary<string, Func<Phrase, string>>
         {
             { "Greet", GreetFn },
             { "Title", TitleFn }
         };
         public delegate void ProcessFnDelegate(string name);
-        private static Action<string> GetProcessFn(Phrase phrase)
+        private static Func<string, string> GetProcessFn(Phrase phrase)
         {
             return (name) => functionDictionary[name]?.Invoke(phrase);
         }
 
-        
-        public static string TestString_Quatro()
+        public static string TestString_Ces()
         {
-            Phrase phrase = new Phrase{
-                Culture = "SaltMarshCulture",
-                Familiarity = "unfamiliar",         //TODO: decide on case for all of these. Probably upper case.
-                ReStr = ""
-            };
-            for (int i=0; i < 5; i++)
+            Phrase newPhrase = new Phrase
             {
-                GreetFn(phrase);
-                phrase.ReStr += ", ";
-            }
-            return phrase.ReStr;
+                Culture = "SaltMarshCulture",
+                Familiarity = "unfamiliar"
+            };
+            string Title = "Title";
+            string Greet = "Greet";
+            Func<string, string> _ = GetProcessFn(newPhrase);
+            return $"{_(Greet)}, {_(Title)}, how are you on this day? {_(Greet)}, {_(Title)} {_(Greet)}, {_(Title)} {_(Greet)}, {_(Title)} {_(Greet)}, {_(Title)} {_(Greet)}, {_(Title)}";
         }
-        public static string TestString_Sinco()
+
+/*        public static string TestString_Sinco()
         {
                 Phrase newPhrase = new Phrase
                 {
@@ -75,22 +73,15 @@ namespace QudCrossroads.Dialogue
                     localProcessFn(element);
                 }
                 return newPhrase.ReStr;
-        }
-        //we will need separate functions for each of Greet, Title, and all others
-        //however I find this probably makes sense in the long run as they will grow in complexity per-member.
-
-
-        /*public Phrase phrase = new Phrase{ 
-            WhichCulture = "SaltMarshCulture",
-            WhichFaamiliarity = "Unfamiliar"
         }*/
-        //string greeting = $"{GreetFn(phrase)}, traveler, how are you this morn?";
-
-
-
 
         public static string OutfitNotice(GameObject player, string curString)
         {
+            //The.Listener.GetEquippedObjects().Any((Obj) => Obj.HasPart<GivesRep>()) // will need to import System.Linq and XRL
+            //The.Listener.GetEquippedObjects().Any((obj) => obj.GetPart("AddsRep") is AddsRep p && p.CachedCommaExpansion().Contains(Faction) && p.AppliedBonus);
+
+
+
             /*
             if player.isWearing(thingIDoLike){
                 curString += $"Ahh, it is {positiveAdjective} to see you in {myTown}'s colors! \n{transitionFrom}, "

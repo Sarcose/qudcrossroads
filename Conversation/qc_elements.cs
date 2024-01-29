@@ -64,7 +64,7 @@ namespace QudCrossroads.Dialogue
                                 {
                                     Familiarities = new Dictionary<string, List<string>>
                                     {
-                                        { "unfamiliar", new List<string> { "Salt and sun", "Good meet to you.", "Bountiful harvest" } },
+                                        { "unfamiliar", new List<string> { "Salt and sun", "Good meet to you", "Bountiful harvest" } },
                                         { "familiar", new List<string> { "Salt and sun", "How are you on this day?", "How fare you?" } },
                                         { "friendly", new List<string> { "Hail", "Merry meet", "Bright tidings" } },
                                         { "unfriendly", new List<string> { "What", "What could you want", "Will this take long" } }
