@@ -50,9 +50,8 @@ namespace QudCrossroads.Dialogue
                 Culture = "SaltMarshCulture",
                 Familiarity = "unfamiliar"
             };
-            string MARKOV = "=MARKOVPARAGRAPH=";
             Func<string, string> _ = GetProcessFn(newPhrase);
-            return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR(MARKOV)}";
+            return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=MARKOVPARAGRAPH=")}";
         }
         public static string OutfitNotice(GameObject player, string curString)
         {
