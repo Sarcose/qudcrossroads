@@ -65,7 +65,7 @@ namespace QudCrossroads.Dialogue
                                 {
                                     { "unfamiliar", new List<string> { "wayfarer", "traveler", "stranger" } },
                                     { "familiar", new List<string> { "wayfarer", "fellow" } },
-                                    { "friendly", new List<string> { "my friend", "my sibling", "my fellow", "dear sib" } },
+                                    { "friendly", new List<string> { "my friend", "my sibling", "my fellow", "dear sib" } }, //my =sib=, dear =sib=
                                     { "unfriendly", new List<string> { "you jerk", "you troublemaker" } }
                                 }
                             }

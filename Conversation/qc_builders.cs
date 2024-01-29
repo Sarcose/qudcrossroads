@@ -42,7 +42,43 @@ namespace QudCrossroads.Dialogue
         {
             return (name) => functionDictionary[name]?.Invoke(phrase);
         }
+        //TODO:
+        /*   ************ Test resultstrings for =XMLVARS= so I can put them directly into my own string declarations
 
+        here is the code in source:
+        
+            public override bool HandleEvent(GetDisplayNameEvent E)
+            {
+                foreach (string key in E.DB.Keys)
+                {
+                    if (key.Contains("="))
+                    {
+                        string text = GameText.VariableReplace(key, ParentObject);          --here is the key to deciphering this
+                        if (text != key)
+                        {
+                            E.DB.Add(text, E.DB[key]);
+                            E.DB.Remove(key);
+                        }
+                    }
+                }
+                return base.HandleEvent(E);
+            }
+
+
+
+
+        We need to:
+                parse the returned string
+                check for an *ENCLOSED* =variable= because that's how it will be written
+                replace enclosed variable with the replacer
+                concatenate back into the string // rebuild the string with concatenated
+
+        Standardization:
+            If an element has a =variable= it must be at the end -- will require parsing a bit (everything after = is the variable) and replacement
+                Example: "my dear =gendersib=" //(not an actual variable tag)
+        */
+
+        //TODO: another wrap function that checks if your character has multiple heads, is plural, or has followers, and uses Pluralize() in response
         public static string TestString_Siete()
         {
             Phrase newPhrase = new Phrase
@@ -53,7 +89,7 @@ namespace QudCrossroads.Dialogue
             Func<string, string> _ = GetProcessFn(newPhrase);
             return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=MARKOVPARAGRAPH=")}";
         }
-        public static string OutfitNotice(GameObject player, string curString)
+        public static string OutfitNotice(GameObject player, string curString)  //probably need to change GameObject player tbh...
         {
             //The.Listener.GetEquippedObjects().Any((Obj) => Obj.HasPart<GivesRep>()) // will need to import System.Linq and XRL
             //The.Listener.GetEquippedObjects().Any((obj) => obj.GetPart("AddsRep") is AddsRep p && p.CachedCommaExpansion().Contains(Faction) && p.AppliedBonus);
