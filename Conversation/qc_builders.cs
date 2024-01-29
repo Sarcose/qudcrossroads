@@ -2,11 +2,15 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
+
 using XRL;
 using XRL.Language;
 using static XRL.Language.Grammar;
 using XRL.World;
+using XRL.World.Conversations;
+using XRL.World.Parts;
 using XRL.Messages;
+
 using QudCrossroads;
 using QRand = QudCrossroads.Utilities.QudCrossroads_Random;
 using static QudCrossroads.Dialogue.Elements;
@@ -29,27 +33,26 @@ namespace QudCrossroads.Dialogue
             public string Culture { get; set; }
             public string Familiarity { get; set; }
         }
+        public static string LVR(string varstring)     //add more later?
+        {
+            return GameText.VariableReplace(varstring, null);
+        }
         public delegate void ProcessFnDelegate(string name);
         private static Func<string, string> GetProcessFn(Phrase phrase)
         {
             return (name) => functionDictionary[name]?.Invoke(phrase);
         }
 
-        public static string TestString_Ces()
+        public static string TestString_Siete()
         {
             Phrase newPhrase = new Phrase
             {
                 Culture = "SaltMarshCulture",
                 Familiarity = "unfamiliar"
             };
-
+            string MARKOV = "=MARKOVPARAGRAPH=";
             Func<string, string> _ = GetProcessFn(newPhrase);
-            return $"{_(Greet)}, {_(Title)}, how are you on this day? {_(Greet)}, {_(Title)} {_(Greet)}, {_(Title)} {_(Greet)}, {_(Title)} {_(Greet)}, {_(Title)} {_(Greet)}, {_(Title)}";
-        }
-
-        public static string TestString_Pluralize()
-        {
-            return Pluralize("human") + Pluralize("person") + Pluralize("dog") + Pluralize("plant") + Pluralize("child");
+            return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR(MARKOV)}";
         }
         public static string OutfitNotice(GameObject player, string curString)
         {

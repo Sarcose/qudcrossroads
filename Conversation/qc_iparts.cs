@@ -47,8 +47,7 @@ namespace QudCrossroads.Dialogue
             public override bool HandleEvent(DisplayTextEvent E)
             {
                 XRL.Messages.MessageQueue.AddPlayerMessage("PrepareTextEvent fired");
-                string text = GameText.VariableReplace("=MARKOVPARAGRAPH=", null);
-                E.Text.Append(text);
+                E.Text.Append(TestString_Siete());
                 return base.HandleEvent(E);
             }
         }
