@@ -65,3 +65,47 @@ AllCultures = {
 
 local whichCulture = "SaltMarshCulture"
 local specificGreetString = AllCultures[whichCulture].Greetings.Unfamiliar[1]
+
+
+
+
+
+
+
+
+local Phrase = {
+    Culture = "",
+    Familiarity = "",
+    ReStr = "",
+}
+
+local function GreetFn(phrase)  --phrase is needed, here
+    --logic
+
+end
+
+local function TitleFn(phrase)
+    --logic
+end
+
+local functionDictionary = {
+    Greet = GreetFn,
+    Title = TitleFn
+}
+
+local function GetProcessFn(phrase)
+    return function(name) functionDictionary[name](phrase) end
+end
+
+local function logic()
+    local newPhrase = New(Phrase)   --New is pseudocode for a table instantiation routine, ignore
+    newPhrase.Culture = "SaltMarshCulture"
+    newPhrase.Familiarity = "unfamiliar"
+    local element = "Greet"
+
+    local localProcessFn = GetProcessFn(newPhrase)
+    
+    for i=1,10 do
+        localProcessFn(element)
+    end
+end

@@ -15,29 +15,34 @@ namespace QudCrossroads.Dialogue
 {
     public static partial class Builders
     {
+
+
         private static void qprintc(string message)
         {
             XRL.Messages.MessageQueue.AddPlayerMessage(message);
         }
         public class Phrase
         {
-            public string Culture;
-            public string Familiarity;
-            public string ReStr;
+            public string Culture { get; set; }
+            public string Familiarity { get; set; }
+            public string ReStr { get; set; }
         }
-        /*public Phrase phrase = new Phrase{ 
-            WhichCulture = "SaltMarshCulture",
-            WhichFamiliarity = "Unfamiliar"
-        }*/
-        //string greeting = $"{GreetFn(phrase)}, traveler, how are you this morn?";
-
         public static string GetRandString(List<string> strList)
         {
             return strList[QRand.Next(0,strList.Count-1)];
         }
+        private static Dictionary<string, Action<Phrase>> functionDictionary = new Dictionary<string, Action<Phrase>>
+        {
+            { "Greet", GreetFn },
+            { "Title", TitleFn }
+        };
+        public delegate void ProcessFnDelegate(string name);
+        private static Action<string> GetProcessFn(Phrase phrase)
+        {
+            return (name) => functionDictionary[name]?.Invoke(phrase);
+        }
 
-
-
+        
         public static string TestString_Quatro()
         {
             Phrase phrase = new Phrase{
@@ -51,6 +56,25 @@ namespace QudCrossroads.Dialogue
                 phrase.ReStr += ", ";
             }
             return phrase.ReStr;
+        }
+        public static string TestString_Sinco()
+        {
+                Phrase newPhrase = new Phrase
+                {
+                    Culture = "SaltMarshCulture",
+                    Familiarity = "unfamiliar"
+                };
+                string element = "Greet";
+
+                // Get the process function based on the newPhrase
+                Action<string> localProcessFn = GetProcessFn(newPhrase);
+
+                // Invoke the process function with the provided element
+                for (int i = 0; i < 10; i++)
+                {
+                    localProcessFn(element);
+                }
+                return newPhrase.ReStr;
         }
         //we will need separate functions for each of Greet, Title, and all others
         //however I find this probably makes sense in the long run as they will grow in complexity per-member.

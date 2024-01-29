@@ -20,5 +20,10 @@ namespace QudCrossroads.Dialogue
             List<string> stringList = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
             phrase.ReStr += GetRandString(stringList);
         }
+        public static void TitleFn(Phrase phrase)
+        {
+            List<string> stringList = AllCultures.Cultures[phrase.Culture].Title["keys"].Familiarities[phrase.Familiarity];
+            phrase.ReStr += GetRandString(stringList);
+        }
     }
 }

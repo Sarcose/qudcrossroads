@@ -47,7 +47,7 @@ namespace QudCrossroads.Dialogue
             public override bool HandleEvent(DisplayTextEvent E)
             {
                 XRL.Messages.MessageQueue.AddPlayerMessage("PrepareTextEvent fired");
-                E.Text.Append(TestString_Quatro());
+                E.Text.Append(TestString_Sinco());
                 return base.HandleEvent(E);
             }
         }
