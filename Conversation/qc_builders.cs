@@ -90,8 +90,22 @@ namespace QudCrossroads.Dialogue
                 =MARKOVCORVIDSENTENCE=
                 =MARKOVSENTENCE=
                 =MARKOVWATERBIRDSENTENCE=
+                =name=  - player name
+                =object.nameSingle= -   i suspect this may be contextual and grabbed a generic
+                =player.apparentSpecies=
+                =player.formalAddressTerm=
+                =player.offspringTerm=
+                =player.personTerm=
+                =player.reflexive=
+                =player.siblingTerm=
+                =pronouns.formalAddressTerm= -- this produced "friend" however, for whatever reason
+                =pronouns.personTerm= --this produced 'human'
+                =pronouns.possessive=
+                =pronouns.siblingTerm=
+                =pronouns.subjective=
+                =subject.refname= --again, by producing "thing", this leads me to believe it is contextual and processed here without context.
 
-            ## Not working
+            ## Not working   -- ime these are looking for contextual variables that would be set in the XML interp
                 =subject.waterRitualLiquid= -- the 'subject' here is probably the source. I don't want to custom roll a string parsing alg tho.
                 =all.influence=
                 =circumstance.influence=
@@ -99,7 +113,8 @@ namespace QudCrossroads.Dialogue
                 =motive.influence=-
                 =mount.complete.days=
                 =mutation.name=
-
+                =pluralize=     -- this strikes me as setting a temporary flag for the XML interp. Use PLuralize()
+                =recipe=
 
             ## Crashes the conversation outright
                 =generic=
@@ -117,10 +132,10 @@ namespace QudCrossroads.Dialogue
             Func<string, string> _ = GetProcessFn(newPhrase);
             //return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=verb:grab=")}";
             string retstr = "";
-            retstr+= $"1. {LVR("=name=")} 2. {LVR("=object.nameSingle=")} 3. {LVR("=player.apparentSpecies=")} 4. {LVR("=player.formalAddressTerm=")}";
-            retstr+= $" 5. {LVR("=player.offspringTerm=")} 6. {LVR("=player.personTerm=")} 7. {LVR("=player.reflexive=")} 8. {LVR("=player.siblingTerm=")}";
-            retstr+= $" 9. {LVR("=pluralize=")} 10. {LVR("=pronouns.formalAddressTerm=")} 11. {LVR("=pronouns.personTerm=")} 12. {LVR("=pronouns.possessive=")}";
-            retstr+= $" 13. {LVR("=pronouns.siblingTerm=")} 14. {LVR("=pronouns.subjective=")} 15. {LVR("=recipe=")} 16. {LVR("=subject.refname=")}";
+            retstr+= $"1. {LVR("")} 2. {LVR("")} 3. {LVR("")} 4. {LVR("")}";
+            retstr+= $" 5. {LVR("")} 6. {LVR("")} 7. {LVR("")} 8. {LVR("")}";
+            retstr+= $" 9. {LVR("")} 10. {LVR("")} 11. {LVR("")} 12. {LVR("")}";
+            retstr+= $" 13. {LVR("")} 14. {LVR("")} 15. {LVR("")} 16. {LVR("=")}";
             return retstr;
         }
         public static string OutfitNotice(GameObject player, string curString)  //probably need to change GameObject player tbh...
