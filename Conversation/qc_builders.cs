@@ -107,6 +107,7 @@ namespace QudCrossroads.Dialogue
 
             ## Not working   -- ime these are looking for contextual variables that would be set in the XML interp
                 =subject.waterRitualLiquid= -- the 'subject' here is probably the source. I don't want to custom roll a string parsing alg tho.
+                =subject.T=
                 =all.influence=
                 =circumstance.influence=
                 =hermit=
@@ -132,10 +133,9 @@ namespace QudCrossroads.Dialogue
             Func<string, string> _ = GetProcessFn(newPhrase);
             //return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=verb:grab=")}";
             string retstr = "";
-            retstr+= $"1. {LVR("")} 2. {LVR("")} 3. {LVR("")} 4. {LVR("")}";
-            retstr+= $" 5. {LVR("")} 6. {LVR("")} 7. {LVR("")} 8. {LVR("")}";
-            retstr+= $" 9. {LVR("")} 10. {LVR("")} 11. {LVR("")} 12. {LVR("")}";
-            retstr+= $" 13. {LVR("")} 14. {LVR("")} 15. {LVR("")} 16. {LVR("=")}";
+            retstr+= $"1. {LVR("=SULTAN4=")} 2. {LVR("=thief.name=")} 3. {LVR("=V0tinkeraddendum=")} 4. {LVR("=verb:grab=")}";
+            retstr+= $" 5. {LVR("=verb:tub=")} 6. {LVR("=village.activity=")} 7. {LVR("=village.name=")} 8. {LVR("=village.profane=")}";
+            retstr+= $" 9. {LVR("=village.sacred=")} 10. {LVR("=villageZeroName=")};
             return retstr;
         }
         public static string OutfitNotice(GameObject player, string curString)  //probably need to change GameObject player tbh...
