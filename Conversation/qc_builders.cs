@@ -76,6 +76,13 @@ namespace QudCrossroads.Dialogue
         Standardization:
             If an element has a =variable= it must be at the end -- will require parsing a bit (everything after = is the variable) and replacement
                 Example: "my dear =gendersib=" //(not an actual variable tag)
+            
+            Working with LVR currently:
+            =MARKOVPARAGRAPH=
+            =verb:grab= -- grabbed from the mental mutation text, but does not become "grabs" in this usage
+
+            Not working
+            =subject.waterRitualLiquid= -- the 'subject' here is probably the source. This may be beyond my ability to parse further.
         */
 
         //TODO: another wrap function that checks if your character has multiple heads, is plural, or has followers, and uses Pluralize() in response
@@ -87,7 +94,12 @@ namespace QudCrossroads.Dialogue
                 Familiarity = "unfamiliar"
             };
             Func<string, string> _ = GetProcessFn(newPhrase);
-            return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=MARKOVPARAGRAPH=")}";
+            //return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=verb:grab=")}";
+            return $"1. {LVR("=player.reflexive=")} 2. {LVR("=subject.T=")} 3. {LVR("=pronouns.siblingTerm=")} 4. {LVR("")}
+             5. {LVR("")} 6. {LVR("")} 7. {LVR("")} 8. {LVR("")}
+            9. {LVR("")} 10. {LVR("")} 11. {LVR("")} 12. {LVR("")}
+            13. {LVR("")} 14. {LVR("")} 15. {LVR("")} 16. {LVR("")}";
+
         }
         public static string OutfitNotice(GameObject player, string curString)  //probably need to change GameObject player tbh...
         {
