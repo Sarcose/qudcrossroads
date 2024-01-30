@@ -95,10 +95,10 @@ namespace QudCrossroads.Dialogue
             };
             Func<string, string> _ = GetProcessFn(newPhrase);
             //return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=verb:grab=")}";
-            return $"1. {LVR("=player.reflexive=")} 2. {LVR("=subject.T=")} 3. {LVR("=pronouns.siblingTerm=")} 4. {LVR("")}
-             5. {LVR("")} 6. {LVR("")} 7. {LVR("")} 8. {LVR("")}
-            9. {LVR("")} 10. {LVR("")} 11. {LVR("")} 12. {LVR("")}
-            13. {LVR("")} 14. {LVR("")} 15. {LVR("")} 16. {LVR("")}";
+            return $"1. {LVR("=alchemist=")} 2. {LVR("=all.influence=")} 3. {LVR("=pronouns.siblingTerm=")} 4. {LVR("=circumstance.influence=")}
+             5. {LVR("=factionaddress:Barathrumites=")} 6. {LVR("=factionaddress:Mopango=")} 7. {LVR("=generic=")} 8. {LVR("=GGRESULT=")}
+            9. {LVR("=hermit=")} 10. {LVR("=MarkOfDeath=")} 11. {LVR("=MARKOVCORVIDSENTENCE=")} 12. {LVR("=MARKOVSENTENCE=")}
+            13. {LVR("=MARKOVWATERBIRDSENTENCE=")} 14. {LVR("=motive.influence=")} 15. {LVR("=mound.complete.days=")} 16. {LVR("=mutation.name=")}";
 
         }
         public static string OutfitNotice(GameObject player, string curString)  //probably need to change GameObject player tbh...
