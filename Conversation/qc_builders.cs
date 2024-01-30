@@ -81,9 +81,26 @@ namespace QudCrossroads.Dialogue
             ## Working with LVR currently:
                 =MARKOVPARAGRAPH=
                 =verb:grab= -- grabbed from the mental mutation text, but does not become "grabs" in this usage
+                =alchemist= -- seems to generate a randomized 'alchemist' babble
+                =prounouns.siblingTerm= -- probably gives a generic if i had to guess
+                =factionaddress:Barathrumites= --this is probably a global variable reference to the player
+                =factionaddress:Mopango= --same as above
+                =GGREESULT= -- Grit Gate attack assessment (won't need this for Qud Crossing)
+                =MarkOfDeath= -- Doubt I'll need this
+                =MARKOVCORVIDSENTENCE=
+                =MARKOVSENTENCE=
+                =MARKOVWATERBIRDSENTENCE=
 
             ## Not working
                 =subject.waterRitualLiquid= -- the 'subject' here is probably the source. I don't want to custom roll a string parsing alg tho.
+                =all.influence=
+                =circumstance.influence=
+                =hermit=
+                =motive.influence=-
+                =mount.complete.days=
+                =mutation.name=
+
+
             ## Crashes the conversation outright
                 =generic=
         */
@@ -100,10 +117,10 @@ namespace QudCrossroads.Dialogue
             Func<string, string> _ = GetProcessFn(newPhrase);
             //return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=verb:grab=")}";
             string retstr = "";
-            retstr+= $"1. {LVR("=alchemist=")} 2. {LVR("=all.influence=")} 3. {LVR("=pronouns.siblingTerm=")} 4. {LVR("=circumstance.influence=")}";
-            retstr+= $" 5. {LVR("=factionaddress:Barathrumites=")} 6. {LVR("=factionaddress:Mopango=")} 7. {LVR("==")} 8. {LVR("=GGRESULT=")}";
-            retstr+= $" 9. {LVR("=hermit=")} 10. {LVR("=MarkOfDeath=")} 11. {LVR("=MARKOVCORVIDSENTENCE=")} 12. {LVR("=MARKOVSENTENCE=")}";
-            retstr+= $" 13. {LVR("=MARKOVWATERBIRDSENTENCE=")} 14. {LVR("=motive.influence=")} 15. {LVR("=mound.complete.days=")} 16. {LVR("=mutation.name=")}";
+            retstr+= $"1. {LVR("=name=")} 2. {LVR("=object.nameSingle=")} 3. {LVR("=player.apparentSpecies=")} 4. {LVR("=player.formalAddressTerm=")}";
+            retstr+= $" 5. {LVR("=player.offspringTerm=")} 6. {LVR("=player.personTerm=")} 7. {LVR("=player.reflexive=")} 8. {LVR("=player.siblingTerm=")}";
+            retstr+= $" 9. {LVR("=pluralize=")} 10. {LVR("=pronouns.formalAddressTerm=")} 11. {LVR("=pronouns.personTerm=")} 12. {LVR("=pronouns.possessive=")}";
+            retstr+= $" 13. {LVR("=pronouns.siblingTerm=")} 14. {LVR("=pronouns.subjective=")} 15. {LVR("=recipe=")} 16. {LVR("=subject.refname=")}";
             return retstr;
         }
         public static string OutfitNotice(GameObject player, string curString)  //probably need to change GameObject player tbh...
