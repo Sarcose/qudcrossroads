@@ -120,7 +120,7 @@ namespace QudCrossroads.Dialogue
                 =mutation.name=
                 =pluralize=     -- this strikes me as setting a temporary flag for the XML interp. Use PLuralize()
                 =recipe=
-                =thief.name=
+                =thief.name=    ----
                 =village.activity=  --\
                 =village.name=      --|
                 =village.profane=   --| --TODO: need to find out how to trigger these specifically. I'm sure there's simply a context I need to invoke. 
