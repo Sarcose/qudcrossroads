@@ -35,6 +35,7 @@ namespace QudCrossroads.Dialogue
         }
         public static string LVR(string varstring)     //add more later?
         {
+            XRL.Messages.MessageQueue.AddPlayerMessage(varstring);
             return GameText.VariableReplace(varstring, null);
         }
         public delegate void ProcessFnDelegate(string name);
@@ -77,15 +78,18 @@ namespace QudCrossroads.Dialogue
             If an element has a =variable= it must be at the end -- will require parsing a bit (everything after = is the variable) and replacement
                 Example: "my dear =gendersib=" //(not an actual variable tag)
             
-            Working with LVR currently:
-            =MARKOVPARAGRAPH=
-            =verb:grab= -- grabbed from the mental mutation text, but does not become "grabs" in this usage
+            ## Working with LVR currently:
+                =MARKOVPARAGRAPH=
+                =verb:grab= -- grabbed from the mental mutation text, but does not become "grabs" in this usage
 
-            Not working
-            =subject.waterRitualLiquid= -- the 'subject' here is probably the source. This may be beyond my ability to parse further.
+            ## Not working
+                =subject.waterRitualLiquid= -- the 'subject' here is probably the source. I don't want to custom roll a string parsing alg tho.
+            ## Crashes the conversation outright
+                =generic=
         */
 
         //TODO: another wrap function that checks if your character has multiple heads, is plural, or has followers, and uses Pluralize() in response
+        //TODO: motherfuck me, one of the =variables= silently crashes the dialogue, with no way of knowing. Perhaps I should put a console output into LVR?
         public static string TestString_Siete()
         {
             Phrase newPhrase = new Phrase
@@ -95,11 +99,12 @@ namespace QudCrossroads.Dialogue
             };
             Func<string, string> _ = GetProcessFn(newPhrase);
             //return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=verb:grab=")}";
-            return $"1. {LVR("=alchemist=")} 2. {LVR("=all.influence=")} 3. {LVR("=pronouns.siblingTerm=")} 4. {LVR("=circumstance.influence=")}
-             5. {LVR("=factionaddress:Barathrumites=")} 6. {LVR("=factionaddress:Mopango=")} 7. {LVR("=generic=")} 8. {LVR("=GGRESULT=")}
-            9. {LVR("=hermit=")} 10. {LVR("=MarkOfDeath=")} 11. {LVR("=MARKOVCORVIDSENTENCE=")} 12. {LVR("=MARKOVSENTENCE=")}
-            13. {LVR("=MARKOVWATERBIRDSENTENCE=")} 14. {LVR("=motive.influence=")} 15. {LVR("=mound.complete.days=")} 16. {LVR("=mutation.name=")}";
-
+            string retstr = "";
+            retstr+= $"1. {LVR("=alchemist=")} 2. {LVR("=all.influence=")} 3. {LVR("=pronouns.siblingTerm=")} 4. {LVR("=circumstance.influence=")}";
+            retstr+= $" 5. {LVR("=factionaddress:Barathrumites=")} 6. {LVR("=factionaddress:Mopango=")} 7. {LVR("==")} 8. {LVR("=GGRESULT=")}";
+            retstr+= $" 9. {LVR("=hermit=")} 10. {LVR("=MarkOfDeath=")} 11. {LVR("=MARKOVCORVIDSENTENCE=")} 12. {LVR("=MARKOVSENTENCE=")}";
+            retstr+= $" 13. {LVR("=MARKOVWATERBIRDSENTENCE=")} 14. {LVR("=motive.influence=")} 15. {LVR("=mound.complete.days=")} 16. {LVR("=mutation.name=")}";
+            return retstr;
         }
         public static string OutfitNotice(GameObject player, string curString)  //probably need to change GameObject player tbh...
         {

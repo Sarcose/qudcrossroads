@@ -14,7 +14,6 @@ namespace QudCrossroads.Dialogue
     public class QCS_Chat_Try : IConversationPart //it appears to use 
         {
             public override bool WantEvent(int id, int propagation){
-                XRL.Messages.MessageQueue.AddPlayerMessage("WantEventFired");
                 return 
                 base.WantEvent(id, propagation) 
                 || id == IsElementVisibleEvent.ID
@@ -22,7 +21,6 @@ namespace QudCrossroads.Dialogue
             }
             public override bool HandleEvent(IsElementVisibleEvent E)
             {
-                XRL.Messages.MessageQueue.AddPlayerMessage("IsElementVisibleFired");
                 GameObject speaker = The.Speaker;
                 if (!speaker.IsCreature)
                 {
@@ -38,7 +36,6 @@ namespace QudCrossroads.Dialogue
     public class QCS_Chat_Respond : IConversationPart //it appears to use 
         {
             public override bool WantEvent(int id, int propagation){
-                XRL.Messages.MessageQueue.AddPlayerMessage("WantEventFired");
                 return 
                 base.WantEvent(id, propagation) 
                 || id == DisplayTextEvent.ID
@@ -46,7 +43,6 @@ namespace QudCrossroads.Dialogue
             }
             public override bool HandleEvent(DisplayTextEvent E)
             {
-                XRL.Messages.MessageQueue.AddPlayerMessage("PrepareTextEvent fired");
                 E.Text.Append(TestString_Siete());
                 return base.HandleEvent(E);
             }
