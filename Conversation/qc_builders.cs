@@ -104,6 +104,10 @@ namespace QudCrossroads.Dialogue
                 =pronouns.siblingTerm=
                 =pronouns.subjective=
                 =subject.refname= --again, by producing "thing", this leads me to believe it is contextual and processed here without context.
+                =SULTAN4=       -- comes up with a Sultan
+                =V0tinkeraddendum= - dunno what this does
+                =verb:grab=
+                =verb:tug=
 
             ## Not working   -- ime these are looking for contextual variables that would be set in the XML interp
                 =subject.waterRitualLiquid= -- the 'subject' here is probably the source. I don't want to custom roll a string parsing alg tho.
@@ -116,6 +120,12 @@ namespace QudCrossroads.Dialogue
                 =mutation.name=
                 =pluralize=     -- this strikes me as setting a temporary flag for the XML interp. Use PLuralize()
                 =recipe=
+                =thief.name=
+                =village.activity=  --\
+                =village.name=      --|
+                =village.profane=   --| --TODO: need to find out how to trigger these specifically. I'm sure there's simply a context I need to invoke. 
+                =village.sacred=    --| -- I am imagining my LVR function needs another layer of assertions to build these various contextual phrases
+                =villageZeroName=   --/
 
             ## Crashes the conversation outright
                 =generic=
@@ -131,12 +141,7 @@ namespace QudCrossroads.Dialogue
                 Familiarity = "unfamiliar"
             };
             Func<string, string> _ = GetProcessFn(newPhrase);
-            //return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=verb:grab=")}";
-            string retstr = "";
-            retstr+= $"1. {LVR("=SULTAN4=")} 2. {LVR("=thief.name=")} 3. {LVR("=V0tinkeraddendum=")} 4. {LVR("=verb:grab=")}";
-            retstr+= $" 5. {LVR("=verb:tub=")} 6. {LVR("=village.activity=")} 7. {LVR("=village.name=")} 8. {LVR("=village.profane=")}";
-            retstr+= $" 9. {LVR("=village.sacred=")} 10. {LVR("=villageZeroName=")};
-            return retstr;
+            return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=verb:grab=")}";
         }
         public static string OutfitNotice(GameObject player, string curString)  //probably need to change GameObject player tbh...
         {
