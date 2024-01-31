@@ -30,3 +30,12 @@ public static void __ExpandVillageText(StringBuilder Text, string Faction = null
 	Text.Replace("=village.name=", newValue).Replace("=village.sacred=", newValue2).Replace("=village.profane=", newValue3)
 		.Replace("=village.activity=", newValue4);
 }
+
+
+
+/*
+
+
+
+
+*/

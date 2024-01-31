@@ -20,18 +20,50 @@ namespace QudCrossroads.Dialogue
 {
     public static partial class Builders
     {
+/***************************************************************/
+//          Utility Functions for Phrase Building              //
+/***************************************************************/
         private static void qprintc(string message)     //move to utilities
         {
             XRL.Messages.MessageQueue.AddPlayerMessage(message);
         }
-        public static string GetRandString(List<string> strList)        //move to utilities
+        public static string GetRandString(params List<string>[] strArrays)     // result = GetRandString(stringList, stringList2, stringList3, stringList4, etc...)
         {
-            return strList[QRand.Next(0,strList.Count-1)];
+            int totalCount = 0;
+            foreach (var strArray in strArrays)
+            {
+                totalCount += strArray.Count;
+            }
+            int randomIndex = QRand.Next(totalCount);
+            foreach (var strArray in strArrays)
+            {
+                if (randomIndex < strArray.Count) {return strArray[randomIndex]; }
+                else { randomIndex -= strArray.Count; }
+            }
+            qprintc("GetRandString error - no elements found.");
         }
-        public class Phrase                 
+        public static int GetRandStringIndex(params List<string>[] strArrays)
         {
-            public string Culture { get; set; }
-            public string Familiarity { get; set; }
+            int totalCount = 0;
+            foreach (var strArray in strArrays)
+            {
+                totalCount += strArray.Count;
+            }
+            return QRand.Next(totalCount);
+        }
+        public static string GetSpecificString(int index, params List<string>[] strArrays)
+        {
+            int totalCount = 0;
+            foreach (var strArray in strArrays)
+            {
+                totalCount += strArray.Count;
+            }
+            foreach (var strArray in strArrays)
+            {
+                if (index < strArray.Count) {return strArray[index]; }
+                else { index -= strArray.Count; }
+            }
+            qprintc("GetSpecificString error - no elements found.");
         }
         public static string LVR(string varstring)     //add more later?
         {
@@ -43,8 +75,28 @@ namespace QudCrossroads.Dialogue
         {
             return (name) => functionDictionary[name]?.Invoke(phrase);
         }
+
+/***************************************************************/
+//                      Phrase Class                           //
+/***************************************************************/
+        public class Phrase                 
+        {
+            public string Culture { get; set; }
+            public string Familiarity { get; set; }
+        }
+
+
+
+
+        
+/***************************************************************/
+//                      Testing Area                           //
+/***************************************************************/
         //TODO:
-        /*   ************ Test resultstrings for =XMLVARS= so I can put them directly into my own string declarations
+        /*  
+
+        UPDATE: VariableReplace in /Qud/ on Drive has the majority of the actual =variable= replacement logic.
+        
 
         here is the code in source:
         

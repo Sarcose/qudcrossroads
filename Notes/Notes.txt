@@ -69,6 +69,7 @@ The basic inspiration is Animal Crossing (Gamecube/N64) where you had the follow
     
 --==Possible Personalities==-- Everyone has two, but those with jobs have one of these and the other a job
 Will not be gendered
+These are for humans. Others will have other personalities.
     -   Lazy
     -   Snooty
     -   Peppy
@@ -88,11 +89,25 @@ Will not be gendered
     -   Jeweller
     -   Ichor Merchant/Alchemist
 
---==Special==--     --work on these later
+--==Cultures==--    --work on these later
     -   Barathrumite
     -   Robots
     -   Putus
     -   Seekers
+    -   Snapjaws
+    -   SaltMarsh
+    -   Desert
+    -   FlowerFields
+    -   Hindren
+    -   Jungle
+    -   Goatfolk
+    -   BananaGroves
+    -   River
+    -   Canyon
+    -   Hills
+    -   Palladium
+    -   MoonStair
+    -   Stilt
 
 --==Chit Chat Phrases==--
 The choice text, based on a number of factors, divided into Socially Repugnant and non-socially-repugnant.

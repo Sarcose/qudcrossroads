@@ -34,8 +34,8 @@ Actors:
 
 
 [X]{greeting} Salt and Sun, 
-[]{playername} Freya 
-[X]{affinityBasedTitle} my sister. 
+[X]{playername} Freya =name=
+[X]{affinityBasedTitle} my sister. ||  =player.siblingTerm=
 []{playerOutfitNotice} I see you are wearing {rivalTown} Bearjerkyton's colors - 
 []{playerOutfitReaction} shame on you, my sister! It would be much lovelier to see you in the regalia of {myTown} Starappleton, {townRelationship} your hometown. 
 []{transitionFrom} At any rate 
@@ -120,14 +120,6 @@ miniMad             - a phrase with its own tags to build another layer of procg
 
 
 
-Theoretical structure:
 
+Some notes:
 
-qc_delegates.cs
-qc_iparts.cs
-qc_phrases.cs       -   array master list
-qc_phrases<category>.cs -   possibly broken down eventually
-qc_builders.cs
-qc_errandTypes.cs       -   broader type spec for different types of errands
-qc_errands.cs
-qc_functions.cs         -   tool functions

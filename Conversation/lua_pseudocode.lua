@@ -2,6 +2,35 @@
 --and then translate them into C# because my brain thinks in Lua terms
 
 
+PersonalityConversation = {
+    Elder = {
+        transitions = {}, --strings
+        questHooks = {}, --strings
+        sayings = {}, --strings
+        comedy = {}, --strings
+        serious = {}, --strings
+        hobbies = {}, --strings
+        insults = {}, --strings
+        compliments = {}, --strings
+    },
+    Lazy = {
+        transitions = {}, --strings
+        questHooks = {}, --strings
+        sayings = {}, --strings
+        comedy = {}, --strings
+        serious = {}, --strings
+        hobbies = {}, --strings
+        insults = {}, --strings
+        compliments = {}, --strings
+    }
+}
+
+
+
+
+
+
+
 KendrinCulture = {
         greetings = {
             unfamiliar = {},
