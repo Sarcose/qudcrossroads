@@ -123,16 +123,20 @@ namespace QudCrossroads.Dialogue
                 =thief.name=    ----
                 =village.activity=  --\
                 =village.name=      --|
-                =village.profane=   --| --TODO: need to find out how to trigger these specifically. I'm sure there's simply a context I need to invoke. 
+                =village.profane=   --| //TODO: need to find out how to trigger these specifically. I'm sure there's simply a context I need to invoke. 
                 =village.sacred=    --| -- I am imagining my LVR function needs another layer of assertions to build these various contextual phrases
                 =villageZeroName=   --/
 
             ## Crashes the conversation outright
-                =generic=
+                =generic=       --looks like this is actually a NOOP to establish the format.
         */
-
+        //Usage examples:
+        // {_(Greet)}
+        // {Pluralize(_(Title))}
+        // {LVR("=verb:grab=")}
+        //
+        //
         //TODO: another wrap function that checks if your character has multiple heads, is plural, or has followers, and uses Pluralize() in response
-        //TODO: motherfuck me, one of the =variables= silently crashes the dialogue, with no way of knowing. Perhaps I should put a console output into LVR?
         public static string TestString_Siete()
         {
             Phrase newPhrase = new Phrase
