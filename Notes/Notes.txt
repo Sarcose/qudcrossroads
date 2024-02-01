@@ -88,6 +88,8 @@ These are for humans. Others will have other personalities.
     -   Kipper
     -   Jeweller
     -   Ichor Merchant/Alchemist
+    -   Laborer
+    -   Warden
 
 --==Cultures==--    --work on these later
     -   Barathrumite
