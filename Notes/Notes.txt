@@ -1,0 +1,313 @@
+Terminology:
+
+<text Priority="-1">
+            <text>Tell me something interesting!</text>
+            <text>So what's new?</text>
+            <text>How have you been, =pronouns.siblingTerm=?</text>
+            <text>What's on your mind?</text>
+          </text>
+          <text IfHavePart="SociallyRepugnant">
+            <text>I'm bored. Entertain me.</text>
+            <text>What are you doing, =pronouns.personTerm=?</text>
+            <text>Why do you look like that?</text>
+          </text>
+       //let's try some pseudocode to generate a conversation
+ //       public override bool HandleEvent(PrepareTextEvent E) //PrepareTextEvent is from the SnapjawLaugh example code
+ //       {
+ //           E.Text.Append("\n\nehehehehe!");    
+            //E.Text.Append can be used for directly loading a string out but can we do more?
+ //           string sup = "whats up buttercup";
+ //           E.Text.Append(sup); //is this the correct syntax?
+
+            //string randomizedString = createRandomString(dictToLookUp); //where do functions go? where do variables go?
+            //E.Text.Append(randomizedString);
+
+ //           return base.HandleEvent(E);
+ //       }
+        /*
+        //these were not commented out originally, they appear to be overloaded functions. Under what circumstances are ICParts overloaded?
+        //oh, obviously, HandleEvent is used for multiple purposes based on input. Duh.
+        public override bool HandleEvent(GetTargetElementEvent E)
+        {
+            var req = 50;
+            var feeling = The.Speaker.pBrain.GetPersonalFeeling(The.Player) ?? 0;
+            foreach (var pair in The.Speaker.pBrain.FactionMembership)
+            {
+                var rep = Factions.GetFeelingFactionToObject(pair.Key, The.Player);
+                feeling += (int) Math.Round(pair.Value / 100f * rep);
+            }
+
+            if (The.Player.OwnPart<Customs_Tactful>()) req -= 25;
+            if (The.Player.OwnPart<SociallyRepugnant>()) req += 25;
+
+            if (feeling < req) E.Target = Target;
+            return base.HandleEvent(E);
+        }
+
+        public override bool HandleEvent(GetChoiceTagEvent E)
+        {
+            E.Tag = "{{g|[invite]}}";
+            return base.HandleEvent(E);
+        }
+        */
+
+
+
+
+
+
+The idea behind this mod is to create a dynamically generated community system that generates quests for a town which will enable:
+    - An alternate way of playing the game
+    - An alternative advancement system (social, tokens, and secrets)
+    - A way of playing the game and idling away without levelling (low XP for quests)
+    - A separate questing system called "Errands"
+
+
+The basic inspiration is Animal Crossing (Gamecube/N64) where you had the following conversaiton options:
+    - Tell me something interesting!
+    - Give me work to do!
+    
+--==Possible Personalities==-- Everyone has two, but those with jobs have one of these and the other a job
+Will not be gendered
+These are for humans. Others will have other personalities.
+    -   Lazy
+    -   Snooty
+    -   Peppy
+    -   Warrior
+    -   Chimera
+    -   Esper
+    -   Studious
+    -   Downer
+    -   Cranky
+    -   Elderly
+--==Jobs==--    inclusive conversationsets, not exclusive. Lazy merchant can have both lazy and merchant conversations
+    -   Tinkerer/Schematics Drafter
+    -   Apothecary
+    -   Gutsmonger
+    -   Scribe/Bookbinder
+    -   Kipper
+    -   Jeweller
+    -   Ichor Merchant/Alchemist
+    -   Laborer
+    -   Warden
+
+--==Cultures==--    --work on these later
+    -   Barathrumite
+    -   Robots
+    -   Putus
+    -   Seekers
+    -   Snapjaws
+    -   SaltMarsh
+    -   Desert
+    -   FlowerFields
+    -   Hindren
+    -   Jungle
+    -   Goatfolk
+    -   BananaGroves
+    -   River
+    -   Canyon
+    -   Hills
+    -   Palladium
+    -   MoonStair
+    -   Stilt
+
+--==Chit Chat Phrases==--
+The choice text, based on a number of factors, divided into Socially Repugnant and non-socially-repugnant.
+---===Normal===---
+## Unfamiliar
+    - Hi, how are you?
+    - Hello, new friend.
+    - Have we met before?
+    - Nice to meet you!
+    - Hi, my name is <name>
+## Familiar
+    - Tell me something interesting!
+    - Do you wanna chat for a bit?
+    - What are you doing, there?
+    - What's on your mind?
+## Friendly
+    - How have you been, =pronouns.siblingTerm=?
+    - =pronouns.siblingTerm=! Let's talk!
+    - You wanna chat for a bit?
+    - What have you been up to?
+    - *Wave enthusiastically*
+## Estranged / Unfriendly (you pissed them off)
+    - Hey...
+    - Hi.
+    - *Wave hesitantly*
+    - Anything you want to talk about?
+---===Socially Repugnant===---
+## Unfamiliar
+    - Where did you come from!?
+## Familiar
+    - I'm bored. Entertain me.
+    - Why do you look like that?
+## Friendly
+    - Are you gonna finish that?
+## Estranged / Unfriendly
+    - Sup, ugly
+    - What's your deal?
+    - *Rude gesture*
+
+--==AskForQuest Phrases==-- Just like above.
+---===Normal===---
+## Unfamiliar
+    - I know we just met, but I can help with that!
+## Familiar
+    - Can I help?
+    - Do you need anything?
+## Friendly     --> Skips ListenTest
+    - I got you, =pronouns.siblingTerm=?
+    - What do you need from me, =pronouns.siblingTerm=? 
+## Estranged / Unfriendly (you pissed them off)
+    - I'd like to help, if that's okay...
+    - I know we're not exactly on the best of terms but I'd like to help
+
+---===Socially Repugnant===---
+## Unfamiliar
+## Familiar
+## Friendly
+## Estranged / Unfriendly
+
+--==ListenTest==--
+Each story will have a simple keyword -did you read the keywords system. Excepting NPCs you are friendly with (who will not test if you listened), you will be given a choice of four, three, or two options (unfriendly, unfamiliar, familiar) to pick from to determine you listened. They may look like this:
+    "I was going to the market to pick up some crabs when I ran into Ushuwat. He asked me if I could give him back his watch. The nerve of that person! I'm not even done with it!"
+        -- I can help with Tufu (incorrect)
+        -- I can help with Ushuwat's watch (correct)
+        -- I can help with the grenades (incorrect)
+        -- I can help with the Apothecary (incorrect)
+
+Pick the right one and you get the errand, pick the wrong one and you will anger the speaker. Anger them two times in a row and they will reset their quest timer and you'll lost affinity. One or two times like this isn't enough to change their FamiliarityLevel, but after 3-4 times it will reduce from Friendly to Familiar then to Unfriendly, or Unfamiliar to Unfriendly. Pick the right one and you gain a bit of affinity, complete the errand and you gain more. A couple of these is enough to bump you back up.
+
+Socially Repugnant will probably double these numbers tbh.
+
+
+--==Conversation Flow==--
+Based roughly on the types of conversations had in Animal Crossing, these will be weighted conversations that come up when you say "Chit Chat" which will be different depending on various factors. See "Chit Chat phrases" above. Each conversation has a chance to enable an errand after the conversation is read. Once you become "Friendly" you will be able to (L) at the person to see if they have an errand they need doing.
+
+Theoretically: the quest can be accepted by correctly reading the conversation and choosing the right response based on a keyword, but I gotta look into how feasible that is.
+
+So that means it goes like this:
+Chitchat -> Speaker story -> AskForErrand -> CheckIfHaveErrand -> ListenTest -> Gain Errand
+                            \_>Bow out          \_> No Errand          \_> Anger speaker
+
+
+--==Conversation Types==--
+    - Tutorial conversations -- basic game functions, no quest available
+    - Hint conversations -- a story about a near-YASD by the character, or a YASD they heard of. A good way to learn about more things to avoid in the game
+    - Gossip conversations -- the majority of the conversations will be generative gossip
+    - Direct quest prompts -- occasionally a conversation will be an obvious and direct quest prompt, skipping ListenTest just as if you were Friendly. These errands are more valuable and rarer.
+
+--==Errand Types==--
+    All errands have a distance factored in. When you are low level most errands take place within the same town. As you gain level they might send you further out.
+    <ErrandItem>s are non-useful items that provide flavor only, and are not findable in the game world
+    <RealItem>s are actual items that can be found in the world. They will draw from a rarity pool based on the value of the quest.
+    - DeliverBorrowed: "I borrowed a <ErrandItem> from <person>, give it back for me"
+    - DeliverGift: "I want to send a gift of <ErrandItem> to <person>"
+    - FindErrandItem: "Can you find <ErrandItem> for me? Last I had it was <place>"
+    - FindDeliverBorrowed: "I borrowed <ErrandItem> from <person> and lost it! If you could help me find it I would make it worth your while. Last I had it was <place or with person>."
+    - FindItemForGift: "I heard <person> has always wanted a <RealItem>, but could never find one. If you bring me one to give to them I'll make it worth your while." -> Followup, DeliverGift
+    - FindItemForMe: "I always wanted a <RealItem>, but could never find one. If you bring me one, I'll make it worth your while."
+
+    Later: escorts, invite neighbors, find people, find information/rumors, find a landmark, find an oddity
+
+--==Rewards==--
+The rewards in this system *have* to be worthwhile. The thing that keeps you coming back in Animal Crossing is the possibility for rare furniture. Without a complex and deep furniture list to draw from (which may be integrated in the future), and without wanting to disrupt the balance of the game by enabling players to gain powerful items too early, the following rewards present themselves:
+    - Level appropriate secrets
+    - Small amounts of reputation
+    - Small amounts of skill points
+    - Money/Water/Very level appropriate reward items like ichors
+    - Clothing items that grant reputation
+    - Rename prompts for items (make your items legendary with Chaos' mod)
+
+Not a lot to work with, honestly. What this tells me is that I probably *should* get to work on a furniture collection for rewards, to be used with a Xyloschemer.
+    - Mod based rewards:
+        - Hearthpyre: furniture blueprints
+        - The gardening mod: seeds etc
+
+
+--==New Delegates==--
+
+A delegate is a function that is called from XML. The function is declared as a kind of struct in C#. It takes a simple variable and spits out another one. We can determine how large said variable will be through testing. *however* this means we don't need separate XMLs for different creatures and personalities - all we need to do is use functional programming concepts to put together 
+
+Question - can delegates return more than true/false?
+
+
+
+--==Infamous Items==--
+DOES NOT APPLY TO FACES LOL
+Items that are generated in the world (through the vanilla system of item procgen) can have mentions of villages and factions, give
++rep or -rep for factions, and even have weird esoteric procs like "8% chance to dismember villagers of Ezra on hit" (this was a 
+real item i saw in Discord)
+
+To that end, a very simple check will be placed on Mayors to look in your inventory for legendary -rep items which you can turn in
+in exchange for a small rep boost (10% of the negative) and a like-tier reward (tier -1, 1 minimum)
+
+    >> Mayor Uswhu, I have found an artifact of your enemies, Villagebane
+
+
+--==Overall==--
+
+So what do we want to achieve with this mod?
+
+    -   Insert more named creatures into towns, giving multiple non-legendaries names
+        -   Store list of said names based on categories
+    -   Categorize villagers into broad personalities
+    -   Give villagers catchphrases (internal inventory items with a 'catchphrase' property that can propagate)
+    -   Generative conversations based on personality type, conversation type
+    -   Generative errands for the player, first to other villagers within the town, then to outside towns
+    -   After completing enough errands for a person they start to generate full Village Quests with full rewards, and after enough of those the person can become a legendary 
+                --with relationships and snippets based on your achievements with them
+
+    Long term
+    -   Errand page, separate from quest page, to prevent clutter
+    -   Enable villagers to travel between very close towns
+    -   Eventually - an option to increase number of towns genned, performing a worldgen check that forces every town to have at least one neighbor within 3 parasangs
+    -   Caravans and escort quests
+    -   More "animal crossing" style features. Lost and found, buildings that have meaningful roles like lighthouses, visiting creatures with special features
+    -   More "animal crossing" style reward opportunities
+    -   A museum somewhere in the world run by a Troll, to hold your artifacts
+
+
+Town relationships:
+    -Hometown
+    -Friendly town
+    -Town's friendly neighbor
+    -Town's rival neighbor
+
+The organic component of this mod is that different types of NPCs will have different dialogue and eventually different quest types they can generate with.
+
+Create a test save with one of every one of these creatures below to test these faction-based conversations.
+
+A shortlist of the various factions immediately of concern, with the snippets I found them referenced as:
+
+
+        <text ID="Crabs" Type="Script">{{emote|*puzzled rasping*}}</text>
+        <text ID="Oozes" Type="Script">{{emote|*inquisitive gushing*}}</text>
+        <text ID="Reptiles" Type="Script">{{emote|*snoopy hiss*}}</text>
+        <text ID="Spiders" Type="Script">{{emote|*weaves a web of queries*}}</text>
+        <text ID="Robots" Type="Script">{{G|*boop boop*}}</text>
+        <text ID="Issachari" Type="Script">
+          Where is your salt-bereft hovel?~
+          I'm listening. Where?
+        </text>
+        
+        <text ID="Humanoid" Type="Property">
+          Where would you have me go?~
+          Where is this settlement of yours?
+        </text>
+        
+        <text ID="Snapjaw" Type="Species">
+          gnrrr.. where far go me?~
+          ooooh where!
+        </text>
+        
+        <text ID="Hindren" Type="Species">
+          Where do kendren live?~
+          I am curious, where would a kendren call home?
+        </text>
+        
+        <text ID="Cat" Type="Species">
+          {{emote|*meow*}}~
+          {{emote|*analytical mew*}}
+        </text>
