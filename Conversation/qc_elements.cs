@@ -67,9 +67,9 @@ namespace QudCrossroads.Dialogue
                     {
                         Elements =
                         {
-                            { "transition", new List<string> { "transition1", "transition2" } },
-                            { "toquest", new List<string> { "QuestHook1", "QuestHook2" } },
-                            { "saying", new List<string> { "Saying1", "Saying2" } },
+                            { "transition", new List<string> { "Anyway", "Regardless","Whatever the case","At any rate","Nonetheless","You know" } },
+                            { "toquest", new List<string> { "I have a tale to tell.","Wait til you hear this.","Now that I have your attention...","I've been thinking about something, lately.","Let me tell you a story.","" } },
+                            { "saying", new List<string> { "hmmmm","the sun always sets","by the salt sun","by the Eaters","at any cost","traveler","for the birds","*the =localfaction= know the way","*=randomcreature= guide us","*=MARKOVWORD=" } },
                             { "comedy", new List<string> { "comedy1", "comedy2" } },
                             { "serious", new List<string> { "serious1", "serious2" } },
                             { "hobby", new List<string> { "Hobby1", "Hobby2" } },

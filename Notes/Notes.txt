@@ -260,6 +260,8 @@ So what do we want to achieve with this mod?
                 --with relationships and snippets based on your achievements with them
 
     Long term
+    -   Music (or the "soundtrack mod" compatibility)
+    -   "Shelters" reclaimed ruins which have camps, crates, and their own faction and "settlement" entries, using the ruin generation + some extra furniture (see below)
     -   Errand page, separate from quest page, to prevent clutter
     -   Enable villagers to travel between very close towns
     -   Eventually - an option to increase number of towns genned, performing a worldgen check that forces every town to have at least one neighbor within 3 parasangs
@@ -274,6 +276,11 @@ Town relationships:
     -Friendly town
     -Town's friendly neighbor
     -Town's rival neighbor
+
+    Unique furniture (mostly used in shelters):
+    -   Crates for storing supplies (opened and closed, use filled containers logic from mod)
+    -   Bonfires - campfires that have larger sprites (still take up one tile) and provide more light
+    -   Spike barriers (hurt you like fractus)
 
 The organic component of this mod is that different types of NPCs will have different dialogue and eventually different quest types they can generate with.
 

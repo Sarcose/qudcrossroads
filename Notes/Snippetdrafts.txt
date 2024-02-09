@@ -5,10 +5,13 @@ Various tags:
 <neighbortown> : every town will have a "neighbor town" that they frequently talk to. This will be the closest town, chosen at random if there are multiple close by.
 <biome> : whichever biome our town is in
 <biomecreature> : a randomly chosen creature from the biome our town is in
+<biomesmell> : randomly chosen phrases of smells based on what biome we're in
 <apothecary> : the name of the local apothecary. If one doesn't exist, the name of the nearest one in neighboring town.
 <merchant> : name of a local merchant, or a nearby neighbortown merchant
 <mayor> : name of town mayor
 <villager> : name of another member of the town. 
+<material> : gem or weapon material
+<eventactivity> : a randomized event that can happen
 =====Tutorial Stories=====
 
 =====Hint Stories=====
@@ -43,7 +46,6 @@ These don't have errands attached but they have a possibility of rewarding the p
 =====Gossip Stories=====
 
 
-
 =====Direct Quests=====
 
 
@@ -53,9 +55,32 @@ Random food
 "Hey, <name>, I spent all this time prepping <food> but I don't want it. Do you want it?"
 
 
+======Tell a story based on faction rep=====
+Look up how faction rep is generated, create snippets corresponding to each and contextually generate a story from it
+
 
 =========================
 Random Stuff /  Unsorted
 =========================
 "I need someone to manage my brand new _____ team. Do you know anybody? Wait, what about you!? Will you be the manager, <name>??" <answer> "That's cool."
 "<Player>, you have really interesting eyes, <catchphrase>" >>Are you OK? >>Be quiet! >>You too! "What? Me too? What do you mean by that? Are you trying to psych me out?"
+
+
+
+
+
+=========================
+Campfire -- Relaxing
+=========================
+"Good day, traveler. Have you ever looked toward the Spindle on a grey day? The way it pierces the clouds on high, it seems to be reaching for something... only the Eaters know."
+"I have not seen my home of [random existing village] in so long, I have forgotten its [nice adjective][pluralize[town noun]]." >>> "Bring news of the town" (travel there and come back)
+"What brings you here today? Do you have ought to trade?"
+"Once, I journeyed to [random village] to see their [village item]. I was not disappointed. Perhaps I will go again, somedy..."
+"It's nice talking to you, [name]. Have you ever considered taking up public speaking? <laughs> of course, you won't find much need for that here. Yet still..."
+"[Name] is hosting a Saltkid building competition, but I am running out of time to find [food]] for the face! If only I could find a [food] to use for the [eyes/nose/mouth], I could finish my entry!"
+            >>offer to get [food]
+"Once, I was travelling along the road from [village] to [other village] and I came upon a caravan of vagrants. I sat with them, broke bread, and shared stories. They told me a peculiar rumor.
+    "In this story, one of the vagrants claimed  how meteors are made of <material>. But you know what? I think that was a lie." >>I could find out for you 
+    "Oh, <that would be kind>, <stranger>. Tell you what, if you find it, bring me back just one piece, and you can keep the rest." >>lead to a Treasure Site
+"Why are you here? \n ... \n Oh, is that so? Why am *I* here? I prefer the solitude. Even with others around me, there's just something wild and.. untamed about a campfire."
+"*Takes a deep whiff of the air* Smell that lovely <biomesmell> air!
