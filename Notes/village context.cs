@@ -2,12 +2,14 @@
 
 // Assembly-CSharp, Version=2.0.206.62, Culture=neutral, PublicKeyToken=null
 // Qud.API.HistoryAPI
+/*
 using System;
 using System.Text;
 using HistoryKit;
 using XRL.Rules;
 using XRL.World;
-
+*/
+/*
 public static void __ExpandVillageText(StringBuilder Text, string Faction = null, HistoricEntitySnapshot Snapshot = null)
 {
 	if (Snapshot == null && !Faction.IsNullOrEmpty())
@@ -30,10 +32,6 @@ public static void __ExpandVillageText(StringBuilder Text, string Faction = null
 	Text.Replace("=village.name=", newValue).Replace("=village.sacred=", newValue2).Replace("=village.profane=", newValue3)
 		.Replace("=village.activity=", newValue4);
 }
-
-
-
-/*
 
 
 

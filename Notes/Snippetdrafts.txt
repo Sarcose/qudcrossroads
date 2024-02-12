@@ -2,6 +2,8 @@ This is a document for putting together ChitChats. Initially built from a select
 
 Various tags:
 
+Playername is going to be Tula for all examples (unless it's <playername> because I'm inconsistent)
+
 <neighbortown> : every town will have a "neighbor town" that they frequently talk to. This will be the closest town, chosen at random if there are multiple close by.
 <biome> : whichever biome our town is in
 <biomecreature> : a randomly chosen creature from the biome our town is in
@@ -84,3 +86,25 @@ Campfire -- Relaxing
     "Oh, <that would be kind>, <stranger>. Tell you what, if you find it, bring me back just one piece, and you can keep the rest." >>lead to a Treasure Site
 "Why are you here? \n ... \n Oh, is that so? Why am *I* here? I prefer the solitude. Even with others around me, there's just something wild and.. untamed about a campfire."
 "*Takes a deep whiff of the air* Smell that lovely <biomesmell> air!
+
+
+=========================
+Job Snippets
+=========================
+
+A Watervine Farmer in Joppa discusses a mundane, minor event
+
+*The day's grime darkening his brow, a weather-beaten farmer adjusts his green-and-mud-stained vinereaper to leverage a hand of work and salt to adjust his kufiya, and looks up at you from his resting squat briefly before standing to give address* "Water and fortune to you, Joppafriend. I'm glad you asked. *He kneels back down, biding you kneel with him. Together the two of you speak between the whispers of watervine in the gentle breeze.* Do you see how thin these wafers are, unfertilized? To ply food and shelter from the saltmarshes is a harsh and hard labor. And so it is, that the Salt Sun rises and the Salt Sun sets, and we work the moisture from the vines. But ah, what am I to complain? 
+
+*He tosses a spent wafer to the ground, to feed the roots once more. Pressing fingers down briefly, he seems to size up some ephemeral quality of the soil and then sighs at last* "No, indeed, friend. I wouldn't trade this life for that of yours, that's for sure. Mind you not the bitter tone of an old salt, after all."
+>>> I can find the fertilizer for you
+>>> I can find food and shelter for you
+>>> I can find 
+
+
+
+/***************************
+With these snippets we will first distill them into parts (elements) and then form them into tagged/coded paragraphs called "chatBlueprints"
+
+
+***************************/

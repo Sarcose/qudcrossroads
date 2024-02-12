@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 using XRL;
 using XRL.Language;
@@ -28,13 +29,13 @@ namespace QudCrossroads.Dialogue
             XRL.Messages.MessageQueue.AddPlayerMessage(message);
         }
         public static string GetRandString(params List<string>[] strArrays)     // result = GetRandString(stringList, stringList2, stringList3, stringList4, etc...)
-        {
+        {   //ERROR: not all code paths return a value
             int totalCount = 0;
             foreach (var strArray in strArrays)
             {
                 totalCount += strArray.Count;
             }
-            int randomIndex = QRand.Next(totalCount);
+            int randomIndex = QRand.Next(totalCount); //ERROR: There is no argument given that corresponds to the required formal parameter 'maxInclusive'
             foreach (var strArray in strArrays)
             {
                 if (randomIndex < strArray.Count) {return strArray[randomIndex]; }
@@ -49,10 +50,10 @@ namespace QudCrossroads.Dialogue
             {
                 totalCount += strArray.Count;
             }
-            return QRand.Next(totalCount);
+            return QRand.Next(totalCount); //ERROR: There is no argument given that corresponds to the required formal parameter 'maxInclusive'
         }
         public static string GetSpecificString(int index, params List<string>[] strArrays)
-        {
+        { //ERROR: not all code paths return a value
             int totalCount = 0;
             foreach (var strArray in strArrays)
             {
@@ -66,9 +67,42 @@ namespace QudCrossroads.Dialogue
             qprintc("GetSpecificString error - no elements found.");
         }
         public static string LVR(string varstring)     //add more later?
-        {
+        {   //TODO: use a GlobalContainer to establish global pronouns for speaker and such
             XRL.Messages.MessageQueue.AddPlayerMessage(varstring);
             return GameText.VariableReplace(varstring, null);
+        }
+        public static string QCVR(string varstring)     //look for |Variables| instead
+        {   //CrossroadsLVR in qc_lists.cs
+            //use a GlobalContainer to establish global pronouns and other contexts for speaker and such
+            return null;    //noop for now
+        }
+        static string RegexToLVR(string input) // pass LVR to this function
+        {
+            //string resultString = RegexToLVR(inputString); //replace =foo=
+            // Use regular expression to find all placeholders
+            Func<string, string> replacementFunction = key => LVR(key);
+            string pattern = "=([^=]+)=";
+            string result = Regex.Replace(input, pattern, match =>     //The name 'Regex' does not exist in the current context
+            {
+                string key = match.Groups[1].Value;
+                return replacementFunction(key); // the only thing left here is that we will need to define some kind of context variables that LVR uses to define pronouns!
+            });
+
+            return result;
+        }
+        static string RegexToQCVR(string input) // pass LVR to this function
+        {
+            // Use regular expression to find all placeholders
+            //string resultString = ReplaceQCVR(inputString); //replace |bar|            
+            Func<string, string> replacementFunction = key => QCVR(key);
+            string pattern = @"\|([^|]+)\|";
+            string result = Regex.Replace(input, pattern, match =>
+            {
+                string key = match.Groups[1].Value;
+                return replacementFunction(key); // the only thing left here is that we will need to define some kind of context variables that LVR uses to define pronouns!
+            });
+
+            return result;
         }
         public delegate void ProcessFnDelegate(string name);
         private static Func<string, string> GetProcessFn(Phrase phrase)

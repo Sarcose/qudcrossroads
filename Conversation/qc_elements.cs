@@ -30,9 +30,14 @@ namespace QudCrossroads.Dialogue
         {
             public Dictionary<string, List<string>> Elements { get; set; } = new Dictionary<string, List<string>>
             {
+                { "emoteintro", new List<string>() },
                 { "transition", new List<string>() },   // generic transition statements like "At any rate" or personality transition statements like "Whatever..."
+                { "emotetransition", new List<string>() },
+                { "emoteconclusion", new List<string>() },
                 { "toquest", new List<string>() },      // a second transition type specifically for opening up the quest hook. "I have a tale to tell."
                 { "saying", new List<string>() },       // upon generation, a villager will pick a random number between 1-20 and choose a saying from amongst their options. This can be changed
+                { "proverb", new List<string>() },
+                { "flavor", new List<string>() },
                 { "comedy", new List<string>() },       // a series of generative phrase templates for saying something comical 
                 { "serious", new List<string>() },      // a series of generative phrase templates for saying something serious
                 { "hobby", new List<string>() },        // upon generation, a villager will pick a 2-4 random numbers between 1-20 and choose hobbies from amongst their options. This cannot be changed
@@ -68,7 +73,7 @@ namespace QudCrossroads.Dialogue
                         Elements =
                         {
                             { "transition", new List<string> { "Anyway", "Regardless","Whatever the case","At any rate","Nonetheless","You know" } },
-                            { "toquest", new List<string> { "I have a tale to tell.","Wait til you hear this.","Now that I have your attention...","I've been thinking about something, lately.","Let me tell you a story.","" } },
+                            { "toquest", new List<string> { "I have a tale to tell.","Wait til you hear this.","Now that I have your attention...","I've been thinking about something, lately.","Let me tell you a story.","I'm glad you asked.","" } },
                             { "saying", new List<string> { "hmmmm","the sun always sets","by the salt sun","by the Eaters","at any cost","traveler","for the birds","*the =localfaction= know the way","*=randomcreature= guide us","*=MARKOVWORD=" } },
                             { "comedy", new List<string> { "comedy1", "comedy2" } },
                             { "serious", new List<string> { "serious1", "serious2" } },
@@ -257,7 +262,7 @@ namespace QudCrossroads.Dialogue
                             {
                                 Familiarities = new Dictionary<string, List<string>>
                                 {
-                                    { "unfamiliar", new List<string> { "Salt and sun", "Good meet to you", "Bountiful harvest" } },
+                                    { "unfamiliar", new List<string> { "Salt and sun", "Good meet to you", "Bountiful harvest","Water and fortune to you" } },
                                     { "familiar", new List<string> { "Salt and sun", "How are you on this day?", "How fare you?" } },
                                     { "friendly", new List<string> { "Hail", "Merry meet", "Bright tidings" } },
                                     { "unfriendly", new List<string> { "What", "What could you want", "Will this take long" } }
@@ -294,6 +299,25 @@ namespace QudCrossroads.Dialogue
 //            Profession Based Conversation Elements            //
 /***************************************************************/
 //Separated into general -> specific, job categories are sorted based on whether the character qualifies out of a list. Starting here:
+    public class Job
+    {
+        public Dictionary<string, List<string>> Elements { get; set; } = new Dictionary<string, List<string>>
+        {
+            { "emoteintro", new List<string>() },
+            { "transition", new List<string>() },   // generic transition statements like "At any rate" or personality transition statements like "Whatever..."
+            { "emotetransition", new List<string>() },
+            { "emoteconclusion", new List<string>() },
+            { "toquest", new List<string>() },      // a second transition type specifically for opening up the quest hook. "I have a tale to tell."
+            { "saying", new List<string>() },       // upon generation, a villager will pick a random number between 1-20 and choose a saying from amongst their options. This can be changed
+            { "proverb", new List<string>() },
+            { "flavor", new List<string>() },
+            { "comedy", new List<string>() },       // a series of generative phrase templates for saying something comical 
+            { "serious", new List<string>() },      // a series of generative phrase templates for saying something serious
+            { "hobby", new List<string>() },        // upon generation, a villager will pick a 2-4 random numbers between 1-20 and choose hobbies from amongst their options. This cannot be changed
+            { "insults", new List<string>() },      // generic insults for when a villager is displeased. Can also be cultural, special, and job based
+            { "compliment", new List<string>() }    // generic compliments for when a villager is pleased. Can also be cultural, special, and job based
+        };
+    }
 
      public static class FarmerConversation
         {
@@ -302,10 +326,15 @@ namespace QudCrossroads.Dialogue
                 { "Generic", new Job()                                      //Everyone has a chance to pick from this list
                     {
                         Elements =
-                        {
-                            { "transition", new List<string> { "Anyway", "Regardless","Whatever the case","At any rate","Nonetheless","You know" } },
-                            { "toquest", new List<string> { "I have a tale to tell.","Wait til you hear this.","Now that I have your attention...","I've been thinking about something, lately.","Let me tell you a story.","" } },
-                            { "saying", new List<string> { "hmmmm","the sun always sets","by the salt sun","by the Eaters","at any cost","traveler","for the birds","*the =localfaction= know the way","*=randomcreature= guide us","*=MARKOVWORD=" } },
+                        {        //TODO: see  notes: csharp snippets, regex replacement
+                            { "emoteintro", new List<string> {"=pronouns.possessive= back bent to you, =pronouns.subjective= is hard at work. A moment passes, and =pronouns.subjective= stands",""}},
+                            { "transition", new List<string> { "Anyway", "Regardless","Whatever the case","At any rate","Nonetheless","You know","But ah, what am I to complain?" } },
+                            { "emotetransition", new List<string> {"=pronouns.posessive= kneels back down, biding you kneel with =pronouns.objective=. Together the two of you speak between the whispers of watervine in the gentle breeze."}},
+                            { "emoteconclusion", new List<string>{""}},
+                            { "toquest", new List<string> { "" } },
+                            { "saying", new List<string> { "" } },
+                            { "proverb", new List<string> { "|picktwo|","so it is, that the Salt Sun rises and the Salt Sun sets"} },
+                            { "flavor", new List<string> { "|picktwo|","To ply |resource.farmer| from the |biome| is a |harshadjective| |laborverb|" } },
                             { "comedy", new List<string> { "comedy1", "comedy2" } },
                             { "serious", new List<string> { "serious1", "serious2" } },
                             { "hobby", new List<string> { "Hobby1", "Hobby2" } },
@@ -318,9 +347,14 @@ namespace QudCrossroads.Dialogue
                     {
                         Elements =
                         {
-                            { "transition", new List<string> { "Anyway", "Regardless","Whatever the case","At any rate","Nonetheless","You know" } },
-                            { "toquest", new List<string> { "I have a tale to tell.","Wait til you hear this.","Now that I have your attention...","I've been thinking about something, lately.","Let me tell you a story.","" } },
-                            { "saying", new List<string> { "hmmmm","the sun always sets","by the salt sun","by the Eaters","at any cost","traveler","for the birds","*the =localfaction= know the way","*=randomcreature= guide us","*=MARKOVWORD=" } },
+                            { "emoteintro", new List<string> {"=pronouns.possessive= back bent to you, =pronouns= is hard at work. A moment passes, and =pronoun= stands",""}},
+                            { "transition", new List<string> { "Anyway", "Regardless","Whatever the case","At any rate","Nonetheless","You know","*EMOTE*" } },
+                            { "emotetransition", new List<string> {"=pronouns.posessive= kneels back down, biding you kneel with =pronouns.objective=. Together the two of you speak between the whispers of watervine in the gentle breeze."}},
+                            { "emoteconclusion", new List<string>{""}},
+                            { "toquest", new List<string> { "" } },
+                            { "saying", new List<string> { "" } },
+                            { "flavor", new List<string> { "flavor1", "flavor2" } },
+                            { "proverb", new List<string> { "", "proverb2" } },
                             { "comedy", new List<string> { "comedy1", "comedy2" } },
                             { "serious", new List<string> { "serious1", "serious2" } },
                             { "hobby", new List<string> { "Hobby1", "Hobby2" } },
@@ -329,7 +363,27 @@ namespace QudCrossroads.Dialogue
                         }
                     }
                 },
-            }
+                { "WatervineFarmer", new Job()                                      //And this is specific
+                    {
+                        Elements =
+                        {       //TODO: create a table for longstrings like this one, bespoke emote sentences
+                            { "emoteintro", new List<string> {"The day's grime darkening =pronouns.posessive= brow, a weather-beaten farmer adjusts =pronouns.posessive= green-and-mud-stained vinereaper to leverage a hand of work and salt to adjust =pronouns.posessive= kufiya, and looks up at you from =pronouns.posessive= resting squat briefly before standing to give address",""}},
+                            { "transition", new List<string> { "Anyway", "Regardless","Whatever the case","At any rate","Nonetheless","You know" } },
+                            { "emotetransition", new List<string> {"=pronouns.posessive= kneels back down, biding you kneel with =pronouns.objective=. Together the two of you speak between the whispers of watervine in the gentle breeze."}},
+                            { "emoteconclusion", new List<string>{""}},
+                            { "toquest", new List<string> { "" } },
+                            { "saying", new List<string> { "" } },
+                            { "flavor", new List<string> { "Do you see how thin these wafers are, unfertilized?", "flavor2" } },
+                            { "proverb", new List<string> { "we work the moisture from the vines", "proverb2" } },
+                            { "comedy", new List<string> { "comedy1", "comedy2" } },
+                            { "serious", new List<string> { "serious1", "serious2" } },
+                            { "hobby", new List<string> { "Hobby1", "Hobby2" } },
+                            { "insults", new List<string> { "insult1", "insult2" } },
+                            { "compliment", new List<string> { "Compliment1", "Compliment2" } }
+                        }
+                    }
+                },
+            };
         }    
     }
 }

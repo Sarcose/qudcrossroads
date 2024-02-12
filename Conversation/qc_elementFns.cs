@@ -32,5 +32,12 @@ namespace QudCrossroads.Dialogue
             List<string> stringList = AllCultures.Cultures[phrase.Culture].Title["keys"].Familiarities[phrase.Familiarity];
             return GetRandString(stringList);
         }
+
+        public static string GetBiome()
+        {
+            //TODO: global container for CurrentConversationContext such as "whaat biome am I in?" etc.
+            //ex return string CurrentConversationContext.currentBiome
+            return null;
+        }
     }
 }
