@@ -1,0 +1,11 @@
+Uniques are named NPCs in the vanilla game *and* mods who either have a specific selection of conversation types or their own special 
+conversation. One example would be Mehmet and Irudad, who may have What's Eating The Watervine? based context such as "we are doing the best
+to recover the watervine" etc. etc..
+
+This mechanic of the mod will *attempt* to single out and include unique characters added by other mods. Mods to consider:
+
+Jademouth: Cat, Bright, Atacama
+Exile's Refuge's "Warden" is not in Fellowship of Wardens, but *does* have a favored status by them.
+
+
+In many cases, the definition of a Unique has simply to look for something like <nameofcharacter> and then add conversation types to it.

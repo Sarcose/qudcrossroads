@@ -85,10 +85,11 @@ These are for humans. Others will have other personalities.
     -   Apothecary
     -   Gutsmonger
     -   Scribe/Bookbinder
-    -   Kipper
+    -   Kipper/Chef
     -   Jeweller
     -   Ichor Merchant/Alchemist
     -   Laborer
+    -   Farmer
     -   Warden
 
 --==Cultures==--    --work on these later
