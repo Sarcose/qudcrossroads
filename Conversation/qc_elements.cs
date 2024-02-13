@@ -398,13 +398,12 @@ namespace QudCrossroads.Dialogue
                         }
                     }
                 },
-            };            
+            };        
             public static List<string> getElement(string key, string specific = "Generic")
             {
-                // Check if the specific category and key exist
-                if (Jobs.ContainsKey(specific) && Jobs[specific].ContainsKey(key))
+                if (Jobs[specific].Elements.ContainsKey(key))
                 {
-                    return Jobs[specific][key];
+                    return Jobs[specific].Elements[key];
                 }
                 else
                 {
@@ -436,13 +435,12 @@ namespace QudCrossroads.Dialogue
                         }
                     }
                 },
-            };            
+            };           
             public static List<string> getElement(string key, string specific = "Generic")
             {
-                // Check if the specific category and key exist
-                if (Jobs.ContainsKey(specific) && Jobs[specific].ContainsKey(key))
+                if (Jobs[specific].Elements.ContainsKey(key))
                 {
-                    return Jobs[specific][key];
+                    return Jobs[specific].Elements[key];
                 }
                 else
                 {
@@ -477,10 +475,9 @@ namespace QudCrossroads.Dialogue
             };            
             public static List<string> getElement(string key, string specific = "Generic")
             {
-                // Check if the specific category and key exist
-                if (Jobs.ContainsKey(specific) && Jobs[specific].ContainsKey(key))
+                if (Jobs[specific].Elements.ContainsKey(key))
                 {
-                    return Jobs[specific][key];
+                    return Jobs[specific].Elements[key];
                 }
                 else
                 {
