@@ -21,21 +21,16 @@ namespace QudCrossroads.Dialogue
             { Greet, GreetFn },
             { Title, TitleFn }
         };
-        public static Dictionary<string, object> jobCategories = new Dictionary<string, object>
-        {
-            { "Farmer", new FarmerConversation() },
-           // { "Warrior", new WarriorConversation() },
-           // { "Merchant", new MerchantConversation() }
-        };
         public static List<string> getJob(string job, string key, string specific = null)
         {
-            if (!string.IsNullOrEmpty(specific))    // We're looking for a specific job
-            {
-                return ((dynamic)jobCategories[job])[specific].Greet;   //explicitly cast the objects in jobCategories as dynamic but return Greet as specific
-            }
-            else        // We're looking for the general job under the job string
-            {
-                return ((dynamic)jobCategories[job]).General.Greet;
+            if (job == "Farmer"){
+                return FarmerConversation.getElement(key, specific);
+            }else if (job == "Merchant"){
+                return MerchantConversation.getElement(key, specific);
+            }else if (job == "Warrior"){
+                return WarriorConversation.getElement(key, specific);
+            }else{
+                return null;
             }
         }
         
