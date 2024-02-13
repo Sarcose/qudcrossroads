@@ -25,7 +25,7 @@ namespace QudCrossroads.Dialogue
 /***************************************************************/
 //          Utility Functions for Phrase Building              //
 /***************************************************************/
-        private static void qprintc(string message)     //move to utilities
+        public static void qprintc(string message)     //move to utilities
         {
             XRL.Messages.MessageQueue.AddPlayerMessage(message);
         }

@@ -10,6 +10,7 @@ using XRL.Core;
 using XRL.Rules;
 using XRL.World;
 
+using static QudCrossroads.Dialogue.Builders;
 
 /* grammar reference
 
@@ -401,12 +402,15 @@ namespace QudCrossroads.Dialogue
             };        
             public static List<string> getElement(string key, string specific = "Generic")
             {
+                qprintc("------getElement started");
                 if (Jobs[specific].Elements.ContainsKey(key))
                 {
+                    qprintc("------getElement contains");
                     return Jobs[specific].Elements[key];
                 }
                 else
                 {
+                    qprintc("NULL");
                     return new List<string>(); // Return an empty list for undefined categories or keys
                 }
             }
