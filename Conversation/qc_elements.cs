@@ -71,7 +71,7 @@ namespace QudCrossroads.Dialogue
 /***************************************************************/
         public static class PersonalityConversation
         {
-            public Dictionary<string, Personality> Personalities { get; set; } = new Dictionary<string, Personality>
+            public static Dictionary<string, Personality> Personalities { get; set; } = new Dictionary<string, Personality>
             {
                 { "Generic", new Personality()                                      //Everyone has a chance to pick from this list
                     {
