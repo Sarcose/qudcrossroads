@@ -214,7 +214,7 @@ namespace QudCrossroads.Dialogue
                 Personality = "Peppy",
                 subPersonality = "Lazy",
                 Job = "Farmer",
-                SpecificJob = "WatervineFarmer"
+                specificJob = "WatervineFarmer"
             };
             string testInput = "|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
             string finalString = RegexToQCVR(testInput, testPhrase);
