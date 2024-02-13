@@ -335,19 +335,7 @@ namespace QudCrossroads.Dialogue
         }
         //this should probably use inheritance but LAZYYYYYY
         public static class FarmerConversation
-        {            
-            public static List<string> getElement(string key, string specific = "Generic")
-            {
-                // Check if the specific category and key exist
-                if (Jobs.ContainsKey(specific) && Jobs[specific].ContainsKey(key))
-                {
-                    return Jobs[specific][key];
-                }
-                else
-                {
-                    return new List<string>(); // Return an empty list for undefined categories or keys
-                }
-            }
+        {
             public static Dictionary<string, Job> Jobs { get; set; } = new Dictionary<string, Job>
             {
                 { "Generic", new Job()                                      //Everyone has a chance to pick from this list
@@ -410,22 +398,22 @@ namespace QudCrossroads.Dialogue
                         }
                     }
                 },
-            };
+            };            
+            public static List<string> getElement(string key, string specific = "Generic")
+            {
+                // Check if the specific category and key exist
+                if (Jobs.ContainsKey(specific) && Jobs[specific].ContainsKey(key))
+                {
+                    return Jobs[specific][key];
+                }
+                else
+                {
+                    return new List<string>(); // Return an empty list for undefined categories or keys
+                }
+            }
         }
         public static class MerchantConversation
-        {            
-            public static List<string> getElement(string key, string specific = "Generic")
-            {
-                // Check if the specific category and key exist
-                if (Jobs.ContainsKey(specific) && Jobs[specific].ContainsKey(key))
-                {
-                    return Jobs[specific][key];
-                }
-                else
-                {
-                    return new List<string>(); // Return an empty list for undefined categories or keys
-                }
-            }
+        {
             public static Dictionary<string, Job> Jobs { get; set; } = new Dictionary<string, Job>
             {
                 { "Generic", new Job()                                      //Everyone has a chance to pick from this list
@@ -448,22 +436,22 @@ namespace QudCrossroads.Dialogue
                         }
                     }
                 },
-            };
+            };            
+            public static List<string> getElement(string key, string specific = "Generic")
+            {
+                // Check if the specific category and key exist
+                if (Jobs.ContainsKey(specific) && Jobs[specific].ContainsKey(key))
+                {
+                    return Jobs[specific][key];
+                }
+                else
+                {
+                    return new List<string>(); // Return an empty list for undefined categories or keys
+                }
+            }
         }
         public static class WarriorConversation
-        {            
-            public static List<string> getElement(string key, string specific = "Generic")
-            {
-                // Check if the specific category and key exist
-                if (Jobs.ContainsKey(specific) && Jobs[specific].ContainsKey(key))
-                {
-                    return Jobs[specific][key];
-                }
-                else
-                {
-                    return new List<string>(); // Return an empty list for undefined categories or keys
-                }
-            }
+        {
             public static Dictionary<string, Job> Jobs { get; set; } = new Dictionary<string, Job>
             {
                 { "Generic", new Job()                                      //Everyone has a chance to pick from this list
@@ -486,7 +474,19 @@ namespace QudCrossroads.Dialogue
                         }
                     }
                 },
-            };
+            };            
+            public static List<string> getElement(string key, string specific = "Generic")
+            {
+                // Check if the specific category and key exist
+                if (Jobs.ContainsKey(specific) && Jobs[specific].ContainsKey(key))
+                {
+                    return Jobs[specific][key];
+                }
+                else
+                {
+                    return new List<string>(); // Return an empty list for undefined categories or keys
+                }
+            }
 
         }
     }
