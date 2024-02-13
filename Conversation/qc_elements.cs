@@ -33,23 +33,7 @@ namespace QudCrossroads.Dialogue
 /***************************************************************/
         public class Personality
         {
-            public Dictionary<string, List<string>> Elements { get; set; } = new Dictionary<string, List<string>>
-            {
-                { "greet", new List<string>() },        //generic will not have one, but personalities will
-                { "emoteintro", new List<string>() },
-                { "transition", new List<string>() },   // generic transition statements like "At any rate" or personality transition statements like "Whatever..."
-                { "emotetransition", new List<string>() },
-                { "emoteconclusion", new List<string>() },
-                { "toquest", new List<string>() },      // a second transition type specifically for opening up the quest hook. "I have a tale to tell."
-                { "saying", new List<string>() },       // upon generation, a villager will pick a random number between 1-20 and choose a saying from amongst their options. This can be changed
-                { "proverb", new List<string>() },
-                { "flavor", new List<string>() },
-                { "comedy", new List<string>() },       // a series of generative phrase templates for saying something comical 
-                { "serious", new List<string>() },      // a series of generative phrase templates for saying something serious
-                { "hobby", new List<string>() },        // upon generation, a villager will pick a 2-4 random numbers between 1-20 and choose hobbies from amongst their options. This cannot be changed
-                { "insults", new List<string>() },      // generic insults for when a villager is displeased. Can also be cultural, special, and job based
-                { "compliment", new List<string>() }    // generic compliments for when a villager is pleased. Can also be cultural, special, and job based
-            };
+            public Dictionary<string, List<string>> Elements { get; set; } = new Dictionary<string, List<string>>();
         }
         public class CultureConversation
         {
@@ -317,24 +301,8 @@ namespace QudCrossroads.Dialogue
 //Separated into general -> specific, job categories are sorted based on whether the character qualifies out of a list. Starting here:
         public class Job
         {
-            public Dictionary<string, List<string>> Elements { get; set; } = new Dictionary<string, List<string>>
-            {
-                { "emoteintro",      new List<string>() },
-                { "transition",      new List<string>() },   // generic transition statements like "At any rate" or personality transition statements like "Whatever..."
-                { "emotetransition", new List<string>() },
-                { "emoteconclusion", new List<string>() },
-                { "toquest",         new List<string>() },      // a second transition type specifically for opening up the quest hook. "I have a tale to tell."
-                { "saying",          new List<string>() },       // upon generation, a villager will pick a random number between 1-20 and choose a saying from amongst their options. This can be changed
-                { "proverb",         new List<string>() },
-                { "flavor",          new List<string>() },
-                { "comedy",          new List<string>() },       // a series of generative phrase templates for saying something comical 
-                { "serious",         new List<string>() },      // a series of generative phrase templates for saying something serious
-                { "hobby",           new List<string>() },        // upon generation, a villager will pick a 2-4 random numbers between 1-20 and choose hobbies from amongst their options. This cannot be changed
-                { "insults",         new List<string>() },      // generic insults for when a villager is displeased. Can also be cultural, special, and job based
-                { "compliment",      new List<string>() }    // generic compliments for when a villager is pleased. Can also be cultural, special, and job based
-            };
+            public Dictionary<string, List<string>> Elements { get; set; } = new Dictionary<string, List<string>>();
         }
-        //this should probably use inheritance but LAZYYYYYY
         public static class FarmerConversation
         {
             public static Dictionary<string, Job> Jobs { get; set; } = new Dictionary<string, Job>
