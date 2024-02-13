@@ -93,7 +93,7 @@ namespace QudCrossroads.Dialogue
                 { "proverb", false },
                 { "emoteTransition", false },
                 { "questConclusion", false },
-                // Add more variables as needed
+                // See TODO and building notes on qc_elementFns
             };
             if (doTest.ContainsKey(key) && doTest[key]) //only check, for now, if the key is in doTest, so we avoid checking lots of unimplemented keys
                 {
@@ -177,8 +177,9 @@ namespace QudCrossroads.Dialogue
             public string Culture { get; set; }
             public string Familiarity { get; set; }
             public string Personality {get; set; }
+            public string subPersonality {get; set; }
             public string Job {get; set; }
-            public string SpecificJob {get; set; }
+            public string specificJob {get; set; }
         }
 
         /*
@@ -210,7 +211,8 @@ namespace QudCrossroads.Dialogue
             {
                 Culture = "SaltMarshCulture",
                 Familiarity = "unfamiliar",
-                Personality = "generic",
+                Personality = "Peppy",
+                subPersonality = "Lazy",
                 Job = "Farmer",
                 SpecificJob = "WatervineFarmer"
             };

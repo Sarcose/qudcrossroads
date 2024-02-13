@@ -34,6 +34,7 @@ namespace QudCrossroads.Dialogue
         {
             public Dictionary<string, List<string>> Elements { get; set; } = new Dictionary<string, List<string>>
             {
+                { "greet", new List<string>() },        //generic will not have one, but personalities will
                 { "emoteintro", new List<string>() },
                 { "transition", new List<string>() },   // generic transition statements like "At any rate" or personality transition statements like "Whatever..."
                 { "emotetransition", new List<string>() },
@@ -68,7 +69,7 @@ namespace QudCrossroads.Dialogue
 /***************************************************************/
 //          Personality Based Conversation Elements            //
 /***************************************************************/
-        public class PersonalityConversation
+        public static class PersonalityConversation
         {
             public Dictionary<string, Personality> Personalities { get; set; } = new Dictionary<string, Personality>
             {
@@ -91,6 +92,7 @@ namespace QudCrossroads.Dialogue
                     {
                         Elements =
                         {
+                            { "greet", new List<string> { "Greeeets!" } }, 
                             { "transition", new List<string> { "Elder transition1", "Elder transition2" } },   
                             { "toquest", new List<string> { "Elder QuestHook1", "Elder QuestHook2" } },      
                             { "saying", new List<string> { "Elder Saying1", "Elder Saying2" } },
@@ -105,7 +107,8 @@ namespace QudCrossroads.Dialogue
                 { "Lazy", new Personality
                     {
                         Elements =
-                        {
+                        {   
+                            { "greet", new List<string> { "*yawn* how's it goin?" } }, 
                             { "transition", new List<string> { "transition1", "transition2" } },
                             { "toquest", new List<string> { "QuestHook1", "QuestHook2" } },
                             { "saying", new List<string> { "Saying1", "Saying2" } },
@@ -121,6 +124,7 @@ namespace QudCrossroads.Dialogue
                     {
                         Elements =
                         {
+                            { "greet", new List<string> { "Greeeets!" } }, 
                             { "transition", new List<string> { "transition1", "transition2" } },
                             { "toquest", new List<string> { "QuestHook1", "QuestHook2" } },
                             { "saying", new List<string> { "Saying1", "Saying2" } },
@@ -136,6 +140,7 @@ namespace QudCrossroads.Dialogue
                     {
                         Elements =
                         {
+                            { "greet", new List<string> { "Beautiful Day!" } }, 
                             { "transition", new List<string> { "transition1", "transition2" } },
                             { "toquest", new List<string> { "QuestHook1", "QuestHook2" } },
                             { "saying", new List<string> { "Saying1", "Saying2" } },
@@ -151,6 +156,7 @@ namespace QudCrossroads.Dialogue
                     {
                         Elements =
                         {
+                            { "greet", new List<string> { "Greeeets!" } }, 
                             { "transition", new List<string> { "transition1", "transition2" } },
                             { "toquest", new List<string> { "QuestHook1", "QuestHook2" } },
                             { "saying", new List<string> { "Saying1", "Saying2" } },
@@ -166,6 +172,7 @@ namespace QudCrossroads.Dialogue
                     {
                         Elements =
                         {
+                            { "greet", new List<string> { "Greeeets!" } }, 
                             { "transition", new List<string> { "transition1", "transition2" } },
                             { "toquest", new List<string> { "QuestHook1", "QuestHook2" } },
                             { "saying", new List<string> { "Saying1", "Saying2" } },
@@ -181,6 +188,7 @@ namespace QudCrossroads.Dialogue
                     {
                         Elements =
                         {
+                            { "greet", new List<string> { "Greeeets!" } }, 
                             { "transition", new List<string> { "transition1", "transition2" } },
                             { "toquest", new List<string> { "QuestHook1", "QuestHook2" } },
                             { "saying", new List<string> { "Saying1", "Saying2" } },
@@ -196,6 +204,7 @@ namespace QudCrossroads.Dialogue
                     {
                         Elements =
                         {
+                            { "greet", new List<string> { "Greeeets!" } }, 
                             { "transition", new List<string> { "transition1", "transition2" } },
                             { "toquest", new List<string> { "QuestHook1", "QuestHook2" } },
                             { "saying", new List<string> { "Saying1", "Saying2" } },
@@ -211,6 +220,7 @@ namespace QudCrossroads.Dialogue
                     {
                         Elements =
                         {
+                            { "greet", new List<string> { "Greeeets!" } }, 
                             { "transition", new List<string> { "transition1", "transition2" } },
                             { "toquest", new List<string> { "QuestHook1", "QuestHook2" } },
                             { "saying", new List<string> { "Saying1", "Saying2" } },
@@ -226,6 +236,7 @@ namespace QudCrossroads.Dialogue
                     {
                         Elements =
                         {
+                            { "greet", new List<string> { "Greeeets!" } }, 
                             { "transition", new List<string> { "transition1", "transition2" } },
                             { "toquest", new List<string> { "QuestHook1", "QuestHook2" } },
                             { "saying", new List<string> { "Saying1", "Saying2" } },
