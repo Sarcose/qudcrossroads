@@ -24,13 +24,21 @@ namespace QudCrossroads.Dialogue
         
         public static string GreetFn(Phrase phrase)
         {
-            List<string> stringList = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
-            return GetRandString(stringList);
+            List<string> greetCulture = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
+            List<string> greetPersonality = new List<string> { "Item3", "Item4" };
+            List<string> greetJob = new List<string> { "Item5", "Item6" };
+
+            List<string>[] greetArray = new List<string>[] { greetCulture, greetPersonality, greetJob };
+            return GetRandString(greetArray);
         }
-        public static string TitleFn(Phrase phrase)
+        public static string TitleFn(Phrase phrase)     //phrase
         {
-            List<string> stringList = AllCultures.Cultures[phrase.Culture].Title["keys"].Familiarities[phrase.Familiarity];
-            return GetRandString(stringList);
+            List<string> titleCulture =  AllCultures.Cultures[phrase.Culture].Title["keys"].Familiarities[phrase.Familiarity];
+            List<string> titlePersonality = new List<string> { "Item3", "Item4" };
+            List<string> titleJob = new List<string> { "Item5", "Item6" };
+
+            List<string>[] titleArray = new List<string>[] { titleCulture, titlePersonality, titleJob };
+            return GetRandString(titleArray);
         }
 
         public static string GetBiome()

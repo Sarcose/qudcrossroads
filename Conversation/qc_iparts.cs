@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using XRL;
 using XRL.Language;
 using XRL.World;
@@ -11,7 +12,7 @@ using static QudCrossroads.Dialogue.Builders;
 
 namespace QudCrossroads.Dialogue
 {
-    public class QCS_Chat_Try : IConversationPart //it appears to use 
+    public class QCS_Chat_Try : IConversationPart    
         {
             public override bool WantEvent(int id, int propagation){
                 return 
@@ -33,7 +34,7 @@ namespace QudCrossroads.Dialogue
                 return base.HandleEvent(E);
             }
         }
-    public class QCS_Chat_Respond : IConversationPart //it appears to use 
+    public class QCS_Chat_Respond : IConversationPart
         {
             public override bool WantEvent(int id, int propagation){
                 return 
@@ -43,8 +44,45 @@ namespace QudCrossroads.Dialogue
             }
             public override bool HandleEvent(DisplayTextEvent E)
             {
-                E.Text.Append(TestString_Siete());
+                //E.VariableReplace = true;
+
+
+                //E.Text.Append("=village.activity= | =pronouns.reflexive= | =pronouns.substantivePossessive= | =pronouns.indicativeDistal= | =pronouns.subjective= kneels back down, bidding you kneel with =pronouns.objective=.");
+                E.Text.Append(TestString_Ocho());
                 return base.HandleEvent(E);
+
+
+
+
+
             }
         }
 }
+
+
+
+/*
+The class members to be aware of:
+
+XRL.The.Player
+XRL.The.Speaker
+XRL.The.Listener
+
+
+use recursion to see namespace members:
+
+                string testString = "||";
+                Type type = typeof(XRL.The.Speaker);
+
+                // Get all members of the class
+                MemberInfo[] members = type.GetMembers();
+
+                // Print the names of all members
+                foreach (MemberInfo member in members)
+                {
+                    testString += member.Name;
+                    testString += "||";
+                }
+
+
+*/

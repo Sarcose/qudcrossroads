@@ -16,6 +16,7 @@ using QudCrossroads;
 using QRand = QudCrossroads.Utilities.QudCrossroads_Random;
 using static QudCrossroads.Dialogue.Elements;
 using static QudCrossroads.Dialogue.Functions;
+using static QudCrossroads.Dialogue.QC_Lists;
 
 namespace QudCrossroads.Dialogue
 {
@@ -35,13 +36,14 @@ namespace QudCrossroads.Dialogue
             {
                 totalCount += strArray.Count;
             }
-            int randomIndex = QRand.Next(totalCount); //ERROR: There is no argument given that corresponds to the required formal parameter 'maxInclusive'
+            int randomIndex = QRand.Next(0, totalCount);
             foreach (var strArray in strArrays)
             {
                 if (randomIndex < strArray.Count) {return strArray[randomIndex]; }
                 else { randomIndex -= strArray.Count; }
             }
             qprintc("GetRandString error - no elements found.");
+            return null;
         }
         public static int GetRandStringIndex(params List<string>[] strArrays)
         {
@@ -50,7 +52,7 @@ namespace QudCrossroads.Dialogue
             {
                 totalCount += strArray.Count;
             }
-            return QRand.Next(totalCount); //ERROR: There is no argument given that corresponds to the required formal parameter 'maxInclusive'
+            return QRand.Next(0, totalCount); //ERROR: There is no argument given that corresponds to the required formal parameter 'maxInclusive'
         }
         public static string GetSpecificString(int index, params List<string>[] strArrays)
         { //ERROR: not all code paths return a value
@@ -65,41 +67,98 @@ namespace QudCrossroads.Dialogue
                 else { index -= strArray.Count; }
             }
             qprintc("GetSpecificString error - no elements found.");
+            return null;
         }
         public static string LVR(string varstring)     //add more later?
         {   //TODO: use a GlobalContainer to establish global pronouns for speaker and such
             XRL.Messages.MessageQueue.AddPlayerMessage(varstring);
             return GameText.VariableReplace(varstring, null);
         }
-        public static string QCVR(string varstring)     //look for |Variables| instead
+
+        public static string QCVR(string key, Phrase phrase)     //look for |Variables| instead
         {   //CrossroadsLVR in qc_lists.cs
+            //|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
             //use a GlobalContainer to establish global pronouns and other contexts for speaker and such
-            return null;    //noop for now
+            qprintc(key);
+            Dictionary<string, bool> doTest = new Dictionary<string, bool>
+            {
+                { "intro", false },
+                { "greeting", true },
+                { "title", false },
+                { "toQuest", false },
+                { "questHint", false },
+                { "questHerring", false },
+                { "transition", false },
+                { "flavor", false },
+                { "proverb", false },
+                { "emoteTransition", false },
+                { "questConclusion", false },
+                // Add more variables as needed
+            };
+            if (doTest.ContainsKey(key) && doTest[key]) //only check, for now, if the key is in doTest, so we avoid checking lots of unimplemented keys
+                {
+                    if (CrossroadsLVR.TryGetValue(key, out object value))
+                    {
+                        if (value is List<string> stringList)
+                        {
+                            // Handle the case where the value is a list of strings
+                            qprintc("--List");
+                            return GetRandString(stringList);
+                        }
+                        else if (value is Func<Phrase, string> function)
+                        {
+                            // Handle the case where the value is a function
+                            qprintc("--Func");
+                            return function(phrase);
+                        }
+                        else if (value is string stringValue)
+                        {
+                            // Handle the case where the value is a single string
+                            qprintc("--String");
+                            return stringValue;
+                        }
+                        else
+                        {
+                            // Handle other cases if needed
+                            qprintc("--Unsup");
+                            return $"|Unsupported type: {key}|";
+                        }
+                    }
+                    else
+                    {
+                        // Key not found in the dictionary
+                        qprintc("--NotFound");
+                        return $"|Key not found: {key}|";
+                    }
+                }
+            else    //ignore and don't translate
+                {
+                    qprintc("-Skipped");
+                    return "|" + key + "|";
+                }
         }
         static string RegexToLVR(string input) // pass LVR to this function
         {
             //string resultString = RegexToLVR(inputString); //replace =foo=
             // Use regular expression to find all placeholders
-            Func<string, string> replacementFunction = key => LVR(key);
             string pattern = "=([^=]+)=";
             string result = Regex.Replace(input, pattern, match =>     //The name 'Regex' does not exist in the current context
             {
                 string key = match.Groups[1].Value;
-                return replacementFunction(key); // the only thing left here is that we will need to define some kind of context variables that LVR uses to define pronouns!
+                return LVR(key); // the only thing left here is that we will need to define some kind of context variables that LVR uses to define pronouns!
             });
 
             return result;
         }
-        static string RegexToQCVR(string input) // pass LVR to this function
+        static string RegexToQCVR(string input, Phrase phrase) // pass LVR to this function
         {
             // Use regular expression to find all placeholders
             //string resultString = ReplaceQCVR(inputString); //replace |bar|            
-            Func<string, string> replacementFunction = key => QCVR(key);
             string pattern = @"\|([^|]+)\|";
             string result = Regex.Replace(input, pattern, match =>
             {
                 string key = match.Groups[1].Value;
-                return replacementFunction(key); // the only thing left here is that we will need to define some kind of context variables that LVR uses to define pronouns!
+                return QCVR(key, phrase); // the only thing left here is that we will need to define some kind of context variables that LVR uses to define pronouns!
             });
 
             return result;
@@ -117,67 +176,76 @@ namespace QudCrossroads.Dialogue
         {
             public string Culture { get; set; }
             public string Familiarity { get; set; }
+            public string Personality {get; set; }
+            public string Job {get; set; }
+            public string SpecificJob {get; set; }
         }
 
-
-
+        /*
+        public Phrase phrase = new Phrase
+        {
+            Culture = "SaltMarshCulture",
+            Familiarity = "Unfamiliar" // Corrected the typo here
+        };
+        */
 
         
 /***************************************************************/
 //                      Testing Area                           //
 /***************************************************************/
-        //TODO:
-        /*  
-
-        UPDATE: VariableReplace in /Qud/ on Drive has the majority of the actual =variable= replacement logic.
-        
-
-        here is the code in source:
-        
-            public override bool HandleEvent(GetDisplayNameEvent E)
+        public static string TestString_Siete()
+        {
+            Phrase newPhrase = new Phrase
             {
-                foreach (string key in E.DB.Keys)
-                {
-                    if (key.Contains("="))
-                    {
-                        string text = GameText.VariableReplace(key, ParentObject);          --here is the key to deciphering this
-                        if (text != key)
-                        {
-                            E.DB.Add(text, E.DB[key]);
-                            E.DB.Remove(key);
-                        }
-                    }
-                }
-                return base.HandleEvent(E);
-            }
+                Culture = "SaltMarshCulture",
+                Familiarity = "unfamiliar"
+            };
+            Func<string, string> _ = GetProcessFn(newPhrase);
+            return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=verb:grab=")}";
+        }
+
+        public static string TestString_Ocho()
+        {
+            Phrase testPhrase = new Phrase
+            {
+                Culture = "SaltMarshCulture",
+                Familiarity = "unfamiliar",
+                Personality = "generic",
+                Job = "Farmer",
+                SpecificJob = "WatervineFarmer"
+            };
+            string testInput = "|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
+            string finalString = RegexToQCVR(testInput, testPhrase);
+            return finalString;
+        }
+        public static string OutfitNotice(GameObject player, string curString)  //probably need to change GameObject player tbh...
+        {
+            return curString;
+        }
+
+
+    }
+
+
+}
+
+/*
+        // {_(Greet)}
+        // {Pluralize(_(Title))}
+        //TODO: another wrap function that checks if your character has multiple heads, is plural, or has followers, and uses Pluralize() in response
 
 
 
-
-        We need to:
-                parse the returned string
-                check for an *ENCLOSED* =variable= because that's how it will be written
-                replace enclosed variable with the replacer
-                concatenate back into the string // rebuild the string with concatenated
-
-        Standardization:
-            If an element has a =variable= it must be at the end -- will require parsing a bit (everything after = is the variable) and replacement
-                Example: "my dear =gendersib=" //(not an actual variable tag)
-            
-            ## Working with LVR currently:
                 =MARKOVPARAGRAPH=
                 =verb:grab= -- grabbed from the mental mutation text, but does not become "grabs" in this usage
                 =alchemist= -- seems to generate a randomized 'alchemist' babble
                 =prounouns.siblingTerm= -- probably gives a generic if i had to guess
                 =factionaddress:Barathrumites= --this is probably a global variable reference to the player
                 =factionaddress:Mopango= --same as above
-                =GGREESULT= -- Grit Gate attack assessment (won't need this for Qud Crossing)
-                =MarkOfDeath= -- Doubt I'll need this
                 =MARKOVCORVIDSENTENCE=
                 =MARKOVSENTENCE=
                 =MARKOVWATERBIRDSENTENCE=
                 =name=  - player name
-                =object.nameSingle= -   i suspect this may be contextual and grabbed a generic
                 =player.apparentSpecies=
                 =player.formalAddressTerm=
                 =player.offspringTerm=
@@ -190,93 +258,5 @@ namespace QudCrossroads.Dialogue
                 =pronouns.siblingTerm=
                 =pronouns.subjective=
                 =subject.refname= --again, by producing "thing", this leads me to believe it is contextual and processed here without context.
-                =SULTAN4=       -- comes up with a Sultan
-                =V0tinkeraddendum= - dunno what this does
-                =verb:grab=
-                =verb:tug=
 
-            ## Not working   -- ime these are looking for contextual variables that would be set in the XML interp
-                =subject.waterRitualLiquid= -- the 'subject' here is probably the source. I don't want to custom roll a string parsing alg tho.
-                =subject.T=
-                =all.influence=
-                =circumstance.influence=
-                =hermit=
-                =motive.influence=-
-                =mount.complete.days=
-                =mutation.name=
-                =pluralize=     -- this strikes me as setting a temporary flag for the XML interp. Use PLuralize()
-                =recipe=
-                =thief.name=    ----
-                =village.activity=  --\
-                =village.name=      --|
-                =village.profane=   --| //TODO: need to find out how to trigger these specifically. I'm sure there's simply a context I need to invoke. 
-                =village.sacred=    --| -- I am imagining my LVR function needs another layer of assertions to build these various contextual phrases
-                =villageZeroName=   --/
-
-            ## Crashes the conversation outright
-                =generic=       --looks like this is actually a NOOP to establish the format.
-        */
-        //Usage examples:
-        // {_(Greet)}
-        // {Pluralize(_(Title))}
-        // {LVR("=verb:grab=")}
-        //
-        //
-        //TODO: another wrap function that checks if your character has multiple heads, is plural, or has followers, and uses Pluralize() in response
-        public static string TestString_Siete()
-        {
-            Phrase newPhrase = new Phrase
-            {
-                Culture = "SaltMarshCulture",
-                Familiarity = "unfamiliar"
-            };
-            Func<string, string> _ = GetProcessFn(newPhrase);
-            return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=verb:grab=")}";
-        }
-        public static string OutfitNotice(GameObject player, string curString)  //probably need to change GameObject player tbh...
-        {
-            //The.Listener.GetEquippedObjects().Any((Obj) => Obj.HasPart<GivesRep>()) // will need to import System.Linq and XRL
-            //The.Listener.GetEquippedObjects().Any((obj) => obj.GetPart("AddsRep") is AddsRep p && p.CachedCommaExpansion().Contains(Faction) && p.AppliedBonus);
-
-
-
-            /*
-            if player.isWearing(thingIDoLike){
-                curString += $"Ahh, it is {positiveAdjective} to see you in {myTown}'s colors! \n{transitionFrom}, "
-            }    
-            elseif player.isWearing(thingIDontLike){
-                curString += $"I see you are wearing the {insult} {rivalTown}'s colors. Shame on you, {title}! It would be much {positiveComparativeAdjective} to see you
-                in the regalia of {myTown}! \n{transitionFrom}, "
-            }
-            return curString;
-            //todo: make these more dynamic
-            */
-            return curString;
-        }
-
-
-    }
-
-
-}
-
-
-/*
-public static string MyFirstName (string userID)
-{
-        string sReturnString = null;
-    using (OdbcConnection Cn = new OdbcConnection(GlobalVariables.DatabaseConnectionString)) //Access database
-    {
-        Cn.Open();
-        OdbcCommand cmd = Cn.CreateCommand();
-        cmd.CommandText = "SELECT FirstName FROM TableUser WHERE Username = '" + userID + "'";
-        OdbcDataReader reader = cmd.ExecuteReader();
-        while (reader.Read())
-        {
-            sReturnString = (string)reader.GetValue(0);
-            break;
-        } 
-     }
-     return sReturnString;
-}
 */

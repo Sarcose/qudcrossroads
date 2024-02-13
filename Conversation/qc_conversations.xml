@@ -6,12 +6,12 @@
           <part Name="QCS_Chat_Try" />
     </choice>
 
-      <node ID="QCS_Followup">
-            <part Name="QCS_Chat_Respond" />
-        <choice Target="End">
-          <text Priority="-1">Live and drink.</text>
-          <text IfHavePart="SociallyRepugnant">Lib. Dink.</text>
-        </choice>
-      </node>
+    <node ID="QCS_Followup">
+          <choice Target="End">
+            <text Priority="-1">Live and drink.</text>
+            <text IfHavePart="SociallyRepugnant">Lib. Dink.</text>
+          </choice>
+          <part Name="QCS_Chat_Respond" />
+    </node>
   </conversation>
 </conversations>

@@ -10,19 +10,23 @@ using XRL.Core;
 using XRL.Rules;
 using XRL.World;
 
+
+/* grammar reference
+
+=pronouns.
+
+reflexive=               |   himself
+substantivePossessive=   |   his
+subjective=              |   he
+objective=               |   him
+indicativeDistal=        |   that
+
+*/
+
 namespace QudCrossroads.Dialogue
 {
     public static partial class Elements
     {
-        //generic transition statements
-        public static string[] transitionFrom = {"At any rate,","Regardless,","You know,","Nonetheless,"};
-        //specifically for transitioning to the quest hook
-        
-
-        public static string[] transitionTo = {"I have a tale to tell.","Wait til you hear this."};
-        public static string[] transitionElder = {"I have a tale to tell.","Wait til you hear this."};
-        
- 
 /***************************************************************/
 //                     Initializations                         //
 /***************************************************************/
@@ -321,7 +325,7 @@ namespace QudCrossroads.Dialogue
 
      public static class FarmerConversation
         {
-            public static Dictionary<string, Job> Jobs { get; set; } = new Dictionary<string, Jobs>
+            public static Dictionary<string, Job> Jobs { get; set; } = new Dictionary<string, Job>
             {
                 { "Generic", new Job()                                      //Everyone has a chance to pick from this list
                     {
