@@ -44,8 +44,8 @@ namespace QudCrossroads.Dialogue
             qprintc("---GreetFn");
             List<string> greetCulture = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
             qprintc("----getJob");
-            List<string> greetJob = getJob(phrase.Job, "greet");
             List<string> greetPersonality = PersonalityConversation.Personalities[phrase.Personality].Elements["greet"];
+            List<string> greetJob = getJob(phrase.Job, "greet");
             List<string> greetsubPersonality = new List<string>{};
             List<string> greetJobSpecific = new List<string>{};
             qprintc("----checkSpecifics");
