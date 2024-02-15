@@ -42,7 +42,7 @@ namespace QudCrossroads.Dialogue
                 if (randomIndex < strArray.Count) {result = strArray[randomIndex]; }
                 else { randomIndex -= strArray.Count; }
             }
-            return result
+            return result;
         }
         public static string GetRandString(params List<string>[] strArrays)     // result = GetRandString(stringList, stringList2, stringList3, stringList4, etc...)
         {   //ERROR: not all code paths return a value
@@ -51,10 +51,10 @@ namespace QudCrossroads.Dialogue
                 result = "";
                 string child = "|picktwo|";
                 int elCount = 2;
-                while (child[0] == "|" || elCount > 0)
+                while (child[0] == '|' || elCount > 0)
                 {
                     child = GetRandString_Child(strArrays);
-                    if (child[0] != "|"){ 
+                    if (child[0] != '|'){ 
                         elCount --;
                         result += child;
                         if (elCount == 1){
@@ -68,10 +68,10 @@ namespace QudCrossroads.Dialogue
                 result = "";
                 string child = "|pickthree|";
                 int elCount = 3;
-                while (child[0] == "|" || elCount > 0)
+                while (child[0] == '|' || elCount > 0)
                 {
                     child = GetRandString_Child(strArrays);
-                    if (child[0] != "|"){ 
+                    if (child[0] != '|'){ 
                         elCount --;
                         result += child;
                         if (elCount == 2){
@@ -81,7 +81,7 @@ namespace QudCrossroads.Dialogue
                         }else {result += ".";}
                         }
                 }
-            }else if (result[0] == "|"){
+            }else if (result[0] == '|'){
                 //handle other specific cases here (such as |pickspecific| which will require another round of spaghetti)
             }
             return result;
@@ -93,10 +93,10 @@ namespace QudCrossroads.Dialogue
             {
                 totalCount += strArray.Count;
             }
-            return QRand.Next(0, totalCount); /
+            return QRand.Next(0, totalCount);
         }
         public static string GetSpecificString(int index, params List<string>[] strArrays)
-        { //ERROR: not all code paths return a value
+        { 
             int totalCount = 0;
             foreach (var strArray in strArrays)
             {
@@ -168,7 +168,7 @@ namespace QudCrossroads.Dialogue
                     else
                     {
                         qprintc("--Func (key not in dict)");
-                        return ElementByCategories(key, phrase);
+                        return ElementByCategories(phrase, key);
 
                     }
                 }
