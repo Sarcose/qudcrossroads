@@ -29,9 +29,9 @@ namespace QudCrossroads.Dialogue
         {
             XRL.Messages.MessageQueue.AddPlayerMessage(message);
         }
-        public static string GetRandString(params List<string>[] strArrays)     // result = GetRandString(stringList, stringList2, stringList3, stringList4, etc...)
-        {   //ERROR: not all code paths return a value
+        public static string GetRandString_Child(params List<string>[] strArrays){
             int totalCount = 0;
+            string result = null;
             foreach (var strArray in strArrays)
             {
                 totalCount += strArray.Count;
@@ -39,11 +39,52 @@ namespace QudCrossroads.Dialogue
             int randomIndex = QRand.Next(0, totalCount);
             foreach (var strArray in strArrays)
             {
-                if (randomIndex < strArray.Count) {return strArray[randomIndex]; }
+                if (randomIndex < strArray.Count) {result = strArray[randomIndex]; }
                 else { randomIndex -= strArray.Count; }
             }
-            qprintc("GetRandString error - no elements found.");
-            return null;
+            return result
+        }
+        public static string GetRandString(params List<string>[] strArrays)     // result = GetRandString(stringList, stringList2, stringList3, stringList4, etc...)
+        {   //ERROR: not all code paths return a value
+            string result = GetRandString_Child(strArrays);
+            if (result == "|picktwo|"){//need to expand this for a whole host of cases
+                result = "";
+                string child = "|picktwo|";
+                int elCount = 2;
+                while (child[0] == "|" || elCount > 0)
+                {
+                    child = GetRandString_Child(strArrays);
+                    if (child[0] != "|"){ 
+                        elCount --;
+                        result += child;
+                        if (elCount == 1){
+                            result += " and ";
+                        }else {result += ".";}
+                    }
+                }
+
+                
+            }else if (result == "|pickthree|"){
+                result = "";
+                string child = "|pickthree|";
+                int elCount = 3;
+                while (child[0] == "|" || elCount > 0)
+                {
+                    child = GetRandString_Child(strArrays);
+                    if (child[0] != "|"){ 
+                        elCount --;
+                        result += child;
+                        if (elCount == 2){
+                            result += ", ";
+                        }else if (elCount == 1){
+                            result += ", and ";
+                        }else {result += ".";}
+                        }
+                }
+            }else if (result[0] == "|"){
+                //handle other specific cases here (such as |pickspecific| which will require another round of spaghetti)
+            }
+            return result;
         }
         public static int GetRandStringIndex(params List<string>[] strArrays)
         {
@@ -52,7 +93,7 @@ namespace QudCrossroads.Dialogue
             {
                 totalCount += strArray.Count;
             }
-            return QRand.Next(0, totalCount); //ERROR: There is no argument given that corresponds to the required formal parameter 'maxInclusive'
+            return QRand.Next(0, totalCount); /
         }
         public static string GetSpecificString(int index, params List<string>[] strArrays)
         { //ERROR: not all code paths return a value
@@ -82,16 +123,16 @@ namespace QudCrossroads.Dialogue
             qprintc(key);
             Dictionary<string, bool> doTest = new Dictionary<string, bool>
             {
-                { "intro", false },
+                { "intro", true },
                 { "greeting", true },
-                { "title", false },
+                { "title", true },
                 { "toQuest", false },
                 { "questHint", false },
                 { "questHerring", false },
-                { "transition", false },
-                { "flavor", false },
-                { "proverb", false },
-                { "emoteTransition", false },
+                { "transition", true },
+                { "flavor", true },
+                { "proverb", true },
+                { "emoteTransition", true },
                 { "questConclusion", false },
                 // See TODO and building notes on qc_elementFns
             };
@@ -121,14 +162,14 @@ namespace QudCrossroads.Dialogue
                         {
                             // Handle other cases if needed
                             qprintc("--Unsup");
-                            return $"|Unsupported type: {key}|";
+                            return $"|Unsupported type for key: {key}|";
                         }
                     }
                     else
                     {
-                        // Key not found in the dictionary
-                        qprintc("--NotFound");
-                        return $"|Key not found: {key}|";
+                        qprintc("--Func (key not in dict)");
+                        return ElementByCategories(key, phrase);
+
                     }
                 }
             else    //ignore and don't translate
@@ -232,6 +273,24 @@ namespace QudCrossroads.Dialogue
 }
 
 /*
+
+" O = coded, X = done
+|intro|
+X |greeting|
+O |title|
+|toQuest|
+|questHint|
+|questHerring|
+|transition|
+|flavor|
+|proverb|
+|transition|
+|emoteTransition|
+|questConclusion|
+
+
+
+
         // {_(Greet)}
         // {Pluralize(_(Title))}
         //TODO: another wrap function that checks if your character has multiple heads, is plural, or has followers, and uses Pluralize() in response

@@ -23,49 +23,61 @@ namespace QudCrossroads.Dialogue
         };
         public static List<string> getJob(string job, string key, string specific = "Generic")
         {
-            qprintc("----getJob started");
             if (job == "Farmer"){
-            qprintc("----farmer");
                 return FarmerConversation.getElement(key, specific);
             }else if (job == "Merchant"){
-            qprintc("----merchant");
                 return MerchantConversation.getElement(key, specific);
             }else if (job == "Warrior"){
-            qprintc("----warrior");
                 return WarriorConversation.getElement(key, specific);
             }else{
-            qprintc("----null");
                 return null;
             }
         }
         
         public static string GreetFn(Phrase phrase)
         {
-            qprintc("---GreetFn");
             List<string> greetCulture = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
-            qprintc("----getJob");
             List<string> greetPersonality = PersonalityConversation.Personalities[phrase.Personality].Elements["greet"];
             List<string> greetJob = getJob(phrase.Job, "greet");
-            List<string> greetsubPersonality = new List<string>{};
-            List<string> greetJobSpecific = new List<string>{};
-            qprintc("----checkSpecifics");
+            List<string> subPersonality = new List<string>{};
+            List<string> jobSpecific = new List<string>{};
             if (!string.IsNullOrEmpty(phrase.specificJob)){greetJobSpecific = getJob(phrase.Job, "greet", phrase.specificJob);}
             if (!string.IsNullOrEmpty(phrase.subPersonality)){greetsubPersonality = PersonalityConversation.Personalities[phrase.subPersonality].Elements["greet"];}
-            qprintc("----buildArray");
-            List<string>[] greetArray = new List<string>[] { greetCulture, greetPersonality, greetJob, greetsubPersonality };
-            qprintc("----getRandString");
+            List<string>[] greetArray = new List<string>[] { greetCulture, greetPersonality, greetJob, jobSpecific, subPersonality };
             return GetRandString(greetArray);
         }
         public static string TitleFn(Phrase phrase)     //phrase
         {
             List<string> titleCulture =  AllCultures.Cultures[phrase.Culture].Title["keys"].Familiarities[phrase.Familiarity];
-            List<string> titlePersonality = new List<string> { "Item3", "Item4" };
-            List<string> titleJob = new List<string> { "Item5", "Item6" };
-
-            List<string>[] titleArray = new List<string>[] { titleCulture, titlePersonality, titleJob };
+            List<string> titlePersonality = PersonalityConversation.Personalities[phrase.Personality].Elements["title"];
+            List<string> titleJob = getJob(phrase.Job, "title");
+            List<string> titlesubPersonality = new List<string>{};
+            List<string> titleJobSpecific = new List<string>{};
+            if (!string.IsNullOrEmpty(phrase.specificJob)){titleJobSpecific = getJob(phrase.Job, "title", phrase.specificJob);}
+            if (!string.IsNullOrEmpty(phrase.subPersonality)){titlesubPersonality = PersonalityConversation.Personalities[phrase.subPersonality].Elements["title"];}
+            List<string>[] titleArray = new List<string>[] { titleCulture, titlePersonality, titleJob, titleJob, titlesubPersonality };
             return GetRandString(titleArray);
         }
+        public static string ElementByCategories(Phrase phrase, string key)
+        {
+            List<string> culture = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
+            List<string> personality = PersonalityConversation.Personalities[phrase.Personality].Elements[key];
+            List<string> job = getJob(phrase.Job, "greet");
+            List<string> subPersonality = new List<string>{};
+            List<string> jobSpecific = new List<string>{};
+            if (!string.IsNullOrEmpty(phrase.specificJob)){jobSpecific = getJob(phrase.Job, key, phrase.specificJob);}
+            if (!string.IsNullOrEmpty(phrase.subPersonality)){subPersonality = PersonalityConversation.Personalities[phrase.subPersonality].Elements[key];}
+            List<string>[] elementArray = new List<string>[] { culture, personality, job, jobSpecific, jobSpecific subPersonality };
+            return GetRandString(greetArray);
 
+
+            //Personality
+            //Subpersonality
+            //Generic Personality
+            //Culture -> Affinity
+            //Job
+            //Job, specific
+        }
         public static string GetBiome()
         {
             //TODO: global container for CurrentConversationContext such as "whaat biome am I in?" etc.

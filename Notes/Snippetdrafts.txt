@@ -68,7 +68,10 @@ Random Stuff /  Unsorted
 "<Player>, you have really interesting eyes, <catchphrase>" >>Are you OK? >>Be quiet! >>You too! "What? Me too? What do you mean by that? Are you trying to psych me out?"
 
 
-
+"Have you heard the legend of the odd man who wanders from town to town, spewing both rage and helpful advice? That's me, grumble. That's my strange fate. 
+The road is my life, grumble. I have a suitcase full of memories, a belly full of bile, and the need to travel and help folks... Hoooo, boy, yes, sir! 
+I haven't even been here long, grumble... but before you know it, I'll have lost my patience and moved on to another town. Story of my life. 
+But like everyone else in every town I've ever been to, I'm sure you'll be happy to see me go, grumble. "
 
 
 =========================
