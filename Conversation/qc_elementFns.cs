@@ -67,7 +67,7 @@ namespace QudCrossroads.Dialogue
             List<string> jobSpecific = new List<string>{};
             if (!string.IsNullOrEmpty(phrase.specificJob)){jobSpecific = getJob(phrase.Job, key, phrase.specificJob);}
             if (!string.IsNullOrEmpty(phrase.subPersonality)){subPersonality = PersonalityConversation.Personalities[phrase.subPersonality].Elements[key];}
-            List<string>[] elementArray = new List<string>[] { culture, personality, job, jobSpecific, jobSpecific subPersonality };
+            List<string>[] elementArray = new List<string>[] { culture, personality, job, jobSpecific, jobSpecific, subPersonality };
             return GetRandString(elementArray);
 
 
