@@ -368,18 +368,20 @@ namespace QudCrossroads.Dialogue
                     }
                 },
             };        
-            public static List<string> getElement(string key, string specific = "Generic")
+            public static List<string> getElement(string key, string specific)
             {
                 qprintc("------getElement started");
+                qprintc("specific = " + specific);
                 if (Jobs[specific].Elements.ContainsKey(key))
                 {
                     qprintc("------getElement contains");
-                    return Jobs[specific].Elements[key];
+                    return new List<string>{"containskey"};
+                    //return Jobs[specific].Elements[key];
                 }
                 else
                 {
                     qprintc("NULL");
-                    return new List<string>(); // Return an empty list for undefined categories or keys
+                    return new List<string>{"nope"}; // Return an empty list for undefined categories or keys
                 }
             }
         }

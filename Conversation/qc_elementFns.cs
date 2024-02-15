@@ -21,7 +21,7 @@ namespace QudCrossroads.Dialogue
             { Greet, GreetFn },
             { Title, TitleFn }
         };
-        public static List<string> getJob(string job, string key, string specific = null)
+        public static List<string> getJob(string job, string key, string specific = "Generic")
         {
             qprintc("----getJob started");
             if (job == "Farmer"){
