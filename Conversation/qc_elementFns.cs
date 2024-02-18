@@ -60,14 +60,21 @@ namespace QudCrossroads.Dialogue
         }
         public static string ElementByCategories(Phrase phrase, string key)
         {
-            List<string> culture = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
-            List<string> personality = PersonalityConversation.Personalities[phrase.Personality].Elements[key];
+            //TODO: exceptions for culture
+            //List<string> culture = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
+            
+            //TODO: exceptions for personality(s) ('getPersonality'?)
+            List<string> personality = new List<string>{};
+            //if (!string.IsNullOrEmpty(phrase.subPersonality)){subPersonality = PersonalityConversation.Personalities[phrase.subPersonality].Elements[key];}
+            //PersonalityConversation.Personalities[phrase.Personality].Elements[key];
+            
+            //TODO: exceptions in getJob
             List<string> job = getJob(phrase.Job, "greet");
             List<string> subPersonality = new List<string>{};
             List<string> jobSpecific = new List<string>{};
             if (!string.IsNullOrEmpty(phrase.specificJob)){jobSpecific = getJob(phrase.Job, key, phrase.specificJob);}
-            if (!string.IsNullOrEmpty(phrase.subPersonality)){subPersonality = PersonalityConversation.Personalities[phrase.subPersonality].Elements[key];}
-            List<string>[] elementArray = new List<string>[] { culture, personality, job, jobSpecific, jobSpecific, subPersonality };
+            
+            List<string>[] elementArray = new List<string>[] { personality, job, jobSpecific, jobSpecific, subPersonality };
             return GetRandString(elementArray);
 
 

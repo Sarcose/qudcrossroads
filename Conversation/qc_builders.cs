@@ -120,10 +120,12 @@ namespace QudCrossroads.Dialogue
         {   //CrossroadsLVR in qc_lists.cs
             //|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
             //use a GlobalContainer to establish global pronouns and other contexts for speaker and such
+            qprintc('======================');
             qprintc(key);
             Dictionary<string, bool> doTest = new Dictionary<string, bool>
             {
-                { "intro", true },
+                { "emoteintro", true },
+                { "intro", false },
                 { "greeting", true },
                 { "title", true },
                 { "toQuest", false },
@@ -167,7 +169,7 @@ namespace QudCrossroads.Dialogue
                     }
                     else
                     {
-                        qprintc("--Func (key not in dict)");
+                        qprintc("--ElementByCategories (key not in dict)");
                         return ElementByCategories(phrase, key);
 
                     }
@@ -257,7 +259,7 @@ namespace QudCrossroads.Dialogue
                 Job = "Farmer",
                 specificJob = "WatervineFarmer"
             };
-            string testInput = "|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
+            string testInput = "|emoteintro||intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
             string finalString = RegexToQCVR(testInput, testPhrase);
             return finalString;
         }

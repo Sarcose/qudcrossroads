@@ -371,7 +371,7 @@ namespace QudCrossroads.Dialogue
             public static List<string> getElement(string key, string specific)
             {
                 qprintc("------getElement started");
-                qprintc("specific = " + specific);
+                qprintc("------specific = " + specific);
                 if (Jobs[specific].Elements.ContainsKey(key))
                 {
                     qprintc("------getElement contains");
@@ -380,7 +380,7 @@ namespace QudCrossroads.Dialogue
                 }
                 else
                 {
-                    qprintc("NULL");
+                    qprintc("------getElement not found");
                     return new List<string>{"nope"}; // Return an empty list for undefined categories or keys
                 }
             }
