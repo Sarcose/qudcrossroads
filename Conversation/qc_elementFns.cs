@@ -36,6 +36,19 @@ namespace QudCrossroads.Dialogue
         
         public static string GreetFn(Phrase phrase)
         {
+            qprintc("----GreetFn");
+            List<string> greetCulture = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
+            return ElementByCategories(phrase, "greet", greetCulture);
+        }
+        public static string TitleFn(Phrase phrase)
+        {
+            qprintc("----TitleFn");
+            List<string> titleCulture = AllCultures.Cultures[phrase.Culture].Title["keys"].Familiarities[phrase.Familiarity];
+            return ElementByCategories(phrase, "title", titleCulture);
+        }
+
+        /*public static string GreetFn(Phrase phrase)
+        {
             List<string> greetCulture = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
             List<string> greetPersonality = PersonalityConversation.Personalities[phrase.Personality].Elements["greet"];
             List<string> greetJob = getJob(phrase.Job, "greet");
@@ -44,6 +57,7 @@ namespace QudCrossroads.Dialogue
             if (!string.IsNullOrEmpty(phrase.specificJob)){jobSpecific = getJob(phrase.Job, "greet", phrase.specificJob);}
             if (!string.IsNullOrEmpty(phrase.subPersonality)){subPersonality = PersonalityConversation.Personalities[phrase.subPersonality].Elements["greet"];}
             List<string>[] greetArray = new List<string>[] { greetCulture, greetPersonality, greetJob, jobSpecific, subPersonality };
+            qprintc("------parsed");
             return GetRandString(greetArray);
         }
         public static string TitleFn(Phrase phrase)     //phrase
@@ -57,24 +71,24 @@ namespace QudCrossroads.Dialogue
             if (!string.IsNullOrEmpty(phrase.subPersonality)){titlesubPersonality = PersonalityConversation.Personalities[phrase.subPersonality].Elements["title"];}
             List<string>[] titleArray = new List<string>[] { titleCulture, titlePersonality, titleJob, titleJob, titlesubPersonality };
             return GetRandString(titleArray);
-        }
-        public static string ElementByCategories(Phrase phrase, string key)
+        }*/
+        public static string ElementByCategories(Phrase phrase, string key, List<string> culture = null)
         {
-            //TODO: exceptions for culture
-            //List<string> culture = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
-            
-            //TODO: exceptions for personality(s) ('getPersonality'?)
-            List<string> personality = new List<string>{};
+            qprintc("-----ElementByCategories");
+            culture ??= new List<string>();
             //if (!string.IsNullOrEmpty(phrase.subPersonality)){subPersonality = PersonalityConversation.Personalities[phrase.subPersonality].Elements[key];}
             //PersonalityConversation.Personalities[phrase.Personality].Elements[key];
-            
+
+
+            //TODO: exceptions for personality(s) ('getPersonality'?)
             //TODO: exceptions in getJob
+            List<string> personality = new List<string>{};
             List<string> job = getJob(phrase.Job, "greet");
             List<string> subPersonality = new List<string>{};
             List<string> jobSpecific = new List<string>{};
             if (!string.IsNullOrEmpty(phrase.specificJob)){jobSpecific = getJob(phrase.Job, key, phrase.specificJob);}
-            
-            List<string>[] elementArray = new List<string>[] { personality, job, jobSpecific, jobSpecific, subPersonality };
+            List<string>[] elementArray = new List<string>[] { culture, personality, job, jobSpecific, subPersonality };
+            qprintc("-----parsed");
             return GetRandString(elementArray);
 
 
