@@ -375,8 +375,7 @@ namespace QudCrossroads.Dialogue
                 if (Jobs[specific].Elements.ContainsKey(key))
                 {
                     qprintc("------getElement contains");
-                    return new List<string>{"containskey"};
-                    //return Jobs[specific].Elements[key];
+                    return Jobs[specific].Elements[key];
                 }
                 else
                 {

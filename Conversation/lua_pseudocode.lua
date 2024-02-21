@@ -3,7 +3,7 @@
 
 
 PersonalityConversation = {
-    Elder = {
+    Elder = {   --string key
         transitions = {}, --strings
         questHooks = {}, --strings
         sayings = {}, --strings
@@ -13,8 +13,8 @@ PersonalityConversation = {
         insults = {}, --strings
         compliments = {}, --strings
     },
-    Lazy = {
-        transitions = {}, --strings
+    Lazy = {    --string key
+        transitions = {"transition1","transition2"}, --strings
         questHooks = {}, --strings
         sayings = {}, --strings
         comedy = {}, --strings
