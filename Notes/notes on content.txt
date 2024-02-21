@@ -1,0 +1,34 @@
+
+
+Mituna:
+i think that more dialogues i'd love to see are comments by NPCs on quests you have, maybe even on dynamic quests
+m[but that wouldd require rewriting the engine a bit i think
+
+Mituna:
+imagine chatting with Irudad who has opinions on you helpipng out a village that reveres the Girsh
+
+
+Agenda and Vendetta System:
+Mituna:
+maybe if you don't broker a peace, Argyve will get got by angry mechanimists later after he kills the zealot, and so on
+m[ also dynamically generated moon kings as a subset of legendaries
+
+N2H4
+mechanimist murder investigation party caravan you find in the northern salt pans then by the flower fields then by red rock or something
+
+Darkwood
+I did kinda want a Seven Samurai style quest where defend a village (originally kuyakya before it got updated) from a Templar warband
+
+Mituna:
+i think maybe Qud updating faction stuffs dynamically when a month passes ingame would be cool and won't be too frequent that it would be obnoxious
+
+
+N2H4
+something interesting would be grand scale alignments
+like in this big region, all the villagers support the mechanimists or the barathrumites or the templar
+and youll see people from those villages interacting with the faction they support, and you handle them based on those grander alignments
+
+
+Sarcose:
+someone might tell us to move this to modding because it's delving into the game's guts a bit much, but i was thinking just a part that the player keeps which simulates the various events being tracked in very very simple math, and then accesses the relevant spawning code when the player reaches certain coordinates
+in this way, say, a caravan moving across several parasangs could be tracked in its movements, but only actually calculate anything once the player gets there

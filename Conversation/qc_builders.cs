@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
@@ -144,18 +145,18 @@ namespace QudCrossroads.Dialogue
             qprintc("=========" + key + "=========");
             Dictionary<string, bool> doTest = new Dictionary<string, bool>
             {                   //some things work and also don't work, must depend on the result
-                { "emoteintro", true },        //ends at GetRandString Start   //succeeds! messes up =variables=
-                { "intro", true },             // "nope" getElement not found  //ends at GetRandString Start
-                { "greeting", true },
-                { "title", true },             // "nope" getElement not found // also fail at GetRandString start
-                { "toQuest", true },            
-                { "questHint", true },          
-                { "questHerring", true },       
-                { "transition", true },         
-                { "flavor", true },             
-                { "proverb", true },            
-                { "emoteTransition", true },    //ends at GetRandString Start //also success
-                { "questConclusion", true },    //ends at GetRandString Start
+                { "emoteintro", false },        //ends at GetRandString Start   //succeeds! messes up =variables=
+                { "intro", false },             // "nope" getElement not found  //ends at GetRandString Start
+                { "greeting", false },
+                { "title", false },             // "nope" getElement not found // also fail at GetRandString start
+                { "toQuest", false },            
+                { "questHint", false },          
+                { "questHerring", false },       
+                { "transition", false },         
+                { "flavor", false },             
+                { "proverb", false },            
+                { "emoteTransition", false },    //ends at GetRandString Start //also success
+                { "questConclusion", false },    //ends at GetRandString Start
                 // See TODO and building notes on qc_elementFns
             };
             if (doTest.ContainsKey(key) && doTest[key]) //only check, for now, if the key is in doTest, so we avoid checking lots of unimplemented keys
