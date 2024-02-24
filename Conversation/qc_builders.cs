@@ -136,32 +136,30 @@ namespace QudCrossroads.Dialogue
             XRL.Messages.MessageQueue.AddPlayerMessage(varstring);
             return GameText.VariableReplace(varstring, null);
         }
-
         public static string QCVR(string key, Phrase phrase)     //look for |Variables| instead
         {   //CrossroadsLVR in qc_lists.cs
             //|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
             //use a GlobalContainer to establish global pronouns and other contexts for speaker and such
             qprintc("======================");
             qprintc("=========" + key + "=========");
-            Dictionary<string, bool> doTest = new Dictionary<string, bool>
-            {                   //some things work and also don't work, must depend on the result
-                { "emoteintro", false },        //ends at GetRandString Start   //succeeds! messes up =variables=
-                { "intro", false },             // "nope" getElement not found  //ends at GetRandString Start
-                { "greeting", false },
-                { "title", false },             // "nope" getElement not found // also fail at GetRandString start
+            Dictionary<string, bool> doTest = new Dictionary<string, bool>{                   
+                { "intro", false },    
+                { "pleasantry", false},
+                { "greet", false },
+                { "title", false },    
                 { "toQuest", false },            
                 { "questHint", false },          
                 { "questHerring", false },       
                 { "transition", false },         
                 { "flavor", false },             
                 { "proverb", false },            
-                { "emoteTransition", false },    //ends at GetRandString Start //also success
-                { "questConclusion", false },    //ends at GetRandString Start
+                { "emoteTransition", false },    
+                { "questConclusion", false },    
                 // See TODO and building notes on qc_elementFns
             };
             if (doTest.ContainsKey(key) && doTest[key]) //only check, for now, if the key is in doTest, so we avoid checking lots of unimplemented keys
                 {
-                    if (CrossroadsLVR.TryGetValue(key, out object value))
+                    if (CrossroadsLVR.TryGetValue(key, out object value))   //see if the item is in CrossroadsLVR
                     {
                         if (value is List<string> stringList)
                         {
@@ -169,11 +167,11 @@ namespace QudCrossroads.Dialogue
                             qprintc("--List");
                             return GetRandString(stringList);
                         }
-                        else if (value is Func<Phrase, string> function)
+                        else if (value is Func<Phrase, string, string> function)
                         {
                             // Handle the case where the value is a function
                             qprintc("--Func");
-                            return function(phrase);
+                            return function(phrase, key);
                         }
                         else if (value is string stringValue)
                         {
@@ -239,11 +237,14 @@ namespace QudCrossroads.Dialogue
         public class Phrase                 
         {
             public string Culture { get; set; }
-            public string Familiarity { get; set; }
-            public string Personality {get; set; }
+            public int Familiarity { get; set; }
+            public string personality {get; set; }
             public string subPersonality {get; set; }
-            public string Job {get; set; }
-            public string specificJob {get; set; }
+            public string profession {get; set; }
+            public string job {get; set; }
+            public string morphotype {get; set;}
+            public string subMorpho {get; set;}
+            public string mutation {get; set;}      //will probably not use this in the future
         }
 
         /*
@@ -273,17 +274,17 @@ namespace QudCrossroads.Dialogue
         {
             Phrase testPhrase = new Phrase
             {
-                Culture = "SaltMarshCulture",
-                Familiarity = "unfamiliar",
-                Personality = "Peppy",
+                culture = "SaltMarshCulture",
+                familiarity = 0,
+                personality = "Peppy",
                 subPersonality = "Lazy",
-                Job = "Farmer",
-                specificJob = "WatervineFarmer"
+                profession = "Farmer",
+                job = "WatervineFarmer",
+                morphotype = "Chimera",
+                subMorpho = "HideousSpecimen",
+                mutation = "SociallyRepugnant"
             };
-            string[] testInput = {"|emoteintro|","|intro|","|greeting|","|title|","|toQuest|","|questHint|","|questHerring|","|transition|","|flavor|","|proverb|","|transition|","|emoteTransition|","|questConclusion|"};
-            int ind = QRand.Next(0,13);
-            
-            //string testInput = "|emoteintro||intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
+            string testInput = "|emoteintro||intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
             string finalString = RegexToQCVR(testInput[ind], testPhrase);
             return finalString;
         }

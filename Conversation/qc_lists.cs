@@ -27,11 +27,13 @@ namespace QudCrossroads.Dialogue
             { "Resource.Watervinefarmer", new List<string> { "|picktwo|", "watervine", "water", "wafers" } },                        
             { "LaborVerb", new List<string> { "labor", "task", "trade", "calling" } },                        
             { "HarshAdjective", new List<string> { "|picktwo|", "harsh", "hard", "tough", "trying", "tiresome" } },
-            { "greeting", (Func<Phrase, string>)GreetFn },
-            { "title", (Func<Phrase, string>)TitleFn },
+            { "greet", new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
+            { "title", new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
+            { "pleasanty", new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
         };
     }
 }
+
 
 
 

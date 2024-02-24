@@ -15,89 +15,59 @@ namespace QudCrossroads.Dialogue
 {
     public static partial class Functions
     {
-        public static string Title = "Title"; public static string Greet = "Greet";
-        public static Dictionary<string, Func<Phrase, string>> functionDictionary = new Dictionary<string, Func<Phrase, string>>
-        {
-            { Greet, GreetFn },
-            { Title, TitleFn }
-        };
-        public static List<string> getJob(string job, string key, string specific = "Generic")
-        {
-            if (job == "Farmer"){
-                return FarmerConversation.getElement(key, specific);
-            }else if (job == "Merchant"){
-                return MerchantConversation.getElement(key, specific);
-            }else if (job == "Warrior"){
-                return WarriorConversation.getElement(key, specific);
-            }else{
-                return null;
-            }
+        public static Dictionary<string,List<string>> familiarityDictionary = new Dictionary<string,List<string>>{
+            { "greet", new List<string> {"snubGreet","strangeGreet","friendGreet" } },
+            { "title", new List<string> {"snubTitle","strangeTitle","friendTitle" } },
+            { "pleasantry", new List<string> {"insult","pleasantry","compliment" } },
+
         }
-        
-        public static string GreetFn(Phrase phrase)
-        {
-            qprintc("----GreetFn");
-            List<string> greetCulture = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
-            return ElementByCategories(phrase, "greet", greetCulture);
+        public static string ParseFamiliarity(Phrase phrase, string key){
+            return ElementByCategories(phrase, FamiliarityDictionary[key][phrase.familiarity+1]);
         }
-        public static string TitleFn(Phrase phrase)
-        {
-            qprintc("----TitleFn");
-            List<string> titleCulture = AllCultures.Cultures[phrase.Culture].Title["keys"].Familiarities[phrase.Familiarity];
-            return ElementByCategories(phrase, "title", titleCulture);
+        // cultureList, genericList, personalityList, 
+        // subPersonalityList, professionList, jobList, morphoList, mutationList
+        public static string ElementByCategories(Phrase phrase, string key){
+            List<List<string>> nonEmptyLists = new List<List<string>>();
+
+            string address = "Cultures." + phrase.culture + "." + key;
+            List<string> cultureList = GetEntry<List<string>>(Conversations, address);
+            if (cultureList.Count > 0) nonEmptyLists.Add(cultureList);
+
+            address = "Personalities.Generic." + key; 
+            List<string> genericList = GetEntry<List<string>>(Conversations, address);
+            if (genericList.Count > 0) nonEmptyLists.Add(genericList);
+
+            address = "Personalities." + phrase.personality + "." + key;
+            List<string> personalityList = GetEntry<List<string>>(Conversations, address);
+            if (personalityList.Count > 0) nonEmptyLists.Add(personalityList);
+
+            address = "Personalities." + phrase.subPersonality + "." + key
+            List<string> subPersonalityList = GetEntry<List<string>>(Conversations, address);
+            if (subPersonalityList.Count > 0) nonEmptyLists.Add(subPersonalityList);
+
+            address = "Professions." + phrase.profession + ".Generic." + key;
+            List<string> professionList = GetEntry<List<string>>(Conversations, address);
+            if (professionList.Count > 0) nonEmptyLists.Add(professionList);
+
+            address = "Professions." + phrase.profession + "." + phrase.job + "." + key;
+            List<string> jobList = GetEntry<List<string>>(Conversations, address);
+            if (jobList.Count > 0) nonEmptyLists.Add(jobList);
+
+            address = "Morphotypes."+ phrase.morphotype + "." + phrase.subMorpho + "." + key;
+            List<string> morphoList = GetEntry<List<string>>(Conversations, address);
+            if (morphoList.Count > 0) nonEmptyLists.Add(morphoList);
+
+            address = "Morphotypes." + "Mutations" + "." + GetMutation(phrase) + "." + key;
+            List<string> mutationList = GetEntry<List<string>>(Conversations, address);  
+            if (mutationList.Count > 0) nonEmptyLists.Add(mutationList);
+            
+            return nonEmptyLists.Count > 0 ? GetRandString(nonEmptyLists[QRand.Next(0, nonEmptyLists.Count)]) : "No options available";
         }
 
-        /*public static string GreetFn(Phrase phrase)
-        {
-            List<string> greetCulture = AllCultures.Cultures[phrase.Culture].Greet["keys"].Familiarities[phrase.Familiarity];
-            List<string> greetPersonality = PersonalityConversation.Personalities[phrase.Personality].Elements["greet"];
-            List<string> greetJob = getJob(phrase.Job, "greet");
-            List<string> subPersonality = new List<string>{};
-            List<string> jobSpecific = new List<string>{};
-            if (!string.IsNullOrEmpty(phrase.specificJob)){jobSpecific = getJob(phrase.Job, "greet", phrase.specificJob);}
-            if (!string.IsNullOrEmpty(phrase.subPersonality)){subPersonality = PersonalityConversation.Personalities[phrase.subPersonality].Elements["greet"];}
-            List<string>[] greetArray = new List<string>[] { greetCulture, greetPersonality, greetJob, jobSpecific, subPersonality };
-            qprintc("------parsed");
-            return GetRandString(greetArray);
-        }
-        public static string TitleFn(Phrase phrase)     //phrase
-        {
-            List<string> titleCulture =  AllCultures.Cultures[phrase.Culture].Title["keys"].Familiarities[phrase.Familiarity];
-            List<string> titlePersonality = PersonalityConversation.Personalities[phrase.Personality].Elements["title"];
-            List<string> titleJob = getJob(phrase.Job, "title");
-            List<string> titlesubPersonality = new List<string>{};
-            List<string> titleJobSpecific = new List<string>{};
-            if (!string.IsNullOrEmpty(phrase.specificJob)){titleJobSpecific = getJob(phrase.Job, "title", phrase.specificJob);}
-            if (!string.IsNullOrEmpty(phrase.subPersonality)){titlesubPersonality = PersonalityConversation.Personalities[phrase.subPersonality].Elements["title"];}
-            List<string>[] titleArray = new List<string>[] { titleCulture, titlePersonality, titleJob, titleJob, titlesubPersonality };
-            return GetRandString(titleArray);
-        }*/
-        public static string ElementByCategories(Phrase phrase, string key, List<string> culture = null)
-        {
-            qprintc("-----ElementByCategories");
-            culture ??= new List<string>();
-            //if (!string.IsNullOrEmpty(phrase.subPersonality)){subPersonality = PersonalityConversation.Personalities[phrase.subPersonality].Elements[key];}
-            //PersonalityConversation.Personalities[phrase.Personality].Elements[key];
-
-
-            //TODO: exceptions for personality(s) ('getPersonality'?)
-            //TODO: exceptions in getJob
-            List<string> personality = new List<string>{};
-            List<string> job = getJob(phrase.Job, "greet");
-            List<string> subPersonality = new List<string>{};
-            List<string> jobSpecific = new List<string>{};
-            if (!string.IsNullOrEmpty(phrase.specificJob)){jobSpecific = getJob(phrase.Job, key, phrase.specificJob);}
-            List<string>[] elementArray = new List<string>[] { culture, personality, job, jobSpecific, subPersonality };
-            qprintc("-----parsed");
-            return GetRandString(elementArray);
-
-
-            //Personality
-            //Subpersonality
-            //Generic Personality
-            //Culture -> Affinity
-            //Job
-            //Job, specific
+        public static string GetMutation(Phrase phrase){
+            // for now we will just grab the test mutation
+            // in the future we will parse a list of implemented mutations, selecting one that the entity has
+            return phrase.mutation;
         }
         public static string GetBiome()
         {

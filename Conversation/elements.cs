@@ -421,8 +421,8 @@ namespace QudCrossroads.Dialogue
                             {
                                 "Two-headed", new Dictionary<string, object>
                                 {
-                                    { "strangeGreet",       new List<string>() { "What do you want?" } },
-                                    { "friendGreet",        new List<string>() { "Hey." } },
+                                    { "strangeGreet",       new List<string>() { "Hi. Hi!" } },
+                                    { "friendGreet",        new List<string>() { "Hey friend! Friend, hi!" } },
                                 }
                             }
                         }
@@ -536,7 +536,20 @@ namespace QudCrossroads.Dialogue
         };
 
         // Function to get a nested entry from the dictionary
-        static T GetEntry<T>(Dictionary<string, object> dict, string address)
+        //                                                             in reality these addresses will be put into an 'address' variable
+
+        //List<string> cultureList = GetEntry<List<string>>(Conversations, "Cultures."+culture+"."+element);
+        //List<string> genericList = GetEntry<List<string>>(Conversations, "Personalities.Generic."+"."+element);
+        //List<string> personalityList = GetEntry<List<string>>(Conversations, "Personalities."+personality+"."+element);
+        //List<string> subPersonalityList = GetEntry<List<string>>(Conversations, "Personalities."+subPersonality+"."+element);
+        //List<string> professionList = GetEntry<List<string>>(Conversations, "Professions."+profession+"."+"Generic"+"."+element);
+        //List<string> jobList = GetEntry<List<string>>(Conversations, "Professions."+profession+"."+job+"."+element);
+        //List<string> morphoList = GetEntry<List<string>>(Conversations, "Morphotypes."+morphotype+"."+subMorpho+"."+element);
+        
+        //List<string> mutationList = GetEntry<List<string>>(Conversations, "Morphotypes."+"Mutations"+"."+getMutation()+"."+element);
+
+        //List<string> elementList = GetEntry<List<string>>(Conversations, elementAddress)
+        static List<string> GetEntry(Dictionary<string, object> dict, string address)
         {
             string[] parts = address.Split('.');
             object current = dict;
@@ -549,12 +562,11 @@ namespace QudCrossroads.Dialogue
                 }
                 else
                 {
-                    Console.WriteLine($"Address part '{part}' not found.");
-                    return default;
+                    return new List<string>(); // Return an empty list if any part is not found
                 }
             }
 
-            return (T)current;
+            return current as List<string> ?? new List<string>(); // Return the list or an empty list if the final part is not a list
         }
     }
 }
