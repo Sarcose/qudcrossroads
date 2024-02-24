@@ -22,9 +22,22 @@ using static QudCrossroads.Dialogue.Builders;
 //  -   TODO: Might not use familiarity after all! Might use , Insult/Pleasantry/Compliment SnubGreet/StrangeGreet/WarmGreet, SnubTitle/StrangeTitle/WarmTitle
 //  -                   ^ insert the above into _TEMPLATE and then apply it to all, including personalities and jobs. All will have the same!
 //  -                   ^ [pleasantry], [greet], and [titlel] will use functions to replace with the above based on familiarity!
+
+/* grammar reference
+
+=pronouns.
+
+reflexive=               |   himself
+substantivePossessive=   |   his
+subjective=              |   he
+objective=               |   him
+indicativeDistal=        |   that
+
+*/
+
 namespace QudCrossroads.Dialogue
 {
-    public static partial class ElementsTwo
+    public static partial class Elements
     {
         public static Dictionary<string, object> Conversations = new Dictionary<string, object>
         {   
@@ -417,6 +430,8 @@ namespace QudCrossroads.Dialogue
                 }
             },
             { //#CULTURES
+            // { "emoteintro",  new List<string> {"=pronouns.possessive= back bent to you, =pronouns.subjective= is hard at work. A moment passes, and =pronouns.subjective= stands",""}},
+            // { "emotetransition", new List<string> {"=pronouns.posessive= kneels back down, biding you kneel with =pronouns.objective=. Together the two of you speak between the whispers of watervine in the gentle breeze."}},
                 "Cultures", new Dictionary<string, object>
                 {
                     {
@@ -427,19 +442,19 @@ namespace QudCrossroads.Dialogue
                             { "pleasantry",     new List<string>() {  } },
                             { "compliment",     new List<string>() {  } },
                             //[greet]
-                            { "snubGreet",      new List<string>() {  } },
-                            { "strangeGreet",   new List<string>() {  } },
-                            { "friendGreet",    new List<string>() {  } },
+                            { "snubGreet",      new List<string>() { "What", "What could you want", "Will this take long" } },
+                            { "strangeGreet",   new List<string>() { "Salt and sun", "Good meet to you", "Bountiful harvest","Water and fortune to you",  "How are you on this day?", "How fare you?" } },
+                            { "friendGreet",    new List<string>() { "Hail", "Merry meet", "Bright tidings" } },
                             //[title]
-                            { "snubTitle",      new List<string>() {  } },
-                            { "strangeTitle",   new List<string>() {  } },
-                            { "friendTitle",    new List<string>() {  } },
+                            { "snubTitle",      new List<string>() { "blighted", "troublemaker", "polluter" } },
+                            { "strangeTitle",   new List<string>() { "wayfarer", "traveler", "stranger"  } },
+                            { "friendTitle",    new List<string>() { "my friend", "my sibling", "my fellow", "dear sib" } },
                             //non-opinion based
                             { "intro",          new List<string>() {  } },
-                            { "transition",     new List<string>() {  } },
+                            { "transition",     new List<string>() { "But ah, what am I to complain?" } },
                             { "toQuest",        new List<string>() {  } },
                             { "saying",         new List<string>() {  } },
-                            { "proverb",        new List<string>() {  } },
+                            { "proverb",        new List<string>() { "so it is, that the Salt Sun rises and the Salt Sun sets"  } },
                             { "flavor",         new List<string>() {  } },
                             { "comedy",         new List<string>() {  } },
                             { "serious",        new List<string>() {  } },
@@ -449,15 +464,29 @@ namespace QudCrossroads.Dialogue
                 }
             },
             {   //#PROFESSION
+            // { "emoteintro",  new List<string> {"=pronouns.possessive= back bent to you, =pronouns.subjective= is hard at work. A moment passes, and =pronouns.subjective= stands",""}},
+            //{ "emoteintro", new List<string> {"=pronouns.possessive= back bent to you, =pronouns= is hard at work. A moment passes, and =pronoun= stands",""}},
+            // { "emotetransition", new List<string> {"=pronouns.posessive= kneels back down, biding you kneel with =pronouns.objective=. Together the two of you speak between the whispers of watervine in the gentle breeze."}},
+              
                 "Profession", new Dictionary<string, object>
                 {
                     {
                         "Farmer", new Dictionary<string, object>
                         {
                             {
+                                "Generic", new Dictionary<string, object>
+                                {
+                                    { "transition",     new List<string>() { "But ah, what am I to complain?" } },
+                                    { "flavor", new List<string> { "To ply |resource.farmer| from the |biome| is a |harshadjective| |laborverb|" } },
+                                    { "proverb", new List<string> { "so it is, that the Salt Sun rises and the Salt Sun sets", "Salt and Sun"} }
+                                }
+                            },
+                            {
                                 "watervineFarmer", new Dictionary<string, object>
                                 {
-                                    { "proverb", new List<string> { "do you see these sheafs, wayfarer? They are our Way.", "Salt and Sun" } }
+                                    { "flavor", new List<string> { "Do you see how thin these wafers are, unfertilized?", "flavor2" } },
+                                    { "transition",     new List<string>() { "But ah, what am I to complain?" } },
+                                    { "proverb", new List<string> { "do you see these sheafs, |title|? They are our Way.",  "we work the moisture from the vines"} }
                                 }
                             },
                             {
