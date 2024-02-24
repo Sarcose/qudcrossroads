@@ -32,3 +32,8 @@ and youll see people from those villages interacting with the faction they suppo
 Sarcose:
 someone might tell us to move this to modding because it's delving into the game's guts a bit much, but i was thinking just a part that the player keeps which simulates the various events being tracked in very very simple math, and then accesses the relevant spawning code when the player reaches certain coordinates
 in this way, say, a caravan moving across several parasangs could be tracked in its movements, but only actually calculate anything once the player gets there
+
+
+
+N2h4:
+a funny reality folder bit would prob be them referring to you as water-sib then realizing that hasnt happened in this timeline
