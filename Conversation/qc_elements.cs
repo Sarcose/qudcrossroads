@@ -73,8 +73,7 @@ namespace QudCrossroads.Dialogue
                     },
                 }
             },
-            {   
-                //#PERSONALITIES
+            {   //#PERSONALITIES
                 "Personalities", new Dictionary<string, object>
                 {
                     {
@@ -163,7 +162,7 @@ namespace QudCrossroads.Dialogue
                         {   
                             //[pleasantry]
                             { "insult",         new List<string>() {  } },
-                            { "pleasantry",     new List<string>() {  } },
+                            { "pleasantry",     new List<string>() { "I had a good sit on my cushion recently... " } },
                             { "compliment",     new List<string>() {  } },
                             //[greet]
                             { "snubGreet",      new List<string>() { "*blinks slowly*" } },
@@ -176,7 +175,7 @@ namespace QudCrossroads.Dialogue
                             //non-opinion based
                             { "intro",          new List<string>() {  } },
                             { "transition",     new List<string>() {  } },
-                            { "toQuest",        new List<string>() {  } },
+                            { "toQuest",        new List<string>() { "but, like, " } },
                             { "saying",         new List<string>() {  } },
                             { "proverb",        new List<string>() {  } },
                             { "flavor",         new List<string>() {  } },
@@ -220,7 +219,7 @@ namespace QudCrossroads.Dialogue
                             { "pleasantry",     new List<string>() {  } },
                             { "compliment",     new List<string>() {  } },
                             //[greet]
-                            { "snubGreet",      new List<string>() { "...well hi, SO nice to see you!" } },
+                            { "snubGreet",      new List<string>() { "...oh, SO nice to see you!" } },
                             { "strangeGreet",   new List<string>() { "Oh! Hi!" } },
                             { "friendGreet",    new List<string>() { "Beautiful day, isn't it?" } },
                             //[title]
@@ -430,8 +429,8 @@ namespace QudCrossroads.Dialogue
                 }
             },
             { //#CULTURES
-            // { "emoteintro",  new List<string> {"=pronouns.possessive= back bent to you, =pronouns.subjective= is hard at work. A moment passes, and =pronouns.subjective= stands",""}},
-            // { "emotetransition", new List<string> {"=pronouns.posessive= kneels back down, biding you kneel with =pronouns.objective=. Together the two of you speak between the whispers of watervine in the gentle breeze."}},
+                    // { "emoteintro",  new List<string> {"=pronouns.possessive= back bent to you, =pronouns.subjective= is hard at work. A moment passes, and =pronouns.subjective= stands",""}},
+                    // { "emotetransition", new List<string> {"=pronouns.posessive= kneels back down, biding you kneel with =pronouns.objective=. Together the two of you speak between the whispers of watervine in the gentle breeze."}},
                 "Cultures", new Dictionary<string, object>
                 {
                     {
@@ -464,9 +463,9 @@ namespace QudCrossroads.Dialogue
                 }
             },
             {   //#PROFESSION
-            // { "emoteintro",  new List<string> {"=pronouns.possessive= back bent to you, =pronouns.subjective= is hard at work. A moment passes, and =pronouns.subjective= stands",""}},
-            //{ "emoteintro", new List<string> {"=pronouns.possessive= back bent to you, =pronouns= is hard at work. A moment passes, and =pronoun= stands",""}},
-            // { "emotetransition", new List<string> {"=pronouns.posessive= kneels back down, biding you kneel with =pronouns.objective=. Together the two of you speak between the whispers of watervine in the gentle breeze."}},
+                    // { "emoteintro",  new List<string> {"=pronouns.possessive= back bent to you, =pronouns.subjective= is hard at work. A moment passes, and =pronouns.subjective= stands",""}},
+                    //{ "emoteintro", new List<string> {"=pronouns.possessive= back bent to you, =pronouns= is hard at work. A moment passes, and =pronoun= stands",""}},
+                    // { "emotetransition", new List<string> {"=pronouns.posessive= kneels back down, biding you kneel with =pronouns.objective=. Together the two of you speak between the whispers of watervine in the gentle breeze."}},
               
                 "Profession", new Dictionary<string, object>
                 {
@@ -549,7 +548,7 @@ namespace QudCrossroads.Dialogue
         //List<string> mutationList = GetEntry<List<string>>(Conversations, "Morphotypes."+"Mutations"+"."+getMutation()+"."+element);
 
         //List<string> elementList = GetEntry<List<string>>(Conversations, elementAddress)
-        static List<string> GetEntry(Dictionary<string, object> dict, string address)
+        public static List<string> GetEntry(Dictionary<string, object> dict, string address)
         {
             string[] parts = address.Split('.');
             object current = dict;
@@ -566,7 +565,7 @@ namespace QudCrossroads.Dialogue
                 }
             }
 
-            return current as List<string> ?? new List<string>(); // Return the list or an empty list if the final part is not a list
+            return current as List<string> ?? new List<string>();
         }
     }
 }

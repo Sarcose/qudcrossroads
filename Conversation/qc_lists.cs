@@ -29,7 +29,10 @@ namespace QudCrossroads.Dialogue
             { "HarshAdjective", new List<string> { "|picktwo|", "harsh", "hard", "tough", "trying", "tiresome" } },
             { "greet", new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
             { "title", new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
-            { "pleasanty", new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
+            { "pleasantry", new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) }//,
+            //{ "questHint", new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) },
+            //{ "questHerring", new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) },
+            //{ "questConclusion", new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) },
         };
     }
 }

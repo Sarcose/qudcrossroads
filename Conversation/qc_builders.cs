@@ -37,40 +37,50 @@ namespace QudCrossroads.Dialogue
             string result = null;
             foreach (var strArray in strArrays)
             {
+                qprintc("---[[building Count");
                 totalCount += strArray.Count;
                 if (totalCount > int.MaxValue)
                 {
                     qprintc("Combined count exceeds Int32.MaxValue");
                 }
             }
-            int randomIndex = QRand.Next(0, (int)totalCount);
+            int randomIndex = QRand.Next(0, (int)totalCount - 1);
+            int loopCount = 0;
             foreach (var strArray in strArrays)
             {
-                qprintc("---[[foreach");
-                if (randomIndex < strArray.Count)
+                qprintc($"---[[foreach {loopCount}");
+                loopCount++;
+                if (randomIndex < strArray.Count - 1)
                 {
+                    qprintc($"---[[getting result from array of count {strArray.Count} with randomIndex {randomIndex}...");
                     result = strArray[randomIndex];
+                    qprintc($"---[[result = {result}");
                 }
                 else
                 {
-                    randomIndex -= strArray.Count;
+                    qprintc("---[[ind decrement");
+                    randomIndex -= (strArray.Count - 1);
                 }
             }
             return result;
+        }
+        public static bool CheckForPipe(string str){
+            if (str != null && str.Length > 0 && str[0] == '|') return true; else {return false;}
         }
         public static string GetRandString(params List<string>[] strArrays)     // result = GetRandString(stringList, stringList2, stringList3, stringList4, etc...)
         {   //ERROR: not all code paths return a value
             qprintc("---[GetRandString start");
             string result = GetRandString_Child(strArrays);
+            qprintc($"--[GetRandString_Child resolved with result {result}");
             if (result == "|picktwo|"){//need to expand this for a whole host of cases
                 qprintc("---[Result = " + result);
                 result = "";
                 string child = "|picktwo|";
                 int elCount = 2;
-                while (child[0] == '|' || elCount > 0)
+                while (CheckForPipe(child) || elCount > 0)
                 {
                     child = GetRandString_Child(strArrays);
-                    if (child[0] != '|'){ 
+                    if (!CheckForPipe(child)){ 
                         elCount --;
                         result += child;
                         if (elCount == 1){
@@ -85,10 +95,10 @@ namespace QudCrossroads.Dialogue
                 result = "";
                 string child = "|pickthree|";
                 int elCount = 3;
-                while (child[0] == '|' || elCount > 0)
+                while (CheckForPipe(child) || elCount > 0)
                 {
                     child = GetRandString_Child(strArrays);
-                    if (child[0] != '|'){ 
+                    if (!CheckForPipe(child)){ 
                         elCount --;
                         result += child;
                         if (elCount == 2){
@@ -98,7 +108,7 @@ namespace QudCrossroads.Dialogue
                         }else {result += ".";}
                         }
                 }
-            }else if (result[0] == '|'){
+            }else if (!CheckForPipe(result)){
                 qprintc("---[Else");
                 qprintc("---[Result = " + result);
                 //handle other specific cases here (such as |pickspecific| which will require another round of spaghetti)
@@ -138,22 +148,21 @@ namespace QudCrossroads.Dialogue
         }
         public static string QCVR(string key, Phrase phrase)     //look for |Variables| instead
         {   //CrossroadsLVR in qc_lists.cs
-            //|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
+            //|intro||greeting||title||pleasantry||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
             //use a GlobalContainer to establish global pronouns and other contexts for speaker and such
             qprintc("======================");
             qprintc("=========" + key + "=========");
             Dictionary<string, bool> doTest = new Dictionary<string, bool>{                   
-                { "intro", false },    
-                { "pleasantry", false},
-                { "greet", false },
-                { "title", false },    
-                { "toQuest", false },            
+                { "intro", true },    
+                { "pleasantry", true},
+                { "greet", true },
+                { "title", true },    
+                { "toQuest", true },            
                 { "questHint", false },          
                 { "questHerring", false },       
-                { "transition", false },         
-                { "flavor", false },             
-                { "proverb", false },            
-                { "emoteTransition", false },    
+                { "transition", true },         
+                { "flavor", true },             
+                { "proverb", true },            
                 { "questConclusion", false },    
                 // See TODO and building notes on qc_elementFns
             };
@@ -225,19 +234,14 @@ namespace QudCrossroads.Dialogue
 
             return result;
         }
-        public delegate void ProcessFnDelegate(string name);
-        private static Func<string, string> GetProcessFn(Phrase phrase)
-        {
-            return (name) => functionDictionary[name]?.Invoke(phrase);
-        }
 
 /***************************************************************/
 //                      Phrase Class                           //
 /***************************************************************/
         public class Phrase                 
         {
-            public string Culture { get; set; }
-            public int Familiarity { get; set; }
+            public string culture { get; set; }
+            public int familiarity { get; set; }
             public string personality {get; set; }
             public string subPersonality {get; set; }
             public string profession {get; set; }
@@ -259,23 +263,13 @@ namespace QudCrossroads.Dialogue
 /***************************************************************/
 //                      Testing Area                           //
 /***************************************************************/
-        public static string TestString_Siete()
-        {
-            Phrase newPhrase = new Phrase
-            {
-                Culture = "SaltMarshCulture",
-                Familiarity = "unfamiliar"
-            };
-            Func<string, string> _ = GetProcessFn(newPhrase);
-            return $"{_(Greet)}, {Pluralize(_(Title))}, how are you on this day? {LVR("=verb:grab=")}";
-        }
 
         public static string TestString_Ocho()
         {
             Phrase testPhrase = new Phrase
             {
                 culture = "SaltMarshCulture",
-                familiarity = 0,
+                familiarity = 1,        //0 = unfriendly, 1 = unfamiliar, 2 = friendly
                 personality = "Peppy",
                 subPersonality = "Lazy",
                 profession = "Farmer",
@@ -284,8 +278,8 @@ namespace QudCrossroads.Dialogue
                 subMorpho = "HideousSpecimen",
                 mutation = "SociallyRepugnant"
             };
-            string testInput = "|emoteintro||intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
-            string finalString = RegexToQCVR(testInput[ind], testPhrase);
+            string testInput = "|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
+            string finalString = RegexToQCVR(testInput, testPhrase);
             return finalString;
         }
         public static string OutfitNotice(GameObject player, string curString)  //probably need to change GameObject player tbh...
