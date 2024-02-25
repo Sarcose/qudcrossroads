@@ -119,7 +119,7 @@ namespace QudCrossroads.Dialogue
                             { "strangeTitle",   new List<string>() {  } },
                             { "friendTitle",    new List<string>() {  } },
                             //non-opinion based
-                            { "intro",          new List<string>() {  } },
+                            { "intro",          new List<string>() { "*looks up at you*", "*gets up from their sitting position*" } },
                             { "transition",     new List<string>() { "Anyway", "Regardless","Whatever the case","At any rate","Nonetheless","You know" } },
                             { "toQuest",        new List<string>() { "I have a tale to tell.","Wait til you hear this.","Now that I have your attention...","I've been thinking about something, lately.","Let me tell you a story.","I'm glad you asked.","" } },
                             { "saying",         new List<string>() { "hmmmm","the sun always sets","by the salt sun","by the Eaters","at any cost","traveler","for the birds","*the =localfaction= know the way","*=randomcreature= guide us","*=MARKOVWORD=" } },
@@ -173,7 +173,7 @@ namespace QudCrossroads.Dialogue
                             { "strangeTitle",   new List<string>() {  } },
                             { "friendTitle",    new List<string>() {  } },
                             //non-opinion based
-                            { "intro",          new List<string>() {  } },
+                            { "intro",          new List<string>() { "*zzzzzzzz*" } },
                             { "transition",     new List<string>() {  } },
                             { "toQuest",        new List<string>() { "but, like, " } },
                             { "saying",         new List<string>() {  } },
@@ -476,22 +476,22 @@ namespace QudCrossroads.Dialogue
                                 "Generic", new Dictionary<string, object>
                                 {
                                     { "transition",     new List<string>() { "But ah, what am I to complain?" } },
-                                    { "flavor", new List<string> { "To ply |resource.farmer| from the |biome| is a |harshadjective| |laborverb|" } },
-                                    { "proverb", new List<string> { "so it is, that the Salt Sun rises and the Salt Sun sets", "Salt and Sun"} }
+                                    { "flavor",         new List<string> { "To ply |resource.farmer| from the |biome| is a |harshadjective| |laborverb|" } },
+                                    { "proverb",        new List<string> { "so it is, that the Salt Sun rises and the Salt Sun sets", "Salt and Sun"} }
                                 }
                             },
                             {
                                 "watervineFarmer", new Dictionary<string, object>
                                 {
-                                    { "flavor", new List<string> { "Do you see how thin these wafers are, unfertilized?", "flavor2" } },
+                                    { "flavor",         new List<string> { "Do you see how thin these wafers are?", "flavor2" } },
                                     { "transition",     new List<string>() { "But ah, what am I to complain?" } },
-                                    { "proverb", new List<string> { "do you see these sheafs, |title|? They are our Way.",  "we work the moisture from the vines"} }
+                                    { "proverb",        new List<string> { "do you see these sheafs, |title|? They are our Way.",  "we work the moisture from the vines"} }
                                 }
                             },
                             {
-                                "starappleFarmer", new Dictionary<string, object>
+                                "starappleFarmer",      new Dictionary<string, object>
                                 {
-                                    { "proverb", new List<string> { "the starapple falls not far from the tree", "one bad starapple..." } }
+                                    { "proverb",        new List<string> { "the starapple falls not far from the tree", "one bad starapple..." } }
                                 }
                             }
                         }

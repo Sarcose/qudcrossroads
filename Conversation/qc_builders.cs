@@ -48,9 +48,9 @@ namespace QudCrossroads.Dialogue
             int loopCount = 0;
             foreach (var strArray in strArrays)
             {
-                qprintc($"---[[foreach {loopCount}");
+                qprintc($"---[[foreach {loopCount} at randomInxed {randomIndex} with strArray.Count {strArray.Count}");
                 loopCount++;
-                if (randomIndex < strArray.Count - 1)
+                if (randomIndex < strArray.Count)
                 {
                     qprintc($"---[[getting result from array of count {strArray.Count} with randomIndex {randomIndex}...");
                     result = strArray[randomIndex];
@@ -70,7 +70,7 @@ namespace QudCrossroads.Dialogue
         public static string GetRandString(params List<string>[] strArrays)     // result = GetRandString(stringList, stringList2, stringList3, stringList4, etc...)
         {   //ERROR: not all code paths return a value
             qprintc("---[GetRandString start");
-            string result = GetRandString_Child(strArrays);
+            string result = GetRandString_Child(strArrays);;
             qprintc($"--[GetRandString_Child resolved with result {result}");
             if (result == "|picktwo|"){//need to expand this for a whole host of cases
                 qprintc("---[Result = " + result);
@@ -149,6 +149,7 @@ namespace QudCrossroads.Dialogue
         public static string QCVR(string key, Phrase phrase)     //look for |Variables| instead
         {   //CrossroadsLVR in qc_lists.cs
             //|intro||greeting||title||pleasantry||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
+            // "|intro|~|greeting|~|title|~|pleasantry|~|toQuest|~|transition|~|flavor|~|proverb|"
             //use a GlobalContainer to establish global pronouns and other contexts for speaker and such
             qprintc("======================");
             qprintc("=========" + key + "=========");
@@ -158,12 +159,12 @@ namespace QudCrossroads.Dialogue
                 { "greet", true },
                 { "title", true },    
                 { "toQuest", true },            
-                { "questHint", false },          
-                { "questHerring", false },       
+                { "questHint", true },          
+                { "questHerring", true },       
                 { "transition", true },         
                 { "flavor", true },             
                 { "proverb", true },            
-                { "questConclusion", false },    
+                { "questConclusion", true },    
                 // See TODO and building notes on qc_elementFns
             };
             if (doTest.ContainsKey(key) && doTest[key]) //only check, for now, if the key is in doTest, so we avoid checking lots of unimplemented keys
@@ -278,7 +279,10 @@ namespace QudCrossroads.Dialogue
                 subMorpho = "HideousSpecimen",
                 mutation = "SociallyRepugnant"
             };
-            string testInput = "|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
+            //string testInput = "|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
+            string testInput = "|intro|;|greeting|;|title|;|pleasantry|;|toQuest|;|transition|;|flavor|;|proverb|";
+            //intro~|greeting|~~~Now that I have your attention...~At any rate~flavor~
+
             string finalString = RegexToQCVR(testInput, testPhrase);
             return finalString;
         }
