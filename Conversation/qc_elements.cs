@@ -77,54 +77,27 @@ namespace QudCrossroads.Dialogue
                 "Personalities", new Dictionary<string, object>
                 {
                     {
-                        "__TEMPLATE", new Dictionary<string, object>     //copy/paste and leave blank if the category doesn't have one
-                        {   
-                            //[pleasantry]
-                            { "insult",         new List<string>() {  } },
-                            { "pleasantry",     new List<string>() {  } },
-                            { "compliment",     new List<string>() {  } },
-                            //[greet]
-                            { "snubGreet",      new List<string>() {  } },
-                            { "strangeGreet",   new List<string>() {  } },
-                            { "friendGreet",    new List<string>() {  } },
-                            //[title]
-                            { "snubTitle",      new List<string>() {  } },
-                            { "strangeTitle",   new List<string>() {  } },
-                            { "friendTitle",    new List<string>() {  } },
-                            //non-opinion based
-                            { "intro",          new List<string>() {  } },
-                            { "transition",     new List<string>() {  } },
-                            { "toQuest",        new List<string>() {  } },
-                            { "saying",         new List<string>() {  } },
-                            { "proverb",        new List<string>() {  } },
-                            { "flavor",         new List<string>() {  } },
-                            { "comedy",         new List<string>() {  } },
-                            { "serious",        new List<string>() {  } },
-                            { "&hobbies",       new List<string>() {  } }
-                        }
-                    },
-                    {
                         "Generic", new Dictionary<string, object>     //copy/paste and leave blank if the category doesn't have one
                         {   
                             //[pleasantry]
-                            { "insult",         new List<string>() {  } },
-                            { "pleasantry",     new List<string>() {  } },
-                            { "compliment",     new List<string>() {  } },
+                            { "insult",         new List<string>() { "you remind me of |hobbyFumble|", "|exclaim|, your |negEquip| is |meanAdj| like |genNegObject|", "negClothes", "I detest you walking around with that |negPartAdj| |negPart|" } },
+                            { "pleasantry",     new List<string>() { "lovely weather we're having","a fine day today","how you doing?" } },
+                            { "compliment",     new List<string>() { "you remind me of |hobbyPhrase|", "glad to see you", "That is a fine |posEquip| you have there", "I'm glad to see you're keeping your |equipment| in shape", "your |posPart| looks especially |posPartAdj| today"  } },
                             //[greet]
-                            { "snubGreet",      new List<string>() {  } },
-                            { "strangeGreet",   new List<string>() {  } },
-                            { "friendGreet",    new List<string>() {  } },
+                            { "snubGreet",      new List<string>() { "|exclaim|!","will this be long?" } },
+                            { "strangeGreet",   new List<string>() { "welcome, stranger." } },
+                            { "friendGreet",    new List<string>() { "Good to see you!"} },
                             //[title]
-                            { "snubTitle",      new List<string>() {  } },
-                            { "strangeTitle",   new List<string>() {  } },
-                            { "friendTitle",    new List<string>() {  } },
+                            { "snubTitle",      new List<string>() { "Worm" } },
+                            { "strangeTitle",   new List<string>() { "Stranger","Wayfarer","Wanderer","Traveler","Nomad" } },
+                            { "friendTitle",    new List<string>() { "Friend","Sib","Ally","Valued ally","Valued friend","Valued sib" } },
                             //non-opinion based
                             { "intro",          new List<string>() { "*looks up at you*", "*gets up from their sitting position*" } },
                             { "transition",     new List<string>() { "Anyway", "Regardless","Whatever the case","At any rate","Nonetheless","You know" } },
                             { "toQuest",        new List<string>() { "I have a tale to tell.","Wait til you hear this.","Now that I have your attention...","I've been thinking about something, lately.","Let me tell you a story.","I'm glad you asked.","" } },
                             { "saying",         new List<string>() { "hmmmm","the sun always sets","by the salt sun","by the Eaters","at any cost","traveler","for the birds","*the =localfaction= know the way","*=randomcreature= guide us","*=MARKOVWORD=" } },
-                            { "proverb",        new List<string>() {  } },
-                            { "flavor",         new List<string>() {  } },
+                            { "proverb",        new List<string>() { "It wouldn't be Qud if we were safe.", "The spindle looks on.", "Sultans watch over us." } },
+                            { "flavor",         new List<string>() {  } }, //[ ] flavor, comedy, serious need to be looked at, not sure what they're going to be used for yet
                             { "comedy",         new List<string>() {  } },
                             { "serious",        new List<string>() {  } },
                             { "&hobbies",       new List<string>() {  } }
@@ -158,26 +131,26 @@ namespace QudCrossroads.Dialogue
                         }
                     },
                     {
-                        "Lazy", new Dictionary<string, object>     //copy/paste and leave blank if the category doesn't have one
+                        "Tired", new Dictionary<string, object>     //copy/paste and leave blank if the category doesn't have one
                         {   
                             //[pleasantry]
-                            { "insult",         new List<string>() {  } },
-                            { "pleasantry",     new List<string>() { "I had a good sit on my cushion recently... " } },
-                            { "compliment",     new List<string>() {  } },
+                            { "insult",         new List<string>() { "Hey, you're blocking my breeze!" } },
+                            { "pleasantry",     new List<string>() { "I had a good sit on my cushion recently...", "*looks around wistfully, then back to you*" } },
+                            { "compliment",     new List<string>() { "We should hang out sometime." } },
                             //[greet]
-                            { "snubGreet",      new List<string>() { "*blinks slowly*" } },
+                            { "snubGreet",      new List<string>() { "*blinks slowly*", "|exclaim|!" } },
                             { "strangeGreet",   new List<string>() { "Oh! I didn't see you there!" } },
                             { "friendGreet",    new List<string>() { "*yawn* how's it goin, friend?" } },
                             //[title]
-                            { "snubTitle",      new List<string>() {  } },
-                            { "strangeTitle",   new List<string>() {  } },
-                            { "friendTitle",    new List<string>() {  } },
+                            { "snubTitle",      new List<string>() { "Buzzkill" } },
+                            { "strangeTitle",   new List<string>() { "New |informalPersonTerm|", "Newcomer" } },
+                            { "friendTitle",    new List<string>() { "Bud","Friendo" } },
                             //non-opinion based
                             { "intro",          new List<string>() { "*zzzzzzzz*" } },
-                            { "transition",     new List<string>() {  } },
+                            { "transition",     new List<string>() { "What was I saying? Oh, yeah" } },
                             { "toQuest",        new List<string>() { "but, like, " } },
-                            { "saying",         new List<string>() {  } },
-                            { "proverb",        new List<string>() {  } },
+                            { "saying",         new List<string>() { "*zzzzz*","*yawn*","*snort*" } },
+                            { "proverb",        new List<string>() { "Don't work too hard." } },
                             { "flavor",         new List<string>() {  } },
                             { "comedy",         new List<string>() {  } },
                             { "serious",        new List<string>() {  } },
@@ -215,23 +188,23 @@ namespace QudCrossroads.Dialogue
                         "Peppy", new Dictionary<string, object>     //copy/paste and leave blank if the category doesn't have one
                         {   
                             //[pleasantry]
-                            { "insult",         new List<string>() {  } },
-                            { "pleasantry",     new List<string>() {  } },
-                            { "compliment",     new List<string>() {  } },
+                            { "insult",         new List<string>() { "Oh... that's an 'interesting' |negEquip|." } },
+                            { "pleasantry",     new List<string>() { "Isn't it just a lovely day out?", "I love |day|!" } },
+                            { "compliment",     new List<string>() { "I LOVE your |posEquip|!" } },
                             //[greet]
                             { "snubGreet",      new List<string>() { "...oh, SO nice to see you!" } },
                             { "strangeGreet",   new List<string>() { "Oh! Hi!" } },
                             { "friendGreet",    new List<string>() { "Beautiful day, isn't it?" } },
                             //[title]
-                            { "snubTitle",      new List<string>() {  } },
-                            { "strangeTitle",   new List<string>() {  } },
-                            { "friendTitle",    new List<string>() {  } },
+                            { "snubTitle",      new List<string>() { "downer","scary" } },
+                            { "strangeTitle",   new List<string>() { "stranger","new friend" } },
+                            { "friendTitle",    new List<string>() { "bestie" } },
                             //non-opinion based
-                            { "intro",          new List<string>() {  } },
-                            { "transition",     new List<string>() {  } },
-                            { "toQuest",        new List<string>() {  } },
-                            { "saying",         new List<string>() {  } },
-                            { "proverb",        new List<string>() {  } },
+                            { "intro",          new List<string>() { "*bounces up and down*","*shouts and waves*","*dances in place*" } },
+                            { "transition",     new List<string>() { "like","so","RIGHT!?" } },
+                            { "toQuest",        new List<string>() { "so anyways", "anyways" } },
+                            { "saying",         new List<string>() { "teehee!","hahaha!","wow!" } },
+                            { "proverb",        new List<string>() { "turn that frown upside down!" } },
                             { "flavor",         new List<string>() {  } },
                             { "comedy",         new List<string>() {  } },
                             { "serious",        new List<string>() {  } },

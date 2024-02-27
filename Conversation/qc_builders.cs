@@ -26,7 +26,7 @@ namespace QudCrossroads.Dialogue
 /***************************************************************/
 //          Utility Functions for Phrase Building              //
 /***************************************************************/
-        public static void qprintc(string message)     //move to utilities
+        public static void qprintc(string message, Phrase phrase)     //move to utilities
         {
             XRL.Messages.MessageQueue.AddPlayerMessage(message, null, false);
         }
@@ -61,6 +61,10 @@ namespace QudCrossroads.Dialogue
                     qprintc("---[[ind decrement");
                     randomIndex -= (strArray.Count - 1);
                 }
+            }
+            if (CheckForPipe(result){
+                qprintc("---[[ recursive check on included variable")
+                result = QCVR(result.Trim('|'), phrase);
             }
             return result;
         }
@@ -141,6 +145,26 @@ namespace QudCrossroads.Dialogue
             qprintc("GetSpecificString error - no elements found.");
             return null;
         }
+        public static string DisplayObjectMembers(){
+            string return = "";
+            //Player pronouns
+            //A player equipment piece
+            //A player equipment piece with specific rep (use a loop to continually check probably)
+                    //The.Listener.GetEquippedObjects().Any((Obj) => Obj.HasPart<GivesRep>()) // will need to import System.Linq and XRL
+
+            //Speaker pronouns
+
+
+            //Day
+            //Time
+            //Time name
+            //Date
+            //Month
+            
+            
+
+            
+        }
         public static string LVR(string varstring)     //add more later?
         {   //TODO: use a GlobalContainer to establish global pronouns for speaker and such
             XRL.Messages.MessageQueue.AddPlayerMessage(varstring);
@@ -175,7 +199,7 @@ namespace QudCrossroads.Dialogue
                         {
                             // Handle the case where the value is a list of strings
                             qprintc("--List");
-                            return GetRandString(stringList);
+                            return GetRandString(stringList, phrase);   //pass phrase to maintain it in case of recursive checks
                         }
                         else if (value is Func<Phrase, string, string> function)
                         {
@@ -241,6 +265,7 @@ namespace QudCrossroads.Dialogue
 /***************************************************************/
         public class Phrase                 
         {
+            public string gender { get; set; }
             public string culture { get; set; }
             public int familiarity { get; set; }
             public string personality {get; set; }
@@ -269,10 +294,11 @@ namespace QudCrossroads.Dialogue
         {
             Phrase testPhrase = new Phrase
             {
+                gender = "Plural",
                 culture = "SaltMarshCulture",
                 familiarity = 1,        //0 = unfriendly, 1 = unfamiliar, 2 = friendly
                 personality = "Peppy",
-                subPersonality = "Lazy",
+                subPersonality = "Tired",
                 profession = "Farmer",
                 job = "WatervineFarmer",
                 morphotype = "Chimera",
@@ -286,9 +312,10 @@ namespace QudCrossroads.Dialogue
             string finalString = RegexToQCVR(testInput, testPhrase);
             return finalString;
         }
-        public static string OutfitNotice(GameObject player, string curString)  //probably need to change GameObject player tbh...
+
+        public static string TestString_Nueve() //brief aside to get the syntax of addressing various members of various objects
         {
-            return curString;
+            return DisplayObjectMembers(); 
         }
 
 

@@ -22,17 +22,79 @@ namespace QudCrossroads.Dialogue
     public static partial class QC_Lists
     {
         public static Dictionary<string, object> CrossroadsLVR = new Dictionary<string, object>
-        {
-            { "Resource.Farmer", new List<string> { "|picktwo|","|pickspecific|","food","shelter" } },
-            { "Resource.Watervinefarmer", new List<string> { "|picktwo|", "watervine", "water", "wafers" } },                        
-            { "LaborVerb", new List<string> { "labor", "task", "trade", "calling" } },                        
-            { "HarshAdjective", new List<string> { "|picktwo|", "harsh", "hard", "tough", "trying", "tiresome" } },
-            { "greet", new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
-            { "title", new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
-            { "pleasantry", new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) }//,
-            //{ "questHint", new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) },
-            //{ "questHerring", new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) },
-            //{ "questConclusion", new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) },
+        {   //NOTE many of the adjectives are contextually appropriate for humans but there are monster situations these wouldn't work for -- a whole new set is needed for monsters
+            { "Resource.Farmer",            new List<string> { "|picktwo|","food","shelter" } },
+            { "Resource.Watervinefarmer",   new List<string> { "|picktwo|", "watervine", "water", "wafers" } },                        
+            { "LaborVerb",                  new List<string> { "labor", "task", "trade", "calling" } },                        
+            { "harshAdjective",             new List<string> { "|picktwo|", "harsh", "hard", "tough", "trying", "tiresome" } },
+            { "meanAdjective",              new List<string> { "|harshAdjective|", "ugly", "wet", "gross", "annoying", "unseemly","unsightly" } },
+            { "genNegObject",               new List<string> { "a knollworm's beak", "a slime's tentacle", "a slugsnout's scood", "a salt kraken's leavings", "Svardym slime", "salt in my eyes" } },
+            { "exclaim",                    new List<string> { "By the sultans","Fie","Egads","Aye","Avaunt","Woe","Nay","Alack","Vexation","Curses","Ya Lhoos","Ya L'asif","Aib","Law Shwayya","Bous","Wayli" } },
+            { "greet",                      new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
+            { "title",                      new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
+            { "pleasantry",                 new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
+            
+            { "informalPersonTerm",         new Func<Phrase, string, string>((phrase, key) => ParseMiscGenderTerm(phrase, key)) }, //[ ] guy, gal, pal, person, something else for other pronouns 
+            { "informalPersonTerm.subject", new Func<Phrase, string, string>((phrase, key) => ParseMiscGenderTerm(phrase, key)) }, //[ ] guy, gal, pal, person, something else for other pronouns 
+            { "informalPersonTerm.speaker", new Func<Phrase, string, string>((phrase, key) => ParseMiscGenderTerm(phrase, key)) }, //[ ] guy, gal, pal, person, something else for other pronouns 
+
+            { "day",                        new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] day
+            { "timeOfDay",                  new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] day
+            { "date",                       new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] day
+            { "month",                      new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] day
+
+            { "contextDay",                 new Func<Phrase, string, string>((phrase, key) => GetContext(phrase, key)) }, //[ ] day
+
+
+            { "equipment",                  new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] equipment
+            { "posEquip",                   new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] posEquip
+            { "negEquip",                   new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] negEquip
+            { "posClothes",                 new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] posClothes
+            { "negClothes",                 new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] negClothes
+            
+            { "part",                       new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] part
+            { "posPart",                    new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] posPart
+            { "posPartAdj",                 new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] posPartAdj -- use this to get a specific one from the below lists
+            { "posMutAdj",                  new List<string> { "slimy","plump","muscular","shiny new","becoming","intriguing","fun" } },
+            { "posTKAdj",                   new List<string> { "shiny","chrome","polished","fancy","expensive","refactored","organized" } },
+            { "posSlotAdj",                 new List<string> { "becoming" } },
+            { "negPart",                    new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] negPart
+            { "negPartAdj",                 new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] negPartAdj -- use this to get a specific one from the below lists
+            { "negMutAdj",                  new List<string> { "disjointed","stunted","unsightly","unseemly","nerve-wracking","disturbing","jittery","corrupted","stubby" } },
+            { "negTKAdj",                   new List<string> { "rusty","filthy","bent-up","frayed","antique","dirty and old","dirty","old" } },
+            { "negSlotAdj",                 new List<string> { "unsightly" } },
+            
+            { "hobbyPhrase",                new Func<Phrase, string, string>((phrase, key) => GetHobby(phrase, key)) }, //[ ] hobbyPhrase
+            { "hobbyFumble",                new Func<Phrase, string, string>((phrase, key) => GetHobby(phrase, key)) }, //[ ] hobbyFumble
+            { "hobby",                      new Func<Phrase, string, string>((phrase, key) => GetHobby(phrase, key)) }, //[ ] hobby
+ 
+            { "questHint",                  new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) }, //[ ] questHint
+            { "questHerring",               new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) }, //[ ] questHerring
+            { "questConclusion",            new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) }, //[ ] questConclusion
+        };
+
+        public static Dictionary<string, List<string>> CrossroadsCasualPronounAddress = new Dictionary<string, List<string>>
+        {   //TODO: find the actual member of a given game object that gives us the gender and pronouns and use that term
+            { "Neuter",                 new List<string> { "person" } },
+            { "Nonspecific",            new List<string> { "person" } },
+            { "Male",                   new List<string> { "guy","boy" } },
+            { "Female",                 new List<string> { "gal","girl" } },
+            { "Plural",                 new List<string> { "people", "folks", "peeps" } },
+            { "Collective",             new List<string> { "mind", "thoughts" } },
+            { "Males",                  new List<string> { "guys", "boys" } },
+            { "Females",                new List<string> { "gals", "girls" } },
+            { "HindrenMale",            new List<string> { "buck" } },
+            { "HindrenFemale",          new List<string> { "doe" } },
+            { "Hartind",                new List<string> { "hartind" } },
+            { "it",                     new List<string> { "thing" } },
+            { "they",                   new List<string> { "person" } },
+            { "plural",                 new List<string> { "people" } },
+            { "he",                     new List<string> { "guy", "boy" } },
+            { "she",                    new List<string> { "gal","girl" } },
+            { "ey",                     new List<string> { "kid", "child" } },
+            { "sie",                    new List<string> { "gil" } },
+            { "xe",                     new List<string> { "xerson" } },
+            { "ze",                     new List<string> { "zerson" } },
         };
     }
 }

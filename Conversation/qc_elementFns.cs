@@ -25,6 +25,76 @@ namespace QudCrossroads.Dialogue
 
             return ElementByCategories(phrase, FamiliarityDictionary[key][phrase.familiarity]);
         }
+        public static string ParseMiscGenderTerm(Phrase phrase, string key){
+            switch (key)
+            {
+                case "informalPersonTerm":          //gender of the player - most used.
+                    string gender = "Neuter";
+                    return GetRandString(CrossroadsCasualPronounAddress[gender]);
+                    break;
+
+                case "informalPersonTerm.Subject":  //gender of the person being spoken about -- this is contextual based on quest dialogue probably
+                    string gender = "Neuter";
+                    return GetRandString(CrossroadsCasualPronounAddress[gender]);
+                    break;
+
+                // more cases can be added as needed
+
+                case "informalPersonTerm.Speaker":  //gender of the speaker
+                    string gender = "Neuter";
+                    return GetRandString(CrossroadsCasualPronounAddress[gender]);
+                    break;
+                
+                default:
+                    return "person";
+            }
+        }
+        public static string GetPart(Phrase phrase, string key){
+            //if key is "equipment" then return a phrase of just a piece of equipment, contextually:
+            //posEquip -- a piece of equipment with +rep, or else a normal piece of equipment
+            //negEquip -- a piece of equipment with +rep of another faction, or else a normal piece of equipment
+            //posClothes -- a generative positive phrase about clothes
+            //negClothes -- a generative negative phrase about clothes that says "You are wearing the X of our rival!"
+
+            //part -- get if player is a TK or a mutation and prioritize in this order: implant, mutation, bodyslot
+            //posPartAdj -- simple replacement. If TK, something like "shiny" "lumescent" etc. If mutant, get mutation adjectives
+            //negPartAdj -- same
+            //posPart | negPart -- some kind of village context, historyspice, or other that comes up with a liked or disliked implant or mutation by the NPC
+                        //to comment on
+
+            return "GetEquipment NOOP";
+        }
+        public static string GetDate(Phrase phrase, string key){
+            switch (key)
+            {   //TODO: find the location of all below day variables
+                case "day":
+                    return "today";
+                    break;
+                case "timeOfDay":
+                    return "morning";
+                    break;
+                case "date":
+                    return "Ut Yara Ux";
+                    break;
+                default:    
+                    return "today";
+                    break;
+            }
+        }
+
+        public static string GetContext(Phrase phrase, string key){
+            // contextDay
+            // return QuestDiscussion[key] ? or something else like that
+            return "noop";
+        }
+        public static string GetHobby(Phrase phrase, string key){
+            //hobby
+            //hobbyPhrase - from a future flavor list of some kind where various phrases are attached to hobbies.
+                    //compliment: you make me feel like the time I kicked the winning goal!
+            //hobbyFumble - from a future flavor list of some kind where various negative experience anecdotes are attached to hobbies
+                    //insult: you're as bad as dropping a stitch!
+            return "GetHobby NOOP";
+        }
         // cultureList, genericList, personalityList, 
         // subPersonalityList, professionList, jobList, morphoList, mutationList
         public static string ElementByCategories(Phrase phrase, string key){
