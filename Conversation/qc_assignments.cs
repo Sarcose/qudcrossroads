@@ -19,40 +19,40 @@ namespace QudCrossroads.Dialogue
     {   // Accessing the "Armorer" job assignments
         //List<string> armorerAssignments = jobAssignments["Armorer"];
         //int numberOfAssignments = armorerAssignments.Count; //loop through it
-        public static Dictionary<string, List<string>> jobAssignments = new Dictionary<string, List<string>>
-        {
-            //*********Merchants********
-            {"Armorer", new List<string> {"Merchant"}},//, "armorer"}},
-            {"Vintner", new List<string> {"Merchant"}},//, "vintner"}},
-            {"Bookbinder", new List<string> {"Merchant"}},//, "scribe"}},
-            {"Scribe", new List<string> {"Merchant"}},//, "scribe"}},
-            {"Gemcutter", new List<string> {"Merchant"}},//, "jeweler"}},
-            {"Jeweler", new List<string> {"Merchant"}},//, "jeweler"}},
-            {"Glover", new List<string> {"Merchant"}},//, "clothier"}}, //generalist
-            {"Grenadier", new List<string> {"Merchant"}},//, "grenadier"}}, //weapon maker generalist?
-            {"Gunsmith", new List<string> {"Merchant"}},//, "gunsmith"}},
-            {"Gutsmonger", new List<string> {"Merchant"}},//, "gutsmonger"}},
-            {"Haberdasher", new List<string> {"Merchant"}},//, "clothier"}},
-            {"Hatter", new List<string> {"Merchant"}},//, "clothier"}},
-            {"IchorMerchant", new List<string> {"Merchant"}},//, "ichor"}},
-            {"DiskMerchant", new List<string> {"Merchant"}},//, "Tinker"}},  //we *may* move tinker and apothecary to it's own category of job
-            {"HumanTinker1", new List<string> {"Merchant"}},//, "Tinker"}},  //we *may* move tinker to it's own category of job, 
-            {"Shoemaker", new List<string> {"Merchant"}},//, "clothier"}},
-            //********Farmers********
-            {"AmoebaFarmer", new List<string> {"Farmer"}},//, "AmoebaFarmer"}}, // generic "herder" or "livestock?"
-            {"AppleMerchant", new List<string> {"Farmer"}},//, "AppleFarmer"}},
-            {"Beekeeper", new List<string> {"Farmer"}},//, "Beekeeper"}},
-            {"BeetleFarmer", new List<string> {"Farmer"}},//, "BeetleFarmer"}}, // "herder" "livestockfarmer"
-            {"CatHerder", new List<string> {"Farmer"}},//, "CatHerder"}},
-            {"CrabFarmer", new List<string> {"Farmer"}},//, "CrabFarmer"}},
-            {"GoatHerder", new List<string> {"Farmer"}},//, "GoatHerder"}},
-            {"LeechFarmer", new List<string> {"Farmer"}},//, "LeechFarmer"}},
-            {"SnailFarmer", new List<string> {"Farmer"}},//, "SnailFarmer"}},
-            {"PigFarmer", new List<string> {"Farmer"}},//, "PigFarmer"}},
-            {"WatervineFarmer", new List<string> {"Farmer"}},//, "WatervineFarmer"}},
-            {"AppleFarmer", new List<string> {"Farmer"}},//, "AppleFarmer"}},
-            {"BananaRancher", new List<string> {"Farmer"}}, // "BananaRancher}},
-            //********Warriors********
+
+        public static Dictionary<string, Phrase> phraseDefaults = new Dictionary<string, Phrase>{
+            //*********Merchant
+            {"Armorer",        new Phrase { profession = "Merchant" }},       
+            {"Vintner",        new Phrase { profession = "Merchant" }},
+            {"Bookbinder",     new Phrase { profession = "Merchant" }},
+            {"Scribe",         new Phrase { profession = "Merchant" }},
+            {"Gemcutter",      new Phrase { profession = "Merchant" }},
+            {"Jeweler",        new Phrase { profession = "Merchant" }},
+            {"Glover",         new Phrase { profession = "Merchant" }},
+            {"Grenadier",      new Phrase { profession = "Merchant" }},
+            {"Gunsmith",       new Phrase { profession = "Merchant" }},
+            {"Gutsmonger",     new Phrase { profession = "Merchant" }},
+            {"Haberdasher",    new Phrase { profession = "Merchant" }},
+            {"Hatter",         new Phrase { profession = "Merchant" }},
+            {"IchorMerchant",  new Phrase { profession = "Merchant" }},
+            {"DiskMerchant",   new Phrase { profession = "Merchant" }},
+            {"HumanTinker1",   new Phrase { profession = "Merchant" }},
+            {"Shoemaker",      new Phrase { profession = "Merchant" }},
+            //********Farmers**
+            {"AmoebaFarmer",   new Phrase { profession = "Farmer" }},
+            {"AppleMerchant",  new Phrase { profession = "Farmer" }},
+            {"Beekeeper",      new Phrase { profession = "Farmer" }},
+            {"BeetleFarmer",   new Phrase { profession = "Farmer" }},
+            {"CatHerder",      new Phrase { profession = "Farmer" }},
+            {"CrabFarmer",     new Phrase { profession = "Farmer" }},
+            {"GoatHerder",     new Phrase { profession = "Farmer" }},
+            {"LeechFarmer",    new Phrase { profession = "Farmer" }},
+            {"SnailFarmer",    new Phrase { profession = "Farmer" }},
+            {"PigFarmer",      new Phrase { profession = "Farmer" }},
+            {"WatervineFarmer",new Phrase { profession = "Farmer" , job = "watervineFarmer"}},
+            {"AppleFarmer",    new Phrase { profession = "Farmer" , job = "starappleFarmer"}},
+            {"BananaRancher",  new Phrase { profession = "Farmer" }}
+            //********Warriors*
         };
     }
         

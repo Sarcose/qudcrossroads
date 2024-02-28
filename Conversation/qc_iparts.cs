@@ -44,17 +44,8 @@ namespace QudCrossroads.Dialogue
             }
             public override bool HandleEvent(DisplayTextEvent E)
             {
-                //E.VariableReplace = true;
-
-
-                //E.Text.Append("=village.activity= | =pronouns.reflexive= | =pronouns.substantivePossessive= | =pronouns.indicativeDistal= | =pronouns.subjective= kneels back down, bidding you kneel with =pronouns.objective=.");
-                E.Text.Append(TestString_Ocho());
+                E.Text.Append(TestString_Nueve());
                 return base.HandleEvent(E);
-
-
-
-
-
             }
         }
 }

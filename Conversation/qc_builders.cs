@@ -145,6 +145,27 @@ namespace QudCrossroads.Dialogue
             qprintc("GetSpecificString error - no elements found.");
             return null;
         }
+        public static string DumpObject(object obj)
+        {
+            Type type = obj.GetType();
+            StringBuilder sb = new StringBuilder();
+
+            // Get all fields
+            FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            foreach (var field in fields)
+            {
+                sb.AppendLine($"{field.Name} = {field.GetValue(obj)}");
+            }
+
+            // Get all properties
+            PropertyInfo[] properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            foreach (var prop in properties)
+            {
+                sb.AppendLine($"{prop.Name} = {prop.GetValue(obj)}");
+            }
+
+            return sb.ToString();
+        }
         public static string DisplayObjectMembers(){
             string return = "";
             //Player pronouns
@@ -154,12 +175,17 @@ namespace QudCrossroads.Dialogue
 
             //Speaker pronouns
 
+            //XRL.World.Calendar
+                //Day
+                //Time
+                //Time name
+                //Date
+                //Month
 
-            //Day
-            //Time
-            //Time name
-            //Date
-            //Month
+
+            //Quest tempQuest = fabricateFindASpecificSiteQuest(XRL.The.Speaker);
+            //return += " | tempQuest: ";
+            //return += DumpObject(tempQuest);
             
             
 
@@ -265,7 +291,6 @@ namespace QudCrossroads.Dialogue
 /***************************************************************/
         public class Phrase                 
         {
-            public string gender { get; set; }
             public string culture { get; set; }
             public int familiarity { get; set; }
             public string personality {get; set; }
@@ -294,7 +319,6 @@ namespace QudCrossroads.Dialogue
         {
             Phrase testPhrase = new Phrase
             {
-                gender = "Plural",
                 culture = "SaltMarshCulture",
                 familiarity = 1,        //0 = unfriendly, 1 = unfamiliar, 2 = friendly
                 personality = "Peppy",
@@ -304,7 +328,7 @@ namespace QudCrossroads.Dialogue
                 morphotype = "Chimera",
                 subMorpho = "HideousSpecimen",
                 mutation = "SociallyRepugnant"
-            };
+            }; 
             //string testInput = "|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
             string testInput = "|intro|;|greeting|;|title|;|pleasantry|;|toQuest|;|transition|;|flavor|;|proverb|";
             //intro~|greeting|~~~Now that I have your attention...~At any rate~flavor~
@@ -315,7 +339,10 @@ namespace QudCrossroads.Dialogue
 
         public static string TestString_Nueve() //brief aside to get the syntax of addressing various members of various objects
         {
-            return DisplayObjectMembers(); 
+            //return DisplayObjectMembers();
+            string XRLString = DumpObject(XRL);
+            string result = "XRL: " + XRLString;
+            return result; 
         }
 
 
