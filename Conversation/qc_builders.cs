@@ -274,14 +274,31 @@ namespace QudCrossroads.Dialogue
         }
         static string RegexToQCVR(string input, Phrase phrase) // pass LVR to this function
         {
-            // Use regular expression to find all placeholders
-            //string resultString = ReplaceQCVR(inputString); //replace |bar|            
             string pattern = @"\|([^|]+)\|";
-            string result = Regex.Replace(input, pattern, match =>
+            string result = "";
+            //----Replace |variables| based on QCVR element-phrase logic----\\
+            result = Regex.Replace(input, pattern, match =>
+                {   string key = match.Groups[1].Value;
+                return QCVR(key, phrase) + " ";  });
+            
+            //----Fill the new result with punctuation based on # placeholders and the phrase's "mood"----\\
+            result = Regex.Replace(result, @"\s+", " ");    //clean up double spaces
+            result = Regex.Replace(result, @"\s+\.", "#");  //clean up spaces before #
+            result = Regex.Replace(result, @"[^\w\s]\#", match => //if an element has punctuation in it, override the placeholder #
+                {  return match.Value[0].ToString() + " "; });
+            result = result.Replace("#", getPunct(phrase)); //if a # is left, pseudo-randomize punctuation and add a space at the end
+
+            //----Make sure there aren't too many semicolons. Stylistic choice.----\\
+            // Calculate the threshold as a percentage of total punctuation symbols
+            int totalPunctuationCount = result.Count(c => !char.IsLetterOrDigit(c) && c != ' '); // Punctuation symbols excluding letters and digits
+            double percentageThreshold = 0.4;
+            int dynamicThreshold = (int)(totalPunctuationCount * percentageThreshold);
+            // Replace ; with . randomly if the count is above the dynamic threshold
+            int semicolonCount = result.Count(c => c == ';');
+            if (semicolonCount > dynamicThreshold)
             {
-                string key = match.Groups[1].Value;
-                return QCVR(key, phrase); // the only thing left here is that we will need to define some kind of context variables that LVR uses to define pronouns!
-            });
+                result = result.Replace(';', QRand.Next(0, 2) == 0 ? '.' : ' ');
+            }
 
             return result;
         }
@@ -300,6 +317,7 @@ namespace QudCrossroads.Dialogue
             public string morphotype {get; set;}
             public string subMorpho {get; set;}
             public string mutation {get; set;}      //will probably not use this in the future
+            public string mood {get; set;}
         }
 
         /*
@@ -327,7 +345,8 @@ namespace QudCrossroads.Dialogue
                 job = "WatervineFarmer",
                 morphotype = "Chimera",
                 subMorpho = "HideousSpecimen",
-                mutation = "SociallyRepugnant"
+                mutation = "SociallyRepugnant",
+                mood = "random"
             }; 
             //string testInput = "|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
             string testInput = "|intro|;|greeting|;|title|;|pleasantry|;|toQuest|;|transition|;|flavor|;|proverb|";

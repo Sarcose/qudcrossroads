@@ -96,6 +96,50 @@ namespace QudCrossroads.Dialogue
             { "xe",                     new List<string> { "xerson" } },
             { "ze",                     new List<string> { "zerson" } },
         };
+
+        //general moods:
+            // simple
+            // excited - angry probably the same as excited
+            // sad / downer
+            // confused
+        public static Dictionary<string, List<string>> CrossroadsPunctuationByMood = new Dictionary<string, List<string>>
+        {   //pseudo-weighted by adding multiple identical list members rather than using a weight logic because that's annoying
+            {"simple",      new List<string> {".",".",";","!","!"} },
+            {"excited",     new List<string> {"!"} },
+            {"sad",         new List<string> {".",".","...",";"} },
+            {"confused",    new List<string> {".","?","?","!?","@#!?"} },
+        }
+        public static string getPunct(Phrase phrase){
+            string ret = "";
+            if (phrase.mood == "random"){   //probably only used for testing but good to have
+                int randMood = QRand.Next(0, 3);
+                switch (randMood){
+                    case 0:
+                        ret = GetRandString(CrossroadsPunctuationByMood["simple"]);
+                        break;
+                    case 1:
+                        ret = GetRandString(CrossroadsPunctuationByMood["excited"]);
+                        break;
+                    case 2:
+                        ret = GetRandString(CrossroadsPunctuationByMood["sad"]);
+                        break;
+                    case 3:
+                        ret = GetRandString(CrossroadsPunctuationByMood["confused"]);
+                        break;
+                    default:
+                        ret = GetRandString(CrossroadsPunctuationByMood["simple"]);
+                        break;
+                }
+            }
+            else if (string.IsNullOrEmpty(phrase.mood)){
+                    ret = GetRandString(CrossroadsPunctuationByMood["simple"]);
+            }
+            else {
+                    ret = GetRandString(CrossroadsPunctuationByMood[phrase.mood]);
+
+            }
+            return ret + " ";
+        }
     }
 }
 
