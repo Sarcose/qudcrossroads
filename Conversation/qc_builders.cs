@@ -206,16 +206,16 @@ namespace QudCrossroads.Dialogue
         public static string DisplayObjectMembers(){
             string result = "";
             List<string> addTable = new List<string> {
-                "Player pronoun: =The.Listener.pronouns.subjective= \n ", //player pronoun?
+                "Player pronoun: =player.pronouns.subjective= \n ",
                 $"A player equipment piece: {GetEquippedRandom(The.Listener)}\n",    //TODO: |keyword|
                 $"A player item: {GetInventoryRandom(The.Listener)}\n",
                 $"A player equip OR item: {GetHeldRandom(The.Listener)}\n",
                 //A player equipment piece with specific rep
-                $"Speaker pronouns: =The.Speaker.pronouns.subjective= \n",
-                $"Current Time: {XRL.World.Calendar.getTime()}",
-                $"Current Day: {XRL.World.Calendar.getDay()}",
-                $"Current Month: {XRL.World.Calendar.getMonth()}",
-                $"Current year: {XRL.World.Calendar.getYear()}",
+                $"Speaker pronouns: =pronouns.subjective= \n",
+                $"Current Time: {XRL.World.Calendar.getTime()\n}",      //oh wow it actually looks like this is the time graphic + time
+                $"Current Day: {XRL.World.Calendar.getDay()\n}",        //this works 
+                $"Current Month: {XRL.World.Calendar.getMonth()\n}",    //this works
+                $"Current year: {XRL.World.Calendar.getYear()\n}",      //this works
             };
             foreach (string item in addTable)
             {
