@@ -78,17 +78,17 @@ namespace QudCrossroads.Dialogue
         }
 
         public static string GetEquippedRandom(GameObject obj){
-            List<GameObject> l = GameObject.GetEquippedObjects();
+            List<GameObject> l = obj.GetEquippedObjects();
             GameObject item = l[QRand.Next(0, l.Count)];
             return item.DisplayName;
         }
         public static string GetInventoryRandom(GameObject obj){
-            List<GameObject> l = GameObject.GetInventory();
+            List<GameObject> l = obj.GetInventory();
             GameObject item = l[QRand.Next(0, l.Count)];
             return item.DisplayName;
         }
         public static string GetHeldRandom(GameObject obj){
-            List<GameObject> l = GameObject.GetWholeInventory();
+            List<GameObject> l = obj.GetWholeInventory();
             GameObject item = l[QRand.Next(0, l.Count)];
             return item.DisplayName;
         }

@@ -43,7 +43,7 @@ namespace QudCrossroads.Dialogue
             { "date",                       new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] day
             { "month",                      new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] day
 
-            { "contextDay",                 new Func<Phrase, string, string>((phrase, key) => GetContext(phrase, key)) }, //[ ] day
+            //{ "contextDay",                 new Func<Phrase, string, string>((phrase, key) => GetContext(phrase, key)) }, //[ ] day
 
 
             { "equipment",                  new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] equipment
