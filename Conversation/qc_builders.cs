@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -19,6 +20,9 @@ using static QudCrossroads.Dialogue.Elements;
 using static QudCrossroads.Dialogue.Functions;
 using static QudCrossroads.Dialogue.QC_Lists;
 
+
+using System.Windows.Forms;
+
 namespace QudCrossroads.Dialogue
 {
     public static partial class Builders
@@ -26,11 +30,11 @@ namespace QudCrossroads.Dialogue
 /***************************************************************/
 //          Utility Functions for Phrase Building              //
 /***************************************************************/
-        public static void qprintc(string message, Phrase phrase)     //move to utilities
+        public static void qprintc(string message)     //move to utilities
         {
             XRL.Messages.MessageQueue.AddPlayerMessage(message, null, false);
         }
-        public static string GetRandString_Child(params List<string>[] strArrays)
+        public static string GetRandString_Child(Phrase phrase, params List<string>[] strArrays)
         {
             qprintc("---[[GetRandString_Child start");
             long totalCount = 0; // Use long to handle potential overflow
@@ -62,19 +66,19 @@ namespace QudCrossroads.Dialogue
                     randomIndex -= (strArray.Count - 1);
                 }
             }
-            if (CheckForPipe(result){
-                qprintc("---[[ recursive check on included variable")
-                result = QCVR(result.Trim('|'), phrase);
+            if (CheckForPipe(result)){
+                qprintc("---[[ recursive check on included variable");
+                result = QCVR( result.Trim('|'), phrase);
             }
             return result;
         }
         public static bool CheckForPipe(string str){
             if (str != null && str.Length > 0 && str[0] == '|') return true; else {return false;}
         }
-        public static string GetRandString(params List<string>[] strArrays)     // result = GetRandString(stringList, stringList2, stringList3, stringList4, etc...)
+        public static string GetRandString(Phrase phrase, params List<string>[] strArrays)     // result = GetRandString(stringList, stringList2, stringList3, stringList4, etc...)
         {   //ERROR: not all code paths return a value
             qprintc("---[GetRandString start");
-            string result = GetRandString_Child(strArrays);;
+            string result = GetRandString_Child(phrase, strArrays);;
             qprintc($"--[GetRandString_Child resolved with result {result}");
             if (result == "|picktwo|"){//need to expand this for a whole host of cases
                 qprintc("---[Result = " + result);
@@ -83,7 +87,7 @@ namespace QudCrossroads.Dialogue
                 int elCount = 2;
                 while (CheckForPipe(child) || elCount > 0)
                 {
-                    child = GetRandString_Child(strArrays);
+                    child = GetRandString_Child(phrase, strArrays);
                     if (!CheckForPipe(child)){ 
                         elCount --;
                         result += child;
@@ -101,7 +105,7 @@ namespace QudCrossroads.Dialogue
                 int elCount = 3;
                 while (CheckForPipe(child) || elCount > 0)
                 {
-                    child = GetRandString_Child(strArrays);
+                    child = GetRandString_Child(phrase,strArrays);
                     if (!CheckForPipe(child)){ 
                         elCount --;
                         result += child;
@@ -166,8 +170,41 @@ namespace QudCrossroads.Dialogue
 
             return sb.ToString();
         }
+        public static string PrintNamespaceMembers(string namespaceName)
+        {
+            string ret = "";
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            foreach (Assembly assembly in assemblies)
+            {
+                Type[] typesInNamespace = assembly.GetTypes()
+                    .Where(type => type.Namespace == namespaceName)
+                    .ToArray();
+
+                foreach (Type type in typesInNamespace)
+                {
+                    ret += $"\n| Type: {type.FullName}";
+
+                    // Get all fields
+                    FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    foreach (var field in fields)
+                    {
+                        ret += $"\n||  Field: {field.Name}";
+                    }
+
+                    // Get all properties
+                    PropertyInfo[] properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    foreach (var prop in properties)
+                    {
+                        ret += $"\n|||  Property: {prop.Name}";
+                    }
+
+                }
+            }
+            return ret;
+        }
         public static string DisplayObjectMembers(){
-            string return = "";
+            string result = "";
             //Player pronouns
             //A player equipment piece
             //A player equipment piece with specific rep (use a loop to continually check probably)
@@ -186,7 +223,7 @@ namespace QudCrossroads.Dialogue
             //Quest tempQuest = fabricateFindASpecificSiteQuest(XRL.The.Speaker);
             //return += " | tempQuest: ";
             //return += DumpObject(tempQuest);
-            
+            return result;
             
 
             
@@ -225,7 +262,7 @@ namespace QudCrossroads.Dialogue
                         {
                             // Handle the case where the value is a list of strings
                             qprintc("--List");
-                            return GetRandString(stringList, phrase);   //pass phrase to maintain it in case of recursive checks
+                            return GetRandString(phrase, stringList);   //pass phrase to maintain it in case of recursive checks
                         }
                         else if (value is Func<Phrase, string, string> function)
                         {
@@ -359,8 +396,10 @@ namespace QudCrossroads.Dialogue
         public static string TestString_Nueve() //brief aside to get the syntax of addressing various members of various objects
         {
             //return DisplayObjectMembers();
-            string XRLString = DumpObject(XRL);
+            //string XRLString = DumpObject(XRL);
+            string XRLString = PrintNamespaceMembers("The");
             string result = "XRL: " + XRLString;
+            Clipboard.SetText(result);
             return result; 
         }
 
@@ -372,50 +411,10 @@ namespace QudCrossroads.Dialogue
 
 /*
 
-" O = coded, X = done
-|intro|
-X |greeting|
-O |title|
-|toQuest|
-|questHint|
-|questHerring|
-|transition|
-|flavor|
-|proverb|
-|transition|
-|emoteTransition|
-|questConclusion|
+Namespace Study:
 
-
-
-
-        // {_(Greet)}
-        // {Pluralize(_(Title))}
-        //TODO: another wrap function that checks if your character has multiple heads, is plural, or has followers, and uses Pluralize() in response
-
-
-
-                =MARKOVPARAGRAPH=
-                =verb:grab= -- grabbed from the mental mutation text, but does not become "grabs" in this usage
-                =alchemist= -- seems to generate a randomized 'alchemist' babble
-                =prounouns.siblingTerm= -- probably gives a generic if i had to guess
-                =factionaddress:Barathrumites= --this is probably a global variable reference to the player
-                =factionaddress:Mopango= --same as above
-                =MARKOVCORVIDSENTENCE=
-                =MARKOVSENTENCE=
-                =MARKOVWATERBIRDSENTENCE=
-                =name=  - player name
-                =player.apparentSpecies=
-                =player.formalAddressTerm=
-                =player.offspringTerm=
-                =player.personTerm=
-                =player.reflexive=
-                =player.siblingTerm=
-                =pronouns.formalAddressTerm= -- this produced "friend" however, for whatever reason
-                =pronouns.personTerm= --this produced 'human'
-                =pronouns.possessive=
-                =pronouns.siblingTerm=
-                =pronouns.subjective=
-                =subject.refname= --again, by producing "thing", this leads me to believe it is contextual and processed here without context.
+    XRL:    
+        XRL.World
+        XRL.The      
 
 */

@@ -68,9 +68,9 @@ namespace QudCrossroads.Dialogue
             { "hobbyFumble",                new Func<Phrase, string, string>((phrase, key) => GetHobby(phrase, key)) }, //[ ] hobbyFumble
             { "hobby",                      new Func<Phrase, string, string>((phrase, key) => GetHobby(phrase, key)) }, //[ ] hobby
  
-            { "questHint",                  new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) }, //[ ] questHint
-            { "questHerring",               new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) }, //[ ] questHerring
-            { "questConclusion",            new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) }, //[ ] questConclusion
+            //{ "questHint",                  new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) }, //[ ] questHint
+            //{ "questHerring",               new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) }, //[ ] questHerring
+            //{ "questConclusion",            new Func<Phrase, string, string>((phrase, key) => GetQuest(phrase, key)) }, //[ ] questConclusion
         };
 
         public static Dictionary<string, List<string>> CrossroadsCasualPronounAddress = new Dictionary<string, List<string>>
@@ -108,34 +108,34 @@ namespace QudCrossroads.Dialogue
             {"excited",     new List<string> {"!"} },
             {"sad",         new List<string> {".",".","...",";"} },
             {"confused",    new List<string> {".","?","?","!?","@#!?"} },
-        }
+        };
         public static string getPunct(Phrase phrase){
             string ret = "";
             if (phrase.mood == "random"){   //probably only used for testing but good to have
                 int randMood = QRand.Next(0, 3);
                 switch (randMood){
                     case 0:
-                        ret = GetRandString(CrossroadsPunctuationByMood["simple"]);
+                        ret = GetRandString(phrase, CrossroadsPunctuationByMood["simple"]);
                         break;
                     case 1:
-                        ret = GetRandString(CrossroadsPunctuationByMood["excited"]);
+                        ret = GetRandString(phrase, CrossroadsPunctuationByMood["excited"]);
                         break;
                     case 2:
-                        ret = GetRandString(CrossroadsPunctuationByMood["sad"]);
+                        ret = GetRandString(phrase, CrossroadsPunctuationByMood["sad"]);
                         break;
                     case 3:
-                        ret = GetRandString(CrossroadsPunctuationByMood["confused"]);
+                        ret = GetRandString(phrase, CrossroadsPunctuationByMood["confused"]);
                         break;
                     default:
-                        ret = GetRandString(CrossroadsPunctuationByMood["simple"]);
+                        ret = GetRandString(phrase, CrossroadsPunctuationByMood["simple"]);
                         break;
                 }
             }
             else if (string.IsNullOrEmpty(phrase.mood)){
-                    ret = GetRandString(CrossroadsPunctuationByMood["simple"]);
+                    ret = GetRandString(phrase, CrossroadsPunctuationByMood["simple"]);
             }
             else {
-                    ret = GetRandString(CrossroadsPunctuationByMood[phrase.mood]);
+                    ret = GetRandString(phrase, CrossroadsPunctuationByMood[phrase.mood]);
 
             }
             return ret + " ";

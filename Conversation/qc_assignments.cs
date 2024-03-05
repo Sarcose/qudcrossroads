@@ -12,6 +12,7 @@ using XRL.Core;
 using XRL.Rules;
 using XRL.World;
 
+using static QudCrossroads.Dialogue.Builders;
 
 namespace QudCrossroads.Dialogue
 {

@@ -10,6 +10,7 @@ using QudCrossroads;
 using QRand = QudCrossroads.Utilities.QudCrossroads_Random;
 using static QudCrossroads.Dialogue.Elements;
 using static QudCrossroads.Dialogue.Builders;
+using static QudCrossroads.Dialogue.QC_Lists;
 
 namespace QudCrossroads.Dialogue
 {
@@ -26,24 +27,22 @@ namespace QudCrossroads.Dialogue
             return ElementByCategories(phrase, FamiliarityDictionary[key][phrase.familiarity]);
         }
         public static string ParseMiscGenderTerm(Phrase phrase, string key){
+            string gender = "";
             switch (key)
             {
                 case "informalPersonTerm":          //gender of the player - most used.
-                    string gender = "Neuter";
-                    return GetRandString(CrossroadsCasualPronounAddress[gender]);
-                    break;
+                    gender = "Neuter";
+                    return GetRandString(phrase, CrossroadsCasualPronounAddress[gender]);
 
                 case "informalPersonTerm.Subject":  //gender of the person being spoken about -- this is contextual based on quest dialogue probably
-                    string gender = "Neuter";
-                    return GetRandString(CrossroadsCasualPronounAddress[gender]);
-                    break;
+                    gender = "Neuter";
+                    return GetRandString(phrase, CrossroadsCasualPronounAddress[gender]);
 
                 // more cases can be added as needed
 
                 case "informalPersonTerm.Speaker":  //gender of the speaker
-                    string gender = "Neuter";
-                    return GetRandString(CrossroadsCasualPronounAddress[gender]);
-                    break;
+                    gender = "Neuter";
+                    return GetRandString(phrase, CrossroadsCasualPronounAddress[gender]);
                 
                 default:
                     return "person";
@@ -69,16 +68,12 @@ namespace QudCrossroads.Dialogue
             {   //TODO: find the location of all below day variables
                 case "day":
                     return "today";
-                    break;
                 case "timeOfDay":
                     return "morning";
-                    break;
                 case "date":
                     return "Ut Yara Ux";
-                    break;
                 default:    
                     return "today";
-                    break;
             }
         }
 
@@ -137,7 +132,7 @@ namespace QudCrossroads.Dialogue
             qprintc($"----ElementByCategories nonEmptyLists count = {nonEmptyLists.Count}");
             
             if (nonEmptyLists.Count > 0){ 
-                return GetRandString(nonEmptyLists[QRand.Next(0, nonEmptyLists.Count - 1)]);}
+                return GetRandString(phrase, nonEmptyLists[QRand.Next(0, nonEmptyLists.Count - 1)]);}
             else { qprintc($"---key {key} returned"); return key;}
         }
 
