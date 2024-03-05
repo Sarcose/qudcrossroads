@@ -411,8 +411,8 @@ namespace QudCrossroads.Dialogue
             //string XRLString = DumpObject(XRL);
             //string XRLString = PrintNamespaceMembers("The"); //we can't use this for now it's too complex to delve into lolol
             //string result = "XRL: " + XRLString;
-            Clipboard.SetText(result);
-            return result; 
+            //Clipboard.SetText(result);
+            //return result; 
         }
 
 
