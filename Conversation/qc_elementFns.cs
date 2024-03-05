@@ -73,7 +73,7 @@ namespace QudCrossroads.Dialogue
                 case "timeOfDay":
                     return "morning";       //ah, what a fine morning!
                 case "year":
-                    return XRL.World.Calendar.getYear();    //the year 1001 has been a harsh one...
+                    return $"{XRL.World.Calendar.getYear()}";    //the year 1001 has been a harsh one...
                 case "daysAgo":             //return a date phrase that is then saved in the quest description
                     return "today";         //just use a random span of time for this
                 case "monthsAgo":    
