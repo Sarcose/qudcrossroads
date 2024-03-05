@@ -420,6 +420,12 @@ namespace QudCrossroads.Dialogue
                 mood = "random"
             }; 
             return LVR(RegexToQCVR(DisplayObjectMembers(), testPhrase));
+                //this does not appear to produce the correct result. 
+                //i think we need to combine RegexToQCVR and LVR into RegexAllVariables that spots both QCVR and LVR variables
+                //we need to respect newlines, because it seems to wash them out
+                //still can't find how to do player pronouns apparently.
+
+                
             //string XRLString = DumpObject(XRL);
             //string XRLString = PrintNamespaceMembers("The"); //we can't use this for now it's too complex to delve into lolol
             //string result = "XRL: " + XRLString;
