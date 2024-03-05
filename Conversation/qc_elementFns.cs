@@ -77,11 +77,22 @@ namespace QudCrossroads.Dialogue
             }
         }
 
-        public static string GetContext(Phrase phrase, string key){
-            // contextDay
-            // return QuestDiscussion[key] ? or something else like that
-            return "noop";
+        public static string GetEquippedRandom(GameObject obj){
+            List<GameObject> l = GameObject.GetEquippedObjects();
+            GameObject item = l[QRand.Next(0, l.Count)];
+            return item.DisplayName;
         }
+        public static string GetInventoryRandom(GameObject obj){
+            List<GameObject> l = GameObject.GetInventory();
+            GameObject item = l[QRand.Next(0, l.Count)];
+            return item.DisplayName;
+        }
+        public static string GetHeldRandom(GameObject obj){
+            List<GameObject> l = GameObject.GetWholeInventory();
+            GameObject item = l[QRand.Next(0, l.Count)];
+            return item.DisplayName;
+        }
+
         public static string GetHobby(Phrase phrase, string key){
             //hobby
             //hobbyPhrase - from a future flavor list of some kind where various phrases are attached to hobbies.

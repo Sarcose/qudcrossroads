@@ -205,13 +205,25 @@ namespace QudCrossroads.Dialogue
         }
         public static string DisplayObjectMembers(){
             string result = "";
-            //Player pronouns
-            //A player equipment piece
+            List<string> addTable = new List<string> {
+                "Player pronoun: =The.Listener.pronouns.subjective= \n ", //player pronoun?
+                $"A player equipment piece: {GetEquippedRandom(The.Listener)}\n",    //TODO: |keyword|
+                $"A player item: {GetInventoryRandom(The.Listener)}\n",
+                $"A player equip OR item: {GetHeldRandom(The.Listener)}\n",
+                //A player equipment piece with specific rep
+                $"Speaker pronouns: =The.Speaker.pronouns.subjective= \n",
+                $"Current Time: {XRL.World.Calendar.getTime()}",
+                $"Current Day: {XRL.World.Calendar.getDay()}",
+                $"Current Month: {XRL.World.Calendar.getMonth()}",
+                $"Current year: {XRL.World.Calendar.getYear()}",
+            };
+            foreach (string item in addTable)
+            {
+                result += item;
+            }
+
             //A player equipment piece with specific rep (use a loop to continually check probably)
-                    //The.Listener.GetEquippedObjects().Any((Obj) => Obj.HasPart<GivesRep>()) // will need to import System.Linq and XRL
-
-            //Speaker pronouns
-
+                    //The.Listener.GetEquippedObjects().Any((Obj) => Obj.HasPart<GivesRep>()) 
             //XRL.World.Calendar
                 //Day
                 //Time
@@ -395,9 +407,9 @@ namespace QudCrossroads.Dialogue
 
         public static string TestString_Nueve() //brief aside to get the syntax of addressing various members of various objects
         {
-            //return DisplayObjectMembers();
+            return DisplayObjectMembers();
             //string XRLString = DumpObject(XRL);
-            string XRLString = PrintNamespaceMembers("The");
+            //string XRLString = PrintNamespaceMembers("The"); //we can't use this for now it's too complex to delve into lolol
             string result = "XRL: " + XRLString;
             Clipboard.SetText(result);
             return result; 

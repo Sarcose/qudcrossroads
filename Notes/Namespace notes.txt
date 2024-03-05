@@ -1,0 +1,94 @@
+//==Shortlist of possibly really useful ones:
+GetDirection...etc...
+GetEquippedObjects():List<GameObject>
+GetInventory():List<GameObject>
+GetInventoryAndEquipment():List<GameObject>
+GetWholeInventory():List<GameObject>    //seems redundant with above but we can just use it vs GetEquippedObjects and GetInventory
+GetGenotype():string
+HasPart<type>():bool
+GetGenotype():string                   
+GetMutationNames():List<string>
+GetPlurality(bool):bool                 //a quick pronoun override that would inform pretty much everything
+GetPropertyOrTag(string Name, string Default):string
+GetSpecies():string
+GetStatValue(string, int):int             //for comparisons, for bespoke stat contests
+GetWaterRitualLiquid(GameObject):string
+HasItemWithBlueprint(string):GameObject     //for instantly checking quest items
+HasObjectEquipped(string blueprint, int n=1):bool
+HasObjectInInventory(string, int):bool
+
+HasPart<type> or HasPart<GivesRep> needs to be dissected more. We need to look at the HasPart function specifically and trace it back.
+    //HasPart looks at a List<IPart> and tests either the property Type or Name
+
+
+
+The.GameObject.Function()s I think
+e.g. The.Listener The.Speaker The.Player
+Are there other The's? Can I do SomeGameObject.Function()?
+
+Possibly useful functions:
+
+//Get
+
+GetAngryAt(GameObject who, int Amount = -50): bool
+GetApparentSpecies(GameObject): string
+GetCulture():string             // return GetPropertyOrTag("Culture") ?? GetSpecies();
+GetDemandName(int DemandCount):string //interesting...
+GetDescriptiveCategory():string
+
+
+
+//=== Locational
+GetDirectionFromCellXY(int X, int Y, bool showCenter = false):string //I'm guessing this is "You can find so and so to the NW"
+GetDirectionToward(Location2D, bool):string //Location2D seems like it's just a [x,y] type
+GetDirectionToward(Cell,bool):string
+GetDirectionToward(GameObject,bool):string)
+GetDisplayName(out bool AdjunctNounActive, int Cutoff = int.MaxValue, string Base = null, string Context = null, bool AsIfKnown = false, bool Single = false, bool NoConfusion = false, bool NoColor = false, bool Stripped = false, bool ColorOnly = false, bool Visible = true, bool WithoutTitles = false, bool ForSort = false, bool Short = false, bool BaseOnly = false, bool WithIndefiniteArticle = false, bool WithDefiniteArticle = false, string DefaultDefiniteArticle = null, bool IndicateHidden = false, bool Capitalize = false, bool SecondPerson = false, bool Reflexive = false, bool? IncludeAdjunctNoun = null, bool AsPossessed = false, GameObject AsPossessedBy = null, bool Reference = false, bool IncludeImplantPrefix = true)
+
+//=== Equipment and inventory
+//since we can get a List<GameObject> of the whole inventory we should be able to iterate through that list, yes?
+        //what this means is we should be able to find a given Item's properties. It's +'s and -'s.
+
+GetEquippedObjects():List<GameObject>                       //examples The.Listener.GetEquippedObjects().Any((Obj) => Obj.HasPart<GivesRep>())
+                                                            //The.Listener.GetEquippedObjects().Any((Obj))
+                                                            
+HasPart<type>():bool
+GetExamineDifficulty():int
+GetFactionAllegiance(string):FactionAllegiance
+GetFactionRank(string):string)
+GetFactionStanding(string):int
+GetFirstBodyPart(string):BodyPart       //multiple examples of this
+GetFirstFlightSourcePart():IFlightSource
+
+GetGenotype():string                                                                    //      **IMPORTANT**
+GetInventory():List<GameObject>             //used to parse inventory for stuff I imagine
+GetHostilityTarget():GameObject             //could be used for far future endeavors to create floating context texts such as "Attack the so and so!"
+GetInventoryAndEquipment():List<GameObject> //here we can see the entirety of a character's stuff to parse for quest items
+GetInventoryCategory():string  //huh... what could this do? // GetInventoryCategoryEvent.FromPool(this); and returns that result
+
+GetMentalMutations():List<BaseMutation>
+GetMutationNames():List<string>
+GetMutationsOfCategory(string):List<BaseMutation>
+GetPhysicalMutations:List<BaseMutation>
+GetPsychicGlimmer(List<GameObject>):int     //huh... this isn't a straight up property check like I'd expect
+
+GetPlurality(bool):bool
+GetPrimaryWeapon():GameObject               //could be something like *brandishes his <Saber> to the sky in frustration*
+GetShieldWithHighestAV(Predicate<GameObject>,GameObject):GameObject //similar as primary weapon *Bashes PrimaryWeapon against ShieldWithHighestAV
+
+
+//Properties:
+GetLongProperty(string Name, long Default = 0L): long
+
+
+
+
+//====Pronouns 
+GetGender(bool AsIfKnown = false):Gender  //good lord the Gender class is huge
+GetPronounSet():PronounSet
+
+//Has
+
+HasItemWithBlueprint(string):GameObject     //for instantly checking quest items
+HasObjectEquipped(string blueprint, int n=1):bool
+HasObjectInInventory(string, int):bool
