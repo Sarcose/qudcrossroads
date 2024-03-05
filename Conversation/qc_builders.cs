@@ -240,8 +240,8 @@ namespace QudCrossroads.Dialogue
             
         }
         public static string LVR(string varstring)     //add more later?
-        {   //TODO: use a GlobalContainer to establish global pronouns for speaker and such
-            XRL.Messages.MessageQueue.AddPlayerMessage(varstring);
+        {  
+            //XRL.Messages.MessageQueue.AddPlayerMessage(varstring);
             return GameText.VariableReplace(varstring, null);
         }
         public static string QCVR(string key, Phrase phrase)     //look for |Variables| instead
@@ -406,7 +406,20 @@ namespace QudCrossroads.Dialogue
 
         public static string TestString_Nueve() //brief aside to get the syntax of addressing various members of various objects
         {
-            return LVR(RegexToQCVR(DisplayObjectMembers()));
+            Phrase testPhrase = new Phrase
+            {
+                culture = "SaltMarshCulture",
+                familiarity = 1,        //0 = unfriendly, 1 = unfamiliar, 2 = friendly
+                personality = "Peppy",
+                subPersonality = "Tired",
+                profession = "Farmer",
+                job = "WatervineFarmer",
+                morphotype = "Chimera",
+                subMorpho = "HideousSpecimen",
+                mutation = "SociallyRepugnant",
+                mood = "random"
+            }; 
+            return LVR(RegexToQCVR(DisplayObjectMembers(), testPhrase));
             //string XRLString = DumpObject(XRL);
             //string XRLString = PrintNamespaceMembers("The"); //we can't use this for now it's too complex to delve into lolol
             //string result = "XRL: " + XRLString;
