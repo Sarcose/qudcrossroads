@@ -212,10 +212,9 @@ namespace QudCrossroads.Dialogue
                 $"A player equip OR item: {GetHeldRandom(The.Listener)}\n",
                 //A player equipment piece with specific rep
                 $"Speaker pronouns: =pronouns.subjective= \n",
-                $"Current Time: {XRL.World.Calendar.getTime()}\n",      //oh wow it actually looks like this is the time graphic + time
-                $"Current Day: {XRL.World.Calendar.getDay()}\n",        //this works 
-                $"Current Month: {XRL.World.Calendar.getMonth()}\n",    //this works
-                $"Current year: {XRL.World.Calendar.getYear()}\n",      //this works
+                $"Current TimeOfDay: unimplemented \n",      //oh wow it actually looks like this is the time graphic + time
+                $"Current Day: |today|\n",        //this works 
+                $"Current year: |year|\n",      //this works
             };
             foreach (string item in addTable)
             {
@@ -407,7 +406,7 @@ namespace QudCrossroads.Dialogue
 
         public static string TestString_Nueve() //brief aside to get the syntax of addressing various members of various objects
         {
-            return DisplayObjectMembers();
+            return LVR(RegexToQCVR(DisplayObjectMembers()));
             //string XRLString = DumpObject(XRL);
             //string XRLString = PrintNamespaceMembers("The"); //we can't use this for now it's too complex to delve into lolol
             //string result = "XRL: " + XRLString;

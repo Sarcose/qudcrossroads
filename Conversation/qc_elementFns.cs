@@ -66,12 +66,20 @@ namespace QudCrossroads.Dialogue
         public static string GetDate(Phrase phrase, string key){
             switch (key)
             {   //TODO: find the location of all below day variables
-                case "day":
-                    return "today";
+                case "today":               
+                    return $"{XRL.World.Calendar.getDay()} of {XRL.World.Calendar.getMonth()}";
+                case "month":
+                    return XRL.World.Calendar.getMonth();
                 case "timeOfDay":
-                    return "morning";
-                case "date":
-                    return "Ut Yara Ux";
+                    return "morning";       //ah, what a fine morning!
+                case "year":
+                    return XRL.World.Calendar.getYear();    //the year 1001 has been a harsh one...
+                case "daysAgo":             //return a date phrase that is then saved in the quest description
+                    return "today";         //just use a random span of time for this
+                case "monthsAgo":    
+                    return "today";
+                case "yearsAgo":    
+                    return "today";
                 default:    
                     return "today";
             }
@@ -85,12 +93,12 @@ namespace QudCrossroads.Dialogue
         public static string GetInventoryRandom(GameObject obj){
             List<GameObject> l = obj.GetInventory();
             GameObject item = l[QRand.Next(0, l.Count)];
-            return item.DisplayNameStripped;
+            return item.DisplayNameOnly;
         }
         public static string GetHeldRandom(GameObject obj){
             List<GameObject> l = obj.GetWholeInventory();
             GameObject item = l[QRand.Next(0, l.Count)];
-            return item.DisplayNameOnlyDirect;
+            return item.DisplayNameOnly;
         }
 
         public static string GetHobby(Phrase phrase, string key){

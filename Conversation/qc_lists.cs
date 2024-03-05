@@ -38,10 +38,13 @@ namespace QudCrossroads.Dialogue
             { "informalPersonTerm.subject", new Func<Phrase, string, string>((phrase, key) => ParseMiscGenderTerm(phrase, key)) }, //[ ] guy, gal, pal, person, something else for other pronouns 
             { "informalPersonTerm.speaker", new Func<Phrase, string, string>((phrase, key) => ParseMiscGenderTerm(phrase, key)) }, //[ ] guy, gal, pal, person, something else for other pronouns 
 
-            { "day",                        new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] day
-            { "timeOfDay",                  new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] day
-            { "date",                       new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] day
-            { "month",                      new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] day
+            { "today",                      new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[X] day 30th of Ubu Ut
+            { "timeOfDay",                  new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] morning, noon, night etc
+            { "year",                       new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[X] year
+            { "month",                      new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[X] month
+            { "daysAgo",                    new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] time ago
+            { "monthsAgo",                  new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] time ago
+            { "yearsAgo",                   new Func<Phrase, string, string>((phrase, key) => GetDate(phrase, key)) }, //[ ] time ago
 
             //{ "contextDay",                 new Func<Phrase, string, string>((phrase, key) => GetContext(phrase, key)) }, //[ ] day
 
