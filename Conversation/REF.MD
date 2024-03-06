@@ -20,3 +20,4 @@
 #### bool StripColors = false)
 
 // string text = GameText.VariableReplace(key, ParentObject);
+// text = Grammar.ConvertAtoAn(text); //maybe?

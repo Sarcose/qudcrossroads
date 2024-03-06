@@ -188,7 +188,7 @@ Building TODOs:
 
 |greeting|: 
     [X] get it to parse and pass GreetFn using Phrase
-    [ ] greetPersonality based on phrase personality in qc_elements.cs -- grab an arbitrary number of personalities actually!!
-    [ ] greetJob based on phrase Job                in qc_elements.cs
-    [ ] greetSpecificJob based on phrase specific job if it exists in qc_elements.cs
+    [X] greetPersonality based on phrase personality in qc_elements.cs -- grab an arbitrary number of personalities actually!!
+    [X] greetJob based on phrase Job                in qc_elements.cs
+    [X] greetSpecificJob based on phrase specific job if it exists in qc_elements.cs
     */

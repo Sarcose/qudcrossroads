@@ -15,6 +15,7 @@ using XRL.World.Parts;
 using XRL.Messages;
 
 using QudCrossroads;
+using Qud.API.QuestsAPI
 using QRand = QudCrossroads.Utilities.QudCrossroads_Random;
 using static QudCrossroads.Dialogue.Elements;
 using static QudCrossroads.Dialogue.Functions;
@@ -76,7 +77,7 @@ namespace QudCrossroads.Dialogue
             if (str != null && str.Length > 0 && str[0] == '|') return true; else {return false;}
         }
         public static string GetRandString(Phrase phrase, params List<string>[] strArrays)     // result = GetRandString(stringList, stringList2, stringList3, stringList4, etc...)
-        {   //ERROR: not all code paths return a value
+        {   //[ ] Test |picktwo| and |pickthree|
             qprintc("---[GetRandString start");
             string result = GetRandString_Child(phrase, strArrays);;
             qprintc($"--[GetRandString_Child resolved with result {result}");
@@ -125,51 +126,6 @@ namespace QudCrossroads.Dialogue
             qprintc("---[GetRandString return");
             return result;
         }
-        public static int GetRandStringIndex(params List<string>[] strArrays)
-        {
-            int totalCount = 0;
-            foreach (var strArray in strArrays)
-            {
-                totalCount += strArray.Count;
-            }
-            return QRand.Next(0, totalCount);
-        }
-        public static string GetSpecificString(int index, params List<string>[] strArrays)
-        { 
-            int totalCount = 0;
-            foreach (var strArray in strArrays)
-            {
-                totalCount += strArray.Count;
-            }
-            foreach (var strArray in strArrays)
-            {
-                if (index < strArray.Count) {return strArray[index]; }
-                else { index -= strArray.Count; }
-            }
-            qprintc("GetSpecificString error - no elements found.");
-            return null;
-        }
-        public static string DumpObject(object obj)
-        {
-            Type type = obj.GetType();
-            StringBuilder sb = new StringBuilder();
-
-            // Get all fields
-            FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            foreach (var field in fields)
-            {
-                sb.AppendLine($"{field.Name} = {field.GetValue(obj)}");
-            }
-
-            // Get all properties
-            PropertyInfo[] properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            foreach (var prop in properties)
-            {
-                sb.AppendLine($"{prop.Name} = {prop.GetValue(obj)}");
-            }
-
-            return sb.ToString();
-        }
         public static string PrintNamespaceMembers(string namespaceName)
         {
             string ret = "";
@@ -203,13 +159,49 @@ namespace QudCrossroads.Dialogue
             }
             return ret;
         }
+        public static string QuestTest(){
+            string result = "";
+            Quest tQuest = fabricateFindASpecificSiteQuest(The.Speaker);
+            if (tQuest is Quest){
+                qprintc("Quest type generated");
+            }else{
+                qprintc("Quest generation failed");
+            }
+            /*
+            See: targetLocation, LandmarkLocation, GeneratedLocationInfo,
+            */
+            List<string> addTable = new List<string> {
+                "===Quest Test===",
+                $"ID: {tQuest.ID ?? "NULL"}",                               //ID = Guid.NewGuid().ToString()
+                $"Name: {tQuest.Name ?? "NULL"}",                           //quest.Name = Grammar.MakeTitleCase(ColorUtility.StripFormatting(targetLocation.Text));
+                $"DisplayName: {tQuest.DisplayName ?? "NULL"}",
+                $"SystemTypeID: {tQuest.SystemTypeID ?? "NULL"}",
+                $"Accomplishment: {tQuest.Accomplishment ?? "NULL"}",
+                $"Achievement: {tQuest.Achievement ?? "NULL"}",
+                $"BonusAtLevel: {tQuest.BonusAtLevel ?? "NULL"}",
+                $"Level: {tQuest.Level != null ? tQuest.Level.ToString() : "NULL"}",
+                $"Factions: {tQuest.Factions ?? "NULL"}",
+                $"Reputation: {tQuest.Reputation ?? "NULL"}",
+                $"Hagiograph: {tQuest.Hagiograph ?? "NULL"}",
+                $"HagiographCategory: {tQuest.HagiographCategory ?? "NULL"}",
+                $"Hagiograph: {tQuest.Hagiograph ?? "NULL"}",
+                "==Properties==",
+                "==IntProperties==",
+                "==StepsByID==",
+            };
+            foreach (string item in addTable)
+            {
+                result += item;
+            }
+            return result;
+        }
         public static string DisplayObjectMembers(){
             string result = "";
             List<string> addTable = new List<string> {
                 //"|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
                 "Oneline: introgreettitletoQuesttransitionproverb \n",
                 "|intro||greeting||title||toQuest||transition||flavor||proverb|\n",
-                "greeting: |greeting|\n",
+                "greeting: |greet|\n",
                 "title: |title|\n",
                 "toQuest: |toQuest|\n",
                 "Player pronoun: =player.subjective=\n ",
@@ -223,9 +215,6 @@ namespace QudCrossroads.Dialogue
                 "Current year: |year|\n",  
                 "informalPersonTerm: |informalPersonTerm|\n",  
                 "Current year: |year|\n",  
-                "Current year: |year|\n",  
-                "Current year: |year|\n",  
-                "Current year: |year|\n",  
             };
             foreach (string item in addTable)
             {
@@ -234,32 +223,10 @@ namespace QudCrossroads.Dialogue
 
             //A player equipment piece with specific rep (use a loop to continually check probably)
                     //The.Listener.GetEquippedObjects().Any((Obj) => Obj.HasPart<GivesRep>()) 
-            //XRL.World.Calendar
-                //Day
-                //Time
-                //Time name
-                //Date
-                //Month
-
-
-            //Quest tempQuest = fabricateFindASpecificSiteQuest(XRL.The.Speaker);
-            //return += " | tempQuest: ";
-            //return += DumpObject(tempQuest);
             return result;
-            
-
-            
         }
-        public static string LVR(string varstring)     //add more later?
-        {  
-            //XRL.Messages.MessageQueue.AddPlayerMessage(varstring);
-            return GameText.VariableReplace(varstring, null);
-        }
-        public static string QCVR(string key, Phrase phrase)     //look for |Variables| instead
-        {   //CrossroadsLVR in qc_lists.cs
-            //|intro||greeting||title||pleasantry||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
-            // "|intro|~|greeting|~|title|~|pleasantry|~|toQuest|~|transition|~|flavor|~|proverb|"
-            //use a GlobalContainer to establish global pronouns and other contexts for speaker and such
+        public static string QCVR(string key, Phrase phrase)
+        {
             qprintc($"===============================");
             qprintc($"=========={key}==========");
             if (CrossroadsLVR.TryGetValue(key, out object value))   //see if the item is in CrossroadsLVR
@@ -348,16 +315,16 @@ namespace QudCrossroads.Dialogue
 /***************************************************************/
         public class Phrase                 
         {
-            public string culture { get; set; }
-            public int familiarity { get; set; }
-            public string personality {get; set; }
-            public string subPersonality {get; set; }
-            public string profession {get; set; }
-            public string job {get; set; }
-            public string morphotype {get; set;}
-            public string subMorpho {get; set;}
-            public string mutation {get; set;}      //will probably not use this in the future
-            public string mood {get; set;}
+            public string culture;
+            public int familiarity;
+            public string personality;
+            public string subPersonality;
+            public string profession;
+            public string job;
+            public string morphotype;
+            public string subMorpho;
+            public string mutation;
+            public string mood;
         }
 
         /*
@@ -373,29 +340,6 @@ namespace QudCrossroads.Dialogue
 //                      Testing Area                           //
 /***************************************************************/
 
-        public static string TestString_Ocho()
-        {
-            Phrase testPhrase = new Phrase
-            {
-                culture = "SaltMarshCulture",
-                familiarity = 1,        //0 = unfriendly, 1 = unfamiliar, 2 = friendly
-                personality = "Peppy",
-                subPersonality = "Tired",
-                profession = "Farmer",
-                job = "WatervineFarmer",
-                morphotype = "Chimera",
-                subMorpho = "HideousSpecimen",
-                mutation = "SociallyRepugnant",
-                mood = "random"
-            }; 
-            //string testInput = "|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
-            string testInput = "|intro|;|greeting|;|title|;|pleasantry|;|toQuest|;|transition|;|flavor|;|proverb|";
-            //intro~|greeting|~~~Now that I have your attention...~At any rate~flavor~
-
-            string finalString = RegexToQCVR(testInput, testPhrase);
-            return finalString;
-        }
-
         public static string TestString_Nueve() //brief aside to get the syntax of addressing various members of various objects
         {
             Phrase testPhrase = new Phrase
@@ -410,19 +354,9 @@ namespace QudCrossroads.Dialogue
                 subMorpho = "HideousSpecimen",
                 mutation = "SociallyRepugnant",
                 mood = "random"
-            }; 
-            return RegexToQCVR(DisplayObjectMembers(), testPhrase);
-                //this does not appear to produce the correct result. 
-                //i think we need to combine RegexToQCVR and LVR into RegexAllVariables that spots both QCVR and LVR variables
-                //we need to respect newlines, because it seems to wash them out
-                //still can't find how to do player pronouns apparently.
-
-                
-            //string XRLString = DumpObject(XRL);
-            //string XRLString = PrintNamespaceMembers("The"); //we can't use this for now it's too complex to delve into lolol
-            //string result = "XRL: " + XRLString;
-            //Clipboard.SetText(result);
-            //return result; 
+            }; //*Gets up and looks at you* Hail, traveler. The salt sun rises and the salt sun sets. At any rate, 
+            string testString = "|intro||greeting||title||toQuest||questHint||questHerring||transition||proverb||transition||emoteTransition||questConclusion|";
+            return RegexToQCVR(QuestTest(), testPhrase);
         }
 
 

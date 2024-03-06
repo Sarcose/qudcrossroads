@@ -16,7 +16,7 @@ using QRand = QudCrossroads.Utilities.QudCrossroads_Random;
 using static QudCrossroads.Dialogue.Elements;
 using static QudCrossroads.Dialogue.Functions;
 using static QudCrossroads.Dialogue.Builders;
-//TODO: reduce my using directives
+//[ ]TODO: reduce my using directives
 namespace QudCrossroads.Dialogue
 {
     public static partial class QC_Lists
@@ -33,7 +33,7 @@ namespace QudCrossroads.Dialogue
             { "greet",                      new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
             { "title",                      new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
             { "pleasantry",                 new Func<Phrase, string, string>((phrase, key) => ParseFamiliarity(phrase, key)) },
-            
+                                            //[ ] parse '.subvariable', especially needed for the quest fields tbh
             { "informalPersonTerm",         new Func<Phrase, string, string>((phrase, key) => ParseMiscGenderTerm(phrase, key)) }, //[ ] guy, gal, pal, person, something else for other pronouns 
             { "informalPersonTerm.subject", new Func<Phrase, string, string>((phrase, key) => ParseMiscGenderTerm(phrase, key)) }, //[ ] guy, gal, pal, person, something else for other pronouns 
             { "informalPersonTerm.speaker", new Func<Phrase, string, string>((phrase, key) => ParseMiscGenderTerm(phrase, key)) }, //[ ] guy, gal, pal, person, something else for other pronouns 
@@ -78,7 +78,7 @@ namespace QudCrossroads.Dialogue
         };
 
         public static Dictionary<string, List<string>> CrossroadsCasualPronounAddress = new Dictionary<string, List<string>>
-        {   //TODO: find the actual member of a given game object that gives us the gender and pronouns and use that term
+        {
             { "Neuter",                 new List<string> { "person" } },
             { "Nonspecific",            new List<string> { "person" } },
             { "Male",                   new List<string> { "guy","boy" } },

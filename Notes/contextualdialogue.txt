@@ -1,0 +1,58 @@
+Giving NPCs contexts to check in a big contextChecker with just dozens of possible ideas.
+|context| or perhaps a |flavor| keyword probably. (I imagine a priority system is in order for these)
+--Dynamic:
+    --There is a merchant onscreen
+    --There is a dromad onscreen
+    --There is a hostile (to npc) onscreen
+    --Player is messy
+    --Player has 2+ fungal infections ("*eyes your fungal infections warily*")
+    --Player is diseased ("you don't look so good")
+    --NPC is messy
+    --NPC is swimming
+    --Player is swimming
+    --Player is semi-nude or nude (some percentage of total slots are unequipped) "Um... put some clothes on" (TOTK references here)
+    --Player is wearing liked (faction positive) clothes
+    --Player is wearing disliked (faction negative) clothes
+    --NPC was in combat recently
+    --NPC was X close to player in combat and player was at any point wounded ("That was a close one, traveler")
+    --NPC was X close to player in combat and not above ("Wow! You gave them a smackdown!")
+    --NPC was just on fire, covered in acid or lava ("AHHHHH hot hot hot hot")
+    --NPC is near death
+    --NPC was just frozen or currently has a low temperature ("*sneeze* s-s-so... c-cold....")
+    --NPC currently has a high temperature ("Is anyone else sweating in here?")
+    --Player is currently in combat ("Hey! Look out behind you!")
+    --An "object of interest" is onscreen. Depends on the NPC, might be culturally relevant. Like Dunes people watch for Salt Kraken, or Lake people watch for Svardym
+    --A horrifying creature is onscreen (Girsh Nephilim for instance)
+
+--onSpawn: particularly important to maintain the immersion as the system could easily spawn people inside walls or in unfortunate areas, etc.
+    --NPC was surrounded by X density of solid walls ("I've been trapped in there for X days!" "I was about to starve!" )
+    --NPC was in a closed room with a locked door (if I can check this) ("FINALLY. That door got stuck behind me!")
+    --NPC is in a dungeon or historic site
+    --NPC is in a specific mod contextual area (like Jademouth or Exile's Refuge -- this will be a whole separate table of concepts)
+    --NPC is in a specific town (Yd, Stilt, Joppa, Ezra, etc)
+
+
+--questContext: a context for if the player is currently on specific plot quests. Each one will have its own class with : "phrases" and "knowledge prereqs" in order to filter out people who may not
+                                                                                                                                be relevant to mention it
+    --BringArgyveAKnicknack ?? BringArgyveAnotherKnicknack : "don't you have some tier 1 grenade in a box somewhere?"
+    --BringArgyveWire: "If you're going to the Rust Wells, you better take care of your equipment..."
+    --A Canticle for Barathrum: 
+
+
+--specificNPCContext: specific easter eggs for certain NPC interactions (maybe these lead to bespoke quests eventually)
+    --Irudad reacting to you having positive Girsh rep
+    --Argyve thanking you for killing the zealot ("I was so tired of his racket!")
+    --Mehmet commenting if you've ever seen a Mehmet clone ("You saw a what underground? I.. I don't understand.")
+    --Any Barathrumite reacting to positive Templar rep ("Be careful what crowds you run with, =factionrank=")
+    --Mechanimists reacting to you having completed any step of the Exile's Refuge quests ("You found the Argent Progeny? ...where?")
+    --Argent Progeny reacting to loved Mechanimist rep ("Do not let zealots cloud your thoughts, wanderer. Think freely and learn of the Kasaphesence.")
+    --Bey Lah reacting to you sharing their secret ("Wait... you told WHO about us?")
+    --Jademouth reacting to a high strength score ("You're a big one. Have you ever considered a job in the mines?")
+    --Jademouth reacting to a low strength score ("Work here is hard, and life harder. Those soft hands would soon harden.")
+    --Yd reacting to water baron rep ("You are welcome to rest and trade, traveler, but be warned: there will be no talk of hierarchy here.")
+    --Une reacting to positive Templar rep ("*You feel a cold stare from behind their mask* You are known among the Templar. This is not a good thing in this town of peace and refuge." )
+    --Ualraig, if the Zealot is still alive ("If you see Argyve 'talking' to the Zealot, mind your business.")
+    --Ualraig, if the Zealot is dead ("I know what you're thinking, traveler, but I assure you - he was not of Joppa, and thus, not under my charge.")
+    --Sheba Hagadias, if you have more than 10 books in your inventory ("Ah, a fellow lover of literature!")
+    --Sheba Hagadias if you have a spray-a-brain or a nano-neuro animator ("*glimpses your =item=.* Thank goodness we remade the sacred well. The last time someone threw one of those in it ran off!")
+    --Local named NPCs commenting if there are clones of one of the local merchant NPCs "our economy is going crazy right now"

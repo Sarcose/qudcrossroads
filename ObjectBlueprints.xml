@@ -2,5 +2,9 @@
 <objects>
     <object Name="Creature"  Load="Merge"> <!--TODO-->
             <!--<part Name="qc_social" />-->
+            <!--qc_questhandler quest handler-->
+            <!--qc_contextcheck-->
+            <!--qc_npchandler mobile NPC handler-->
+            <!--qc_social, adds personality aspects and tracks various values-->
     </object>
 </objects>
