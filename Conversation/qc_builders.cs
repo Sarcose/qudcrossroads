@@ -15,7 +15,7 @@ using XRL.World.Parts;
 using XRL.Messages;
 
 using QudCrossroads;
-using static Qud.API.QuestsAPI;
+using Qud.API;
 using QRand = QudCrossroads.Utilities.QudCrossroads_Random;
 using static QudCrossroads.Dialogue.Elements;
 using static QudCrossroads.Dialogue.Functions;
