@@ -44,6 +44,7 @@ namespace QudCrossroads.Dialogue
             }
             public override bool HandleEvent(DisplayTextEvent E)
             {
+                E.VariableReplace = true;
                 E.Text.Append(TestString_Nueve());
                 return base.HandleEvent(E);
             }

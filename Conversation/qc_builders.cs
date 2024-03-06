@@ -419,7 +419,7 @@ namespace QudCrossroads.Dialogue
                 mutation = "SociallyRepugnant",
                 mood = "random"
             }; 
-            return LVR(RegexToQCVR(DisplayObjectMembers(), testPhrase));
+            return RegexToQCVR(DisplayObjectMembers(), testPhrase);
                 //this does not appear to produce the correct result. 
                 //i think we need to combine RegexToQCVR and LVR into RegexAllVariables that spots both QCVR and LVR variables
                 //we need to respect newlines, because it seems to wash them out
