@@ -15,7 +15,7 @@ using XRL.World.Parts;
 using XRL.Messages;
 
 using QudCrossroads;
-using Qud.API.QuestsAPI
+using static Qud.API.QuestsAPI;
 using QRand = QudCrossroads.Utilities.QudCrossroads_Random;
 using static QudCrossroads.Dialogue.Elements;
 using static QudCrossroads.Dialogue.Functions;
@@ -161,7 +161,7 @@ namespace QudCrossroads.Dialogue
         }
         public static string QuestTest(){
             string result = "";
-            Quest tQuest = fabricateFindASpecificSiteQuest(The.Speaker);
+            Quest tQuest = QuestsAPI.FindASpecificSiteQuest(The.Speaker);
             if (tQuest is Quest){
                 qprintc("Quest type generated");
             }else{
@@ -179,7 +179,7 @@ namespace QudCrossroads.Dialogue
                 $"Accomplishment: {tQuest.Accomplishment ?? "NULL"}",
                 $"Achievement: {tQuest.Achievement ?? "NULL"}",
                 $"BonusAtLevel: {tQuest.BonusAtLevel ?? "NULL"}",
-                $"Level: {tQuest.Level != null ? tQuest.Level.ToString() : "NULL"}",
+                $"Level: {(tQuest.Level != null ? tQuest.Level.ToString() : "NULL")}",
                 $"Factions: {tQuest.Factions ?? "NULL"}",
                 $"Reputation: {tQuest.Reputation ?? "NULL"}",
                 $"Hagiograph: {tQuest.Hagiograph ?? "NULL"}",
@@ -263,19 +263,6 @@ namespace QudCrossroads.Dialogue
 
             }
         }
-        static string RegexToLVR(string input) //old
-        {
-            //string resultString = RegexToLVR(inputString); //replace =foo=
-            // Use regular expression to find all placeholders
-            string pattern = "=([^=]+)=";
-            string result = Regex.Replace(input, pattern, match =>     //The name 'Regex' does not exist in the current context
-            {
-                string key = match.Groups[1].Value;
-                return LVR(key); // the only thing left here is that we will need to define some kind of context variables that LVR uses to define pronouns!
-            });
-
-            return result;
-        }
         static string RegexToQCVR(string input, Phrase phrase)
         {
             string pattern = @"\|([^|]+)\|";
@@ -355,7 +342,7 @@ namespace QudCrossroads.Dialogue
                 mutation = "SociallyRepugnant",
                 mood = "random"
             }; //*Gets up and looks at you* Hail, traveler. The salt sun rises and the salt sun sets. At any rate, 
-            string testString = "|intro||greeting||title||toQuest||questHint||questHerring||transition||proverb||transition||emoteTransition||questConclusion|";
+           // string testString = "|intro||greeting||title||toQuest||questHint||questHerring||transition||proverb||transition||emoteTransition||questConclusion|";
             return RegexToQCVR(QuestTest(), testPhrase);
         }
 
