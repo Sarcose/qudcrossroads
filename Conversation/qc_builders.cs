@@ -249,65 +249,41 @@ namespace QudCrossroads.Dialogue
             //|intro||greeting||title||pleasantry||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
             // "|intro|~|greeting|~|title|~|pleasantry|~|toQuest|~|transition|~|flavor|~|proverb|"
             //use a GlobalContainer to establish global pronouns and other contexts for speaker and such
-            qprintc("======================");
-            qprintc("=========" + key + "=========");
-            Dictionary<string, bool> doTest = new Dictionary<string, bool>{                   
-                { "intro", true },    
-                { "pleasantry", true},
-                { "greet", true },
-                { "title", true },    
-                { "toQuest", true },            
-                { "questHint", true },          
-                { "questHerring", true },       
-                { "transition", true },         
-                { "flavor", true },             
-                { "proverb", true },            
-                { "questConclusion", true },    
-                // See TODO and building notes on qc_elementFns
-            };
-            if (doTest.ContainsKey(key) && doTest[key]) //only check, for now, if the key is in doTest, so we avoid checking lots of unimplemented keys
+            if (CrossroadsLVR.TryGetValue(key, out object value))   //see if the item is in CrossroadsLVR
+            {
+                if (value is List<string> stringList)
                 {
-                    if (CrossroadsLVR.TryGetValue(key, out object value))   //see if the item is in CrossroadsLVR
-                    {
-                        if (value is List<string> stringList)
-                        {
-                            // Handle the case where the value is a list of strings
-                            qprintc("--List");
-                            return GetRandString(phrase, stringList);   //pass phrase to maintain it in case of recursive checks
-                        }
-                        else if (value is Func<Phrase, string, string> function)
-                        {
-                            // Handle the case where the value is a function
-                            qprintc("--Func");
-                            return function(phrase, key);
-                        }
-                        else if (value is string stringValue)
-                        {
-                            // Handle the case where the value is a single string
-                            qprintc("--String");
-                            return stringValue;
-                        }
-                        else
-                        {
-                            // Handle other cases if needed
-                            qprintc("--Unsup");
-                            return $"|Unsupported type for key: {key}|";
-                        }
-                    }
-                    else
-                    {
-                        qprintc("--ElementByCategories (key not in dict)");
-                        return ElementByCategories(phrase, key);
+                    // Handle the case where the value is a list of strings
+                    qprintc("--List");
+                    return GetRandString(phrase, stringList);   //pass phrase to maintain it in case of recursive checks
+                }
+                else if (value is Func<Phrase, string, string> function)
+                {
+                    // Handle the case where the value is a function
+                    qprintc("--Func");
+                    return function(phrase, key);
+                }
+                else if (value is string stringValue)
+                {
+                    // Handle the case where the value is a single string
+                    qprintc("--String");
+                    return stringValue;
+                }
+                else
+                {
+                    // Handle other cases if needed
+                    qprintc("--Unsup");
+                    return $"|Unsupported type for key: {key}|";
+                }
+            }
+            else
+            {
+                qprintc("--ElementByCategories (key not in dict)");
+                return ElementByCategories(phrase, key);
 
-                    }
-                }
-            else    //ignore and don't translate
-                {
-                    qprintc("-Skipped");
-                    return "|" + key + "|";
-                }
+            }
         }
-        static string RegexToLVR(string input) // pass LVR to this function
+        static string RegexToLVR(string input) //old
         {
             //string resultString = RegexToLVR(inputString); //replace =foo=
             // Use regular expression to find all placeholders
@@ -320,15 +296,17 @@ namespace QudCrossroads.Dialogue
 
             return result;
         }
-        static string RegexToQCVR(string input, Phrase phrase) // pass LVR to this function
+        static string RegexToQCVR(string input, Phrase phrase)
         {
             string pattern = @"\|([^|]+)\|";
             string result = "";
+            string newlinePlaceholder = "__NEWLINE__";
+            
             //----Replace |variables| based on QCVR element-phrase logic----\\
             result = Regex.Replace(input, pattern, match =>
                 {   string key = match.Groups[1].Value;
                 return QCVR(key, phrase) + " ";  });
-            
+            result = result.Replace("\n", newlinePlaceholder);
             //----Fill the new result with punctuation based on # placeholders and the phrase's "mood"----\\
             result = Regex.Replace(result, @"\s+", " ");    //clean up double spaces
             result = Regex.Replace(result, @"\s+\.", "#");  //clean up spaces before #
@@ -347,6 +325,7 @@ namespace QudCrossroads.Dialogue
             {
                 result = result.Replace(';', QRand.Next(0, 2) == 0 ? '.' : ' ');
             }
+            result = result.Replace(newlinePlaceholder, "\n");
 
             return result;
         }
