@@ -161,7 +161,7 @@ namespace QudCrossroads.Dialogue
         }
         public static string QuestTest(){
             string result = "";
-            Quest tQuest = QuestsAPI.FindASpecificSiteQuest(The.Speaker);
+            Quest tQuest = QuestsAPI.fabricateFindASpecificSiteQuest(The.Speaker);
             if (tQuest is Quest){
                 qprintc("Quest type generated");
             }else{
