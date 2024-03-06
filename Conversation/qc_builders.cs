@@ -260,6 +260,8 @@ namespace QudCrossroads.Dialogue
             //|intro||greeting||title||pleasantry||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
             // "|intro|~|greeting|~|title|~|pleasantry|~|toQuest|~|transition|~|flavor|~|proverb|"
             //use a GlobalContainer to establish global pronouns and other contexts for speaker and such
+            qprintc($"===============================");
+            qprintc($"=========={key}==========");
             if (CrossroadsLVR.TryGetValue(key, out object value))   //see if the item is in CrossroadsLVR
             {
                 if (value is List<string> stringList)

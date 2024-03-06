@@ -57,7 +57,7 @@ namespace QudCrossroads.Dialogue
                 case "randHeld":
                     return GetHeldRandom(The.Listener);
                 default:
-                    return "~GetPart Unimplemented~"
+                    return "~GetPart Unimplemented~";
             }
 
             //if key is "equipment" then return a phrase of just a piece of equipment, contextually:
