@@ -206,15 +206,26 @@ namespace QudCrossroads.Dialogue
         public static string DisplayObjectMembers(){
             string result = "";
             List<string> addTable = new List<string> {
-                "Player pronoun: =player.pronouns.subjective= \n ",
-                $"A player equipment piece: {GetEquippedRandom(The.Listener)}\n",    //TODO: |keyword|
-                $"A player item: {GetInventoryRandom(The.Listener)}\n",
-                $"A player equip OR item: {GetHeldRandom(The.Listener)}\n",
+                //"|intro||greeting||title||toQuest||questHint||questHerring||transition||flavor||proverb||transition||emoteTransition||questConclusion|";
+                "Oneline: introgreettitletoQuesttransitionproverb \n",
+                "|intro||greeting||title||toQuest||transition||flavor||proverb|\n",
+                "greeting: |greeting|\n",
+                "title: |title|\n",
+                "toQuest: |toQuest|\n",
+                "Player pronoun: =player.subjective=\n ",
+                "A player equipment piece: |randEquipment|\n",    //TODO: |keyword|
+                "A player item: |randInventory|\n",
+                "A player equip OR item: |randHeld|\n",
                 //A player equipment piece with specific rep
-                $"Speaker pronouns: =pronouns.subjective= \n",
-                $"Current TimeOfDay: unimplemented \n",      //oh wow it actually looks like this is the time graphic + time
-                $"Current Day: |today|\n",        //this works 
-                $"Current year: |year|\n",      //this works
+                "Speaker pronouns: =pronouns.subjective=\n",
+                "Current TimeOfDay: unimplemented\n",      //oh wow it actually looks like this is the time graphic + time
+                "Current Day: |today|\n",  
+                "Current year: |year|\n",  
+                "informalPersonTerm: |informalPersonTerm|\n",  
+                "Current year: |year|\n",  
+                "Current year: |year|\n",  
+                "Current year: |year|\n",  
+                "Current year: |year|\n",  
             };
             foreach (string item in addTable)
             {

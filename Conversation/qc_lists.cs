@@ -50,11 +50,12 @@ namespace QudCrossroads.Dialogue
 
 
             { "equipment",                  new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] equipment
+            { "randEquipment",              new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[X] equipment
+            { "randInventory",              new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[X] equipment
+            { "randHeld",                   new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[X] equipment
             { "posEquip",                   new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] posEquip
             { "negEquip",                   new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] negEquip
-            { "posClothes",                 new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] posClothes
-            { "negClothes",                 new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] negClothes
-            
+
             { "part",                       new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] part
             { "posPart",                    new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] posPart
             { "posPartAdj",                 new Func<Phrase, string, string>((phrase, key) => GetPart(phrase, key)) }, //[ ] posPartAdj -- use this to get a specific one from the below lists

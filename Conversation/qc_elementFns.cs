@@ -49,6 +49,17 @@ namespace QudCrossroads.Dialogue
             }
         }
         public static string GetPart(Phrase phrase, string key){
+            switch(key){
+                case "randEquipment":
+                    return GetEquippedRandom(The.Listener);
+                case "randInventory":
+                    return GetInventoryRandom(The.Listener);
+                case "randHeld":
+                    return GetHeldRandom(The.Listener);
+                default:
+                    return "~GetPart Unimplemented~"
+            }
+
             //if key is "equipment" then return a phrase of just a piece of equipment, contextually:
             //posEquip -- a piece of equipment with +rep, or else a normal piece of equipment
             //negEquip -- a piece of equipment with +rep of another faction, or else a normal piece of equipment
@@ -61,7 +72,6 @@ namespace QudCrossroads.Dialogue
             //posPart | negPart -- some kind of village context, historyspice, or other that comes up with a liked or disliked implant or mutation by the NPC
                         //to comment on
 
-            return "GetEquipment NOOP";
         }
         public static string GetDate(Phrase phrase, string key){
             switch (key)
