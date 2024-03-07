@@ -17,6 +17,7 @@ using HistoryKit;
 using XRL.Rules;
 
 using QudCrossroads;
+using QudCrossroads.Quests;
 using Qud.API;
 using QRand = QudCrossroads.Utilities.QudCrossroads_Random;
 using static QudCrossroads.Dialogue.Elements;
@@ -166,7 +167,8 @@ namespace QudCrossroads.Dialogue
 // An object reference is required for the non-static field, method, or property 'FindASpecificSiteDynamicQuestTemplate_FabricateQuestGiver.fabricateFindASpecificSiteQuest(GameObject)'
         public static string QuestTest(){
             string result = "";
-            Quest tQuest = XRL.World.ZoneBuilders.FindASpecificSiteDynamicQuestTemplate_FabricateQuestGiver.fabricateFindASpecificSiteQuest(The.Speaker);
+
+            Quest tQuest = QudCrossroads.Quests.VanillaQuest.fabricateFindASpecificSiteQuest(The.Speaker);
             if (tQuest is Quest){
                 qprintc("Quest type generated");
             }else{
