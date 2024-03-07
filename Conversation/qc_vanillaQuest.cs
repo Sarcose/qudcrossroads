@@ -7,10 +7,11 @@ using Qud.API;
 using XRL.Language;
 using XRL.Rules;
 using XRL.World.WorldBuilders;
+using XRL.World;
 
 using QudCrossroads;
 
-namespace QudCrossroads.Quests
+namespace QudCrossroads.QuestSystem
 {
 	public static partial class VanillaQuest
 	{

@@ -17,7 +17,7 @@ using HistoryKit;
 using XRL.Rules;
 
 using QudCrossroads;
-using QudCrossroads.Quests;
+using QudCrossroads.QuestSystem;
 using Qud.API;
 using QRand = QudCrossroads.Utilities.QudCrossroads_Random;
 using static QudCrossroads.Dialogue.Elements;

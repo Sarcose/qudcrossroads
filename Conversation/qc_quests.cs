@@ -30,7 +30,7 @@ using static QudCrossroads.Dialogue.QC_Lists;
 
 */
 
-namespace QudCrossroads.Dialogue
+namespace QudCrossroads.QuestSystem
 {
     public static partial class QuestEngine
     {
