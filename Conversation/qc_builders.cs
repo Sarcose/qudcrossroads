@@ -13,6 +13,8 @@ using XRL.World;
 using XRL.World.Conversations;
 using XRL.World.Parts;
 using XRL.Messages;
+using HistoryKit;
+using XRL.Rules;
 
 using QudCrossroads;
 using Qud.API;
@@ -159,9 +161,12 @@ namespace QudCrossroads.Dialogue
             }
             return ret;
         }
+
+        //=== !WIP Qud Crossroads 0.0 Errors ===
+// An object reference is required for the non-static field, method, or property 'FindASpecificSiteDynamicQuestTemplate_FabricateQuestGiver.fabricateFindASpecificSiteQuest(GameObject)'
         public static string QuestTest(){
             string result = "";
-            Quest tQuest = QuestsAPI.fabricateFindASpecificSiteQuest(The.Speaker);
+            Quest tQuest = XRL.World.ZoneBuilders.FindASpecificSiteDynamicQuestTemplate_FabricateQuestGiver.fabricateFindASpecificSiteQuest(The.Speaker);
             if (tQuest is Quest){
                 qprintc("Quest type generated");
             }else{
