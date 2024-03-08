@@ -167,8 +167,8 @@ namespace QudCrossroads.Dialogue
 // An object reference is required for the non-static field, method, or property 'FindASpecificSiteDynamicQuestTemplate_FabricateQuestGiver.fabricateFindASpecificSiteQuest(GameObject)'
         public static string QuestTest(){
             string result = "";
-
-            Quest tQuest = QudCrossroads.Quests.VanillaQuest.fabricateFindASpecificSiteQuest(The.Speaker);
+            //see qc_quest notes
+            Quest tQuest = new Quest();//QudCrossroads.Quests.VanillaQuest.fabricateFindASpecificSiteQuest(The.Speaker);
             if (tQuest is Quest){
                 qprintc("Quest type generated");
             }else{

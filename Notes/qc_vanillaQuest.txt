@@ -17,15 +17,15 @@ namespace QudCrossroads.QuestSystem
 	{
 		public static Quest fabricateFindASpecificSiteQuest(GameObject giver)
 		{
-			typeOfDirections = "path";
+			string typeOfDirections = "path";
 			Quest quest = QuestsAPI.fabricateEmptyQuest();
 			int num = Stat.Random(0, 12);
-			min = 12;
-			max = 18;
-			targetLocation = null;
+			int min = 12;
+			int max = 18;
+			List<JournalMapNote> targetLocation = null;
 			int broaden = 0;
 			while (targetLocation == null && broaden <= 240)
-			{
+			{																													
 				targetLocation = JournalAPI.GetUnrevealedMapNotesWithinZoneRadiusN(zone, min - broaden, max + broaden, questContext.IsValidQuestDestination).GetRandomElement();
 				broaden++;
 			}
@@ -40,8 +40,8 @@ namespace QudCrossroads.QuestSystem
 				{
 					min = 0;
 					max = 1;
-					landmarkLocation = null;
-					landmarkLocation = JournalAPI.GetUnrevealedMapNotesWithinZoneRadiusN(targetLocation.ZoneID, min - broaden, max + broaden, questContext.IsValidQuestDestination).GetRandomElement();
+						
+					List<JournalMapNote> landmarkLocation = JournalAPI.GetUnrevealedMapNotesWithinZoneRadiusN(targetLocation.ZoneID, min - broaden, max + broaden, questContext.IsValidQuestDestination).GetRandomElement();
 					if (landmarkLocation == null)
 					{
 						typeOfDirections = "direction";
